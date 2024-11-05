@@ -1,0 +1,705 @@
+fileFormatVersion: 2
+guid: 8069cd34b5af24d9ca89648cb3fd45d9
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: one of a kind ui-03_0
+      rect:
+        serializedVersion: 2
+        x: 2316
+        y: 3805
+        width: 517
+        height: 539
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1af6a5bd658a549c8a8fbbaf80ec7a4a
+      internalID: -191084253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_6
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 3828
+        width: 517
+        height: 503
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 998f97a28040e4e1dbd03bb23722debc
+      internalID: 980524983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_7
+      rect:
+        serializedVersion: 2
+        x: 1342
+        y: 3828
+        width: 517
+        height: 503
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5818e677f19746af92e40c56621b998
+      internalID: -686631268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_8
+      rect:
+        serializedVersion: 2
+        x: 3256
+        y: 3828
+        width: 515
+        height: 515
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f18bdd625d3f4cb3802e13f928abd4d
+      internalID: -1336483097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_14
+      rect:
+        serializedVersion: 2
+        x: 5756
+        y: 3190
+        width: 1066
+        height: 1086
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa9078cb89bdf4a48a94629c1b79d6cb
+      internalID: 1258132259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_17
+      rect:
+        serializedVersion: 2
+        x: 8488
+        y: 3190
+        width: 1091
+        height: 1086
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 064046a00c198498ab4bcdcc3d369b60
+      internalID: -1549229695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_20
+      rect:
+        serializedVersion: 2
+        x: 4389
+        y: 3200
+        width: 1072
+        height: 1039
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe44f265e4bab44a3bf86eaa5051e0fc
+      internalID: 1260999159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_21
+      rect:
+        serializedVersion: 2
+        x: 7084
+        y: 3190
+        width: 1076
+        height: 1067
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1dc4459304f7c4f51a83b5830f73ddd7
+      internalID: -1475822264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_37
+      rect:
+        serializedVersion: 2
+        x: 2290
+        y: 3014
+        width: 548
+        height: 548
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b5dc6c2d131a441c49982be98d43e460
+      internalID: -1216766206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_38
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 3036
+        width: 515
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4eacb81c17a144e4e81d9f6f2d2c8704
+      internalID: 388404913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_39
+      rect:
+        serializedVersion: 2
+        x: 1359
+        y: 3028
+        width: 500
+        height: 508
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc380bc4b1e1c43c3b64e8c4b55d9681
+      internalID: -1867299632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_41
+      rect:
+        serializedVersion: 2
+        x: 3256
+        y: 3028
+        width: 515
+        height: 515
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 820985558965b481486337e0d624996b
+      internalID: -1457555543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_52
+      rect:
+        serializedVersion: 2
+        x: 7060
+        y: 1938
+        width: 1100
+        height: 1095
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff3f1912d21024642b403b67e3841fe4
+      internalID: -988456998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_53
+      rect:
+        serializedVersion: 2
+        x: 8522
+        y: 1938
+        width: 1062
+        height: 1095
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e969a0cb3876648e4be24fdb08e305fb
+      internalID: 273471857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_54
+      rect:
+        serializedVersion: 2
+        x: 4394
+        y: 1938
+        width: 1095
+        height: 1086
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ccad8daaeaf841eaaf1db53ca5b4c16
+      internalID: 1918107659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_55
+      rect:
+        serializedVersion: 2
+        x: 5784
+        y: 1938
+        width: 1076
+        height: 1086
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 612df11202cd84e4085afe82c698385b
+      internalID: 2142608130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_59
+      rect:
+        serializedVersion: 2
+        x: 143
+        y: 2160
+        width: 1658
+        height: 542
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93b874bde02a74ccc80c7c743f89a0bb
+      internalID: 976707444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_60
+      rect:
+        serializedVersion: 2
+        x: 2228
+        y: 2056
+        width: 1659
+        height: 565
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b463d34d9a4f444ea864b833b3db38a1
+      internalID: 27879151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_74
+      rect:
+        serializedVersion: 2
+        x: 5196
+        y: 3
+        width: 1837
+        height: 1856
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4949e227740474ec180aa4bda0cb6e56
+      internalID: 1940740004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_76
+      rect:
+        serializedVersion: 2
+        x: 7425
+        y: 26
+        width: 1832
+        height: 1833
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 028e442ac98a94f4dbc8aa31eeb9c3b6
+      internalID: -1189246061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_78
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 1260
+        width: 1765
+        height: 538
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c22760650d8a47e6a4a68e30f5fff13
+      internalID: 1070729007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui-03_83
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 360
+        width: 2047
+        height: 547
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19a359cb0b3114a019b65503a08933ac
+      internalID: 1528822962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      one of a kind ui-03_0: -191084253
+      one of a kind ui-03_1: -1943276205
+      one of a kind ui-03_10: -1050756281
+      one of a kind ui-03_11: 1303321232
+      one of a kind ui-03_12: 1605197721
+      one of a kind ui-03_13: 262176513
+      one of a kind ui-03_14: 1258132259
+      one of a kind ui-03_15: 1583245994
+      one of a kind ui-03_16: 1962782357
+      one of a kind ui-03_17: -1549229695
+      one of a kind ui-03_18: 2078997728
+      one of a kind ui-03_19: 1595616112
+      one of a kind ui-03_2: -1158180730
+      one of a kind ui-03_20: 1260999159
+      one of a kind ui-03_21: -1475822264
+      one of a kind ui-03_22: -1864829333
+      one of a kind ui-03_23: -569705327
+      one of a kind ui-03_24: -1095358001
+      one of a kind ui-03_25: -1800235822
+      one of a kind ui-03_26: 2124931248
+      one of a kind ui-03_27: 459642693
+      one of a kind ui-03_28: 23004393
+      one of a kind ui-03_29: 259732545
+      one of a kind ui-03_3: -1590859890
+      one of a kind ui-03_30: 1787257213
+      one of a kind ui-03_31: 333269562
+      one of a kind ui-03_32: -759774486
+      one of a kind ui-03_33: -1339464861
+      one of a kind ui-03_34: -650756476
+      one of a kind ui-03_35: -172467762
+      one of a kind ui-03_36: -1779409857
+      one of a kind ui-03_37: -1216766206
+      one of a kind ui-03_38: 388404913
+      one of a kind ui-03_39: -1867299632
+      one of a kind ui-03_4: 417443251
+      one of a kind ui-03_40: 1493910094
+      one of a kind ui-03_41: -1457555543
+      one of a kind ui-03_42: -1061096277
+      one of a kind ui-03_43: -928433768
+      one of a kind ui-03_44: -1863053843
+      one of a kind ui-03_45: 1348765649
+      one of a kind ui-03_46: 1857739444
+      one of a kind ui-03_47: 1942851118
+      one of a kind ui-03_48: 798784249
+      one of a kind ui-03_49: 1940037492
+      one of a kind ui-03_5: 1621967831
+      one of a kind ui-03_50: -155881488
+      one of a kind ui-03_51: -1724617299
+      one of a kind ui-03_52: -988456998
+      one of a kind ui-03_53: 273471857
+      one of a kind ui-03_54: 1918107659
+      one of a kind ui-03_55: 2142608130
+      one of a kind ui-03_56: 944007022
+      one of a kind ui-03_57: -1892158519
+      one of a kind ui-03_58: 1035269162
+      one of a kind ui-03_59: 976707444
+      one of a kind ui-03_6: 980524983
+      one of a kind ui-03_60: 27879151
+      one of a kind ui-03_61: -35982491
+      one of a kind ui-03_62: 7018832
+      one of a kind ui-03_63: -1123120105
+      one of a kind ui-03_64: 292941076
+      one of a kind ui-03_65: -949053044
+      one of a kind ui-03_66: -307872255
+      one of a kind ui-03_67: 1675147094
+      one of a kind ui-03_68: -1430706334
+      one of a kind ui-03_69: 1918431336
+      one of a kind ui-03_7: -686631268
+      one of a kind ui-03_70: -2038344076
+      one of a kind ui-03_71: -320473327
+      one of a kind ui-03_72: -1225780216
+      one of a kind ui-03_73: -232475420
+      one of a kind ui-03_74: 1940740004
+      one of a kind ui-03_75: -4808063
+      one of a kind ui-03_76: -1189246061
+      one of a kind ui-03_77: 1198648035
+      one of a kind ui-03_78: 1070729007
+      one of a kind ui-03_79: 1103943873
+      one of a kind ui-03_8: -1336483097
+      one of a kind ui-03_80: -332446841
+      one of a kind ui-03_81: 1536854146
+      one of a kind ui-03_82: 213343424
+      one of a kind ui-03_83: 1528822962
+      one of a kind ui-03_84: -905054127
+      one of a kind ui-03_85: 126716567
+      one of a kind ui-03_86: 824360262
+      one of a kind ui-03_87: 1953297002
+      one of a kind ui-03_88: 2146726392
+      one of a kind ui-03_89: -1123853779
+      one of a kind ui-03_9: -1214675485
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

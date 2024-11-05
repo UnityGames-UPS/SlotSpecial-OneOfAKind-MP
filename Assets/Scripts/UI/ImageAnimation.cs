@@ -17,17 +17,32 @@ public class ImageAnimation : MonoBehaviour
 	public Image rendererDelegate;
 	public bool useSharedMaterial = true;
 	public bool doLoopAnimation = true;
+	public bool StartOnAwake = false;
 	private int indexOfTexture;
 	private float idealFrameRate = 0.0416666679f;
 	private float delayBetweenAnimation;
 	public float AnimationSpeed = 5f;
 	public float delayBetweenLoop;
 
+	private void OnValidate()
+    {
+		rendererDelegate = GetComponent<Image>();
+
+		// Ensure the reference is correctly set
+		if (rendererDelegate == null)
+		{
+			Debug.LogError("No Image component found on this GameObject. Please add one.");
+		}
+	}
+
 	private void Awake()
 	{
 		if (Instance == null)
 		{
 			Instance = this;
+		}
+		if(StartOnAwake){
+			StartAnimation();
 		}
     }
 
