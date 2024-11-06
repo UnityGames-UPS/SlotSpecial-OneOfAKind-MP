@@ -59,6 +59,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Menu Objects")]
     [SerializeField] private Button Menu_Button;
+    [SerializeField] private Sprite Menu_Image, MenuHover_Image, MenuPressed_Image, CloseMenu_image, CloseMenuHover_Image, CloseMenuPressed_Image;
     [SerializeField] private Button Info_Button;
     [SerializeField] private Button Settings_Button;
     [SerializeField] private Button RaycastLayerButton;
@@ -146,6 +147,8 @@ public class UIManager : MonoBehaviour
             }
         });
 
+        
+
         if (Settings_Button) Settings_Button.onClick.RemoveAllListeners();
         if (Settings_Button) Settings_Button.onClick.AddListener(OpenSettingsPanel);
 
@@ -214,15 +217,23 @@ public class UIManager : MonoBehaviour
         if (toggle)
         {
             isMenu = true;
+
+            SpriteState state = new SpriteState{
+                highlightedSprite=CloseMenuHover_Image,
+                pressedSprite=CloseMenuPressed_Image
+            };
+            Menu_Button.image.sprite = CloseMenu_image;
+            Menu_Button.spriteState = state;
+
             if (Info_Button) Info_Button.gameObject.SetActive(true);
             if (Settings_Button) Settings_Button.gameObject.SetActive(true);
 
-            DOTween.To(() => Info_BttnTransform.anchoredPosition, (val) => Info_BttnTransform.anchoredPosition = val, new Vector2(Info_BttnTransform.anchoredPosition.x - 125, Info_BttnTransform.anchoredPosition.y), 0.1f).OnUpdate(() =>
+            DOTween.To(() => Info_BttnTransform.anchoredPosition, (val) => Info_BttnTransform.anchoredPosition = val, new Vector2(Info_BttnTransform.anchoredPosition.x, Info_BttnTransform.anchoredPosition.y + 150), 0.1f).OnUpdate(() =>
             {
                 LayoutRebuilder.ForceRebuildLayoutImmediate(Info_BttnTransform);
             });
 
-            DOTween.To(() => Settings_BttnTransform.anchoredPosition, (val) => Settings_BttnTransform.anchoredPosition = val, new Vector2(Settings_BttnTransform.anchoredPosition.x - 250, Settings_BttnTransform.anchoredPosition.y), 0.1f).OnUpdate(() =>
+            DOTween.To(() => Settings_BttnTransform.anchoredPosition, (val) => Settings_BttnTransform.anchoredPosition = val, new Vector2(Settings_BttnTransform.anchoredPosition.x, Settings_BttnTransform.anchoredPosition.y + 300), 0.1f).OnUpdate(() =>
             {
                 LayoutRebuilder.ForceRebuildLayoutImmediate(Settings_BttnTransform);
             });
@@ -230,12 +241,20 @@ public class UIManager : MonoBehaviour
         else
         {
             isMenu = false;
-            DOTween.To(() => Info_BttnTransform.anchoredPosition, (val) => Info_BttnTransform.anchoredPosition = val, new Vector2(Info_BttnTransform.anchoredPosition.x + 125, Info_BttnTransform.anchoredPosition.y), 0.1f).OnUpdate(() =>
+
+            SpriteState state = new SpriteState{
+                highlightedSprite=MenuHover_Image,
+                pressedSprite=MenuPressed_Image
+            };
+            Menu_Button.image.sprite = Menu_Image;
+            Menu_Button.spriteState = state;
+
+            DOTween.To(() => Info_BttnTransform.anchoredPosition, (val) => Info_BttnTransform.anchoredPosition = val, new Vector2(Info_BttnTransform.anchoredPosition.x, Info_BttnTransform.anchoredPosition.y - 150), 0.1f).OnUpdate(() =>
             {
                 LayoutRebuilder.ForceRebuildLayoutImmediate(Info_BttnTransform);
             });
 
-            DOTween.To(() => Settings_BttnTransform.anchoredPosition, (val) => Settings_BttnTransform.anchoredPosition = val, new Vector2(Settings_BttnTransform.anchoredPosition.x + 250, Settings_BttnTransform.anchoredPosition.y), 0.1f).OnUpdate(() =>
+            DOTween.To(() => Settings_BttnTransform.anchoredPosition, (val) => Settings_BttnTransform.anchoredPosition = val, new Vector2(Settings_BttnTransform.anchoredPosition.x, Settings_BttnTransform.anchoredPosition.y - 300), 0.1f).OnUpdate(() =>
             {
                 LayoutRebuilder.ForceRebuildLayoutImmediate(Settings_BttnTransform);
             });
