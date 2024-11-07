@@ -308,7 +308,7 @@ public class SocketIOManager : MonoBehaviour
 
     private void PopulateSlotSocket(List<string> slotPop, List<string> LineIds)
     {
-        slotManager.ShuffleSlots();
+        slotManager.ShuffleSlot();
 
         slotManager.SetInitialUI();
 

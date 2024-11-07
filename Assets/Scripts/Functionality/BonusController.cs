@@ -37,7 +37,7 @@ public class BonusController : MonoBehaviour
         _audioManager.SwitchBGSound(true);
         if (BonusOpen_ImageAnimation) BonusOpen_ImageAnimation.StartAnimation();
 
-        slotManager.StopGameAnimation();
+        // slotManager.StopGameAnimation();
 
         yield return new WaitUntil(() => BonusOpen_ImageAnimation.rendererDelegate.sprite == BonusOpen_ImageAnimation.textureArray[16]);
 
@@ -99,7 +99,7 @@ public class BonusController : MonoBehaviour
             BonusClosingUI.SetActive(false);
             BonusClose_ImageAnimation.ResumeAnimation();
         }
-        slotManager.StopGameAnimation();
+        // slotManager.StopGameAnimation();
         yield return new WaitUntil(()=> BonusClose_ImageAnimation.rendererDelegate.sprite == BonusClose_ImageAnimation.textureArray[BonusClose_ImageAnimation.textureArray.Count-1]);
         BonusClose_ImageAnimation.StopAnimation();
         _audioManager.SwitchBGSound(false);
