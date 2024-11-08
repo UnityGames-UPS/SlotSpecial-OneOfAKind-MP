@@ -34,6 +34,7 @@ public class BackgroundController : MonoBehaviour
     [SerializeField] private ImageAnimation OrangeFR_ImageAnimation;
     [SerializeField] private ImageAnimation GreenFR_ImageAnimation;
     [SerializeField] private ImageAnimation PurpleFR_ImageAnimation;
+    [SerializeField] private Sprite[] sprites;
     private Tween NR_RotateTween;
     private Tween BlueFR_RotateTween, GoldenFR_RotateTween, OrangeFR_RotateTween, GreenFR_RotateTween, PurpleFR_RotateTween;
 
@@ -41,146 +42,113 @@ public class BackgroundController : MonoBehaviour
     [SerializeField] private float NRTweenDuration = 30;
     [SerializeField] private float FRTweenDuration = 5;
 
+    public enum BackgroundType {
+        Base,
+        BlueFR,
+        GreenFR,
+        GoldenFR,
+        OrangeFR,
+        PurpleFR
+    }
+
+    private Dictionary<BackgroundType, (CanvasGroup CG, CanvasGroup CircleCG, ImageAnimation ImageAnim)> backgrounds;
+
+    private void Awake() {
+        backgrounds = new Dictionary<BackgroundType, (CanvasGroup, CanvasGroup, ImageAnimation)> {
+            { BackgroundType.BlueFR, (BlueFR_CG, BlueFRCircle_CG, BlueFR_ImageAnimation) },
+            { BackgroundType.GreenFR, (GreenFR_CG, GreenFRCircle_CG, GreenFR_ImageAnimation) },
+            { BackgroundType.GoldenFR, (GoldenFR_CG, GoldenFRCircle_CG, GoldenFR_ImageAnimation) },
+            { BackgroundType.OrangeFR, (OrangeFR_CG, OrangeFRCircle_CG, OrangeFR_ImageAnimation) },
+            { BackgroundType.PurpleFR, (PurpleFR_CG, PurpleFRCircle_CG, PurpleFR_ImageAnimation) }
+        };
+    }
     private void Start() {
         RotateBG();
     }
 
-    private void SwitchBG(string s){
-        switch(s){
-            case "Base":
-                if(BlueFR_CG.alpha!=0) BlueFR_CG.DOFade(0, .5f).OnComplete(()=> {BlueFR_ImageAnimation.StopAnimation();});
-                if(BlueFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(GoldenFR_CG.alpha!=0) GoldenFR_CG.DOFade(0, .5f).OnComplete(()=> {GoldenFR_ImageAnimation.StopAnimation();});
-                if(GoldenFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(OrangeFR_CG.alpha!=0) OrangeFR_CG.DOFade(0, .5f).OnComplete(()=> {OrangeFR_ImageAnimation.StopAnimation();});
-                if(OrangeFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(GreenFR_CG.alpha!=0) GreenFR_CG.DOFade(0, .5f).OnComplete(()=> {GreenFR_ImageAnimation.StopAnimation();});
-                if(GreenFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(PurpleFR_CG.alpha!=0) PurpleFR_CG.DOFade(0, .5f).OnComplete(()=> {PurpleFR_ImageAnimation.StopAnimation();});
-                if(PurpleFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                DOVirtual.DelayedCall(.5f, ()=>{ StopRotation(s); });
+    internal void SwitchBG(BackgroundType bgType, List<int> values = null) {
+        foreach (var kvp in backgrounds) {
+            if (kvp.Key != bgType) {
+                kvp.Value.CG.DOFade(0, 0.5f).OnComplete(() => kvp.Value.ImageAnim.StopAnimation());
+                kvp.Value.CircleCG.DOFade(0, 0.5f);
+            }
+        }
 
-                RotateBG();
-                if(NRBG_CG.alpha!=1) NRBG_CG.DOFade(1, .5f);
-                if(NRBGCircle_CG.alpha!=1) NRBGCircle_CG.DOFade(1, .5f);
-                break;
+        DOVirtual.DelayedCall(0.5f, () => StopRotation(bgType.ToString()));
 
-            case "BlueFR":
-                if(NRBG_CG.alpha!=0) NRBG_CG.DOFade(0, .5f);
-                if(NRBGCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(GoldenFR_CG.alpha!=0) GoldenFR_CG.DOFade(0, .5f).OnComplete(()=> {GoldenFR_ImageAnimation.StopAnimation();});
-                if(GoldenFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(OrangeFR_CG.alpha!=0) OrangeFR_CG.DOFade(0, .5f).OnComplete(()=> {OrangeFR_ImageAnimation.StopAnimation();});
-                if(OrangeFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(GreenFR_CG.alpha!=0) GreenFR_CG.DOFade(0, .5f).OnComplete(()=> {GreenFR_ImageAnimation.StopAnimation();});
-                if(GreenFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(PurpleFR_CG.alpha!=0) PurpleFR_CG.DOFade(0, .5f).OnComplete(()=> {PurpleFR_ImageAnimation.StopAnimation();});
-                if(PurpleFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                DOVirtual.DelayedCall(.5f, ()=>{ StopRotation(s); });
+        if (bgType == BackgroundType.Base) {
+            NRBG_CG.DOFade(1, 0.5f);
+            NRBGCircle_CG.DOFade(1, 0.5f);
+            RotateBG();
+        } else {
+            var (cg, circleCg, anim) = backgrounds[bgType];
+            anim.StartAnimation();
+            RotateFastBG(cg.transform.GetChild(0).GetComponent<Image>(), bgType.ToString());
+            cg.DOFade(1, 0.5f);
+            if(values.Count>0) PopuplateWheel(circleCg.transform, values);
+            circleCg.DOFade(1, 0.5f);
+        }
+    }
+    
+    private void PopuplateWheel(Transform CircleTransform ,List<int> values){
+        int childCount = CircleTransform.childCount;
+        List<int> availableIndices = new List<int>();
+        for (int i = 0; i < childCount; i++) availableIndices.Add(i);
 
-                BlueFR_ImageAnimation.StartAnimation();
-                RotateFastBG(BlueFR_Image, "Blue");
-                if(BlueFR_CG.alpha!=1) BlueFR_CG.DOFade(1, .5f);
-                if(BlueFRCircle_CG.alpha!=1) BlueFRCircle_CG.DOFade(1, .5f);
-                break;
+        // Ensure a random non-adjacent assignment for each value
+        System.Random random = new System.Random();
+        List<int> usedIndices = new List<int>();
 
-            case "GreenFR":
-                if(NRBG_CG.alpha!=0) NRBG_CG.DOFade(0, .5f);
-                if(NRBGCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(BlueFR_CG.alpha!=0) BlueFR_CG.DOFade(0, .5f).OnComplete(()=> {BlueFR_ImageAnimation.StopAnimation();});
-                if(BlueFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(GoldenFR_CG.alpha!=0) GoldenFR_CG.DOFade(0, .5f).OnComplete(()=> {GoldenFR_ImageAnimation.StopAnimation();});
-                if(GoldenFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(OrangeFR_CG.alpha!=0) OrangeFR_CG.DOFade(0, .5f).OnComplete(()=> {OrangeFR_ImageAnimation.StopAnimation();});
-                if(OrangeFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(PurpleFR_CG.alpha!=0) PurpleFR_CG.DOFade(0, .5f).OnComplete(()=> {PurpleFR_ImageAnimation.StopAnimation();});
-                if(PurpleFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                DOVirtual.DelayedCall(.5f, ()=>{ StopRotation(s); });
-                
-                GreenFR_ImageAnimation.StartAnimation();
-                RotateFastBG(GreenFR_Image, "Green");
-                if(GreenFR_CG.alpha!=1) GreenFR_CG.DOFade(1, .5f);
-                if(GreenFRCircle_CG.alpha!=1) GreenFRCircle_CG.DOFade(1, .5f);
-                break;
-            
-            case "GoldenFR":
-                if(NRBG_CG.alpha!=0) NRBG_CG.DOFade(0, .5f);
-                if(NRBGCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(BlueFR_CG.alpha!=0) BlueFR_CG.DOFade(0, .5f).OnComplete(()=> {BlueFR_ImageAnimation.StopAnimation();});
-                if(BlueFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(OrangeFR_CG.alpha!=0) OrangeFR_CG.DOFade(0, .5f).OnComplete(()=> {OrangeFR_ImageAnimation.StopAnimation();});
-                if(OrangeFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(GreenFR_CG.alpha!=0) GreenFR_CG.DOFade(0, .5f).OnComplete(()=> {GreenFR_ImageAnimation.StopAnimation();});
-                if(GreenFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(PurpleFR_CG.alpha!=0) PurpleFR_CG.DOFade(0, .5f).OnComplete(()=> {PurpleFR_ImageAnimation.StopAnimation();});
-                if(PurpleFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                DOVirtual.DelayedCall(.5f, ()=>{ StopRotation(s); });
+        foreach (int value in values) {
+            // Find non-adjacent random index
+            int index;
+            do {
+                index = availableIndices[random.Next(availableIndices.Count)];
+            } while (usedIndices.Contains(index - 1) || usedIndices.Contains(index + 1));
 
-                GoldenFR_ImageAnimation.StartAnimation();
-                RotateFastBG(GoldenFR_Image, "Golden");
-                if(GoldenFR_CG.alpha!=1) GoldenFR_CG.DOFade(1, .5f);
-                if(GoldenFRCircle_CG.alpha!=1) GoldenFRCircle_CG.DOFade(1, .5f);
-                break;
+            usedIndices.Add(index);
+            availableIndices.Remove(index);
 
-            case "OrangeFR":
-                if(NRBG_CG.alpha!=0) NRBG_CG.DOFade(0, .5f);
-                if(NRBGCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(BlueFR_CG.alpha!=0) BlueFR_CG.DOFade(0, .5f).OnComplete(()=> {BlueFR_ImageAnimation.StopAnimation();});
-                if(BlueFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(GoldenFR_CG.alpha!=0) GoldenFR_CG.DOFade(0, .5f).OnComplete(()=> {GoldenFR_ImageAnimation.StopAnimation();});
-                if(GoldenFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(GreenFR_CG.alpha!=0) GreenFR_CG.DOFade(0, .5f).OnComplete(()=> {GreenFR_ImageAnimation.StopAnimation();});
-                if(GreenFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(PurpleFR_CG.alpha!=0) PurpleFR_CG.DOFade(0, .5f).OnComplete(()=> {PurpleFR_ImageAnimation.StopAnimation();});
-                if(PurpleFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                DOVirtual.DelayedCall(.5f, ()=>{ StopRotation(s); });
+            // Assign the corresponding sprite
+            Sprite targetSprite = Array.Find(sprites, sprite => sprite.name == value.ToString());
+            if (targetSprite != null) {
+                Image childImage = CircleTransform.GetChild(index).GetComponent<Image>();
+                if (childImage != null) {
+                    childImage.sprite = targetSprite;
+                }
+            } else {
+                Debug.LogWarning($"Sprite for value {value} not found in sprites array.");
+            }
+        }
 
-                OrangeFR_ImageAnimation.StartAnimation();
-                RotateFastBG(OrangeFR_Image, "Orange");
-                if(OrangeFR_CG.alpha!=1) OrangeFR_CG.DOFade(1, .5f);
-                if(OrangeFRCircle_CG.alpha!=1) OrangeFRCircle_CG.DOFade(1, .5f);
-                break;
-
-            case "PurpleFR":
-                if(NRBG_CG.alpha!=0) NRBG_CG.DOFade(0, .5f);
-                if(NRBGCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(BlueFR_CG.alpha!=0) BlueFR_CG.DOFade(0, .5f).OnComplete(()=> {BlueFR_ImageAnimation.StopAnimation();});
-                if(BlueFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(GoldenFR_CG.alpha!=0) GoldenFR_CG.DOFade(0, .5f).OnComplete(()=> {GoldenFR_ImageAnimation.StopAnimation();});
-                if(GoldenFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(GreenFR_CG.alpha!=0) GreenFR_CG.DOFade(0, .5f).OnComplete(()=> {GreenFR_ImageAnimation.StopAnimation();});
-                if(GreenFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                if(OrangeFR_CG.alpha!=0) OrangeFR_CG.DOFade(0, .5f).OnComplete(()=> {OrangeFR_ImageAnimation.StopAnimation();});
-                if(OrangeFRCircle_CG.alpha!=0) BlueFRCircle_CG.DOFade(0, .5f);
-                DOVirtual.DelayedCall(.5f, ()=>{ StopRotation(s); });
-                
-                PurpleFR_ImageAnimation.StartAnimation();
-                RotateFastBG(PurpleFR_Image, "Purple");
-                if(PurpleFR_CG.alpha!=1) PurpleFR_CG.DOFade(1, .5f);
-                if(PurpleFRCircle_CG.alpha!=1) PurpleFRCircle_CG.DOFade(1, .5f);
-                break;
+        // Fill remaining slots with random sprites
+        foreach (int index in availableIndices) {
+            Sprite randomSprite = sprites[random.Next(sprites.Length)];
+            Image childImage = CircleTransform.GetChild(index).GetComponent<Image>();
+            if (childImage != null) {
+                childImage.sprite = randomSprite;
+            }
         }
     }
 
-    int index=0;
     private void Update() {
         if(Input.GetKeyDown(KeyCode.Keypad0)){
-            SwitchBG("Base");
+            SwitchBG(BackgroundType.Base);
         }
         if(Input.GetKeyDown(KeyCode.Keypad1)){
-            SwitchBG("BlueFR");
+            SwitchBG(BackgroundType.BlueFR);
         }
         if(Input.GetKeyDown(KeyCode.Keypad2)){
-            SwitchBG("GreenFR");
+            SwitchBG(BackgroundType.OrangeFR);
         }
         if(Input.GetKeyDown(KeyCode.Keypad3)){
-            SwitchBG("GoldenFR");
+            SwitchBG(BackgroundType.GreenFR);
         }
         if(Input.GetKeyDown(KeyCode.Keypad4)){
-            SwitchBG("OrangeFR");
+            SwitchBG(BackgroundType.PurpleFR);
         }
         if(Input.GetKeyDown(KeyCode.Keypad5)){
-            SwitchBG("PurpleFR");
+            SwitchBG(BackgroundType.GoldenFR);
         }
     }
 
@@ -195,19 +163,19 @@ public class BackgroundController : MonoBehaviour
         z-=360;
         Tween tween = image.transform.DORotate(new Vector3(0, 0, z), FRTweenDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1);
         switch(s){
-            case "Blue":
+            case "BlueFR":
             BlueFR_RotateTween = tween;
             break;
-            case "Orange":
+            case "OrangeFR":
             OrangeFR_RotateTween = tween;
             break;
-            case "Golden":
+            case "GoldenFR":
             GoldenFR_RotateTween = tween;
             break;
-            case "Green":
+            case "GreenFR":
             GreenFR_RotateTween = tween;
             break;
-            case "Purple":
+            case "PurpleFR":
             PurpleFR_RotateTween = tween;
             break;
         }

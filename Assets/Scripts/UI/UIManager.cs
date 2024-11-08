@@ -69,6 +69,11 @@ public class UIManager : MonoBehaviour
     [Header("Paytable Slot Text")]
     [SerializeField] private List<TMP_Text> SymbolsText = new();
 
+    [Header("Major Payout UI")]
+    [SerializeField] private TMP_Text Minor_Text;
+    [SerializeField] private TMP_Text Major_Text;
+    [SerializeField] private TMP_Text Grand_Text;
+
     [SerializeField] private AudioController audioController;
 
     [SerializeField] private SlotBehaviour slotManager;
@@ -429,43 +434,46 @@ public class UIManager : MonoBehaviour
     {
         StartCoroutine(DownloadImage(AbtImgUrl));
         PopulateSymbolsPayout(symbolsText);
+        Minor_Text.text = socketManager.initialData.Joker[0].ToString();
+        Major_Text.text = socketManager.initialData.Joker[1].ToString();
+        Grand_Text.text = socketManager.initialData.Joker[2].ToString();
     }
 
     private void PopulateSymbolsPayout(Paylines paylines)
     {
-        for (int i = 0; i < SymbolsText.Count; i++)
-        {
-            string text = null;
-            if (paylines.symbols[i].Multiplier[0][0] != 0)
-            {
-                text += "5x - " + paylines.symbols[i].Multiplier[0][0];
-            }
-            if (paylines.symbols[i].Multiplier[1][0] != 0)
-            {
-                text += "\n4x - " + paylines.symbols[i].Multiplier[1][0];
-            }
-            if (paylines.symbols[i].Multiplier[2][0] != 0)
-            {
-                text += "\n3x - " + paylines.symbols[i].Multiplier[2][0];
-            }
-            if (SymbolsText[i]) SymbolsText[i].text = text;
-        }
+        // for (int i = 0; i < SymbolsText.Count; i++)
+        // {
+        //     string text = null;
+        //     if (paylines.symbols[i].Multiplier[0][0] != 0)
+        //     {
+        //         text += "5x - " + paylines.symbols[i].Multiplier[0][0];
+        //     }
+        //     if (paylines.symbols[i].Multiplier[1][0] != 0)
+        //     {
+        //         text += "\n4x - " + paylines.symbols[i].Multiplier[1][0];
+        //     }
+        //     if (paylines.symbols[i].Multiplier[2][0] != 0)
+        //     {
+        //         text += "\n3x - " + paylines.symbols[i].Multiplier[2][0];
+        //     }
+        //     if (SymbolsText[i]) SymbolsText[i].text = text;
+        // }
 
-        for (int i = 0; i < paylines.symbols.Count; i++)
-        {
-            if (paylines.symbols[i].Name.ToUpper() == "FREESPIN")
-            {
-                if (FreeSpin_Text) FreeSpin_Text.text = paylines.symbols[i].description.ToString();
-            }            
-            if (paylines.symbols[i].Name.ToUpper() == "JACKPOT")
-            {
-                if (Jackpot_Text) Jackpot_Text.text = paylines.symbols[i].description.ToString();
-            }
-            if (paylines.symbols[i].Name.ToUpper() == "WILD")
-            {
-                if (Wild_Text) Wild_Text.text = paylines.symbols[i].description.ToString();
-            }
-        }
+        // for (int i = 0; i < paylines.symbols.Count; i++)
+        // {
+        //     if (paylines.symbols[i].Name.ToUpper() == "FREESPIN")
+        //     {
+        //         if (FreeSpin_Text) FreeSpin_Text.text = paylines.symbols[i].description.ToString();
+        //     }            
+        //     if (paylines.symbols[i].Name.ToUpper() == "JACKPOT")
+        //     {
+        //         if (Jackpot_Text) Jackpot_Text.text = paylines.symbols[i].description.ToString();
+        //     }
+        //     if (paylines.symbols[i].Name.ToUpper() == "WILD")
+        //     {
+        //         if (Wild_Text) Wild_Text.text = paylines.symbols[i].description.ToString();
+        //     }
+        // }
     }
 
     private void CallOnExitFunction()
