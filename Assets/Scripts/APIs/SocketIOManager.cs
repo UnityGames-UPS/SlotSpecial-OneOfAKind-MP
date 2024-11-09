@@ -33,7 +33,7 @@ public class SocketIOManager : MonoBehaviour
     //protected string TestSocketURI = "https://6f01c04j-5000.inc1.devtunnels.ms/";
     //protected string TestSocketURI = "https://7p68wzhv-5000.inc1.devtunnels.ms/"; //vikings
     //protected string TestSocketURI = "https://916smq0d-5001.inc1.devtunnels.ms/";
-    protected string TestSocketURI = "https://c4xfw9cd-5002.inc1.devtunnels.ms/";
+    protected string TestSocketURI = "https://jmn3wfcb-5001.inc1.devtunnels.ms/";
 
 
     [SerializeField]
@@ -547,7 +547,7 @@ public class Symbol
     public object symbolsCount { get; set; }
     public object increaseValue { get; set; }
     public object description { get; set; }
-    public int freeSpin { get; set; }
+    public int payout { get; set; }
 }
 
 [Serializable]

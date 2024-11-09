@@ -36,7 +36,7 @@ public class BackgroundController : MonoBehaviour
     [SerializeField] private ImageAnimation PurpleFR_ImageAnimation;
     [SerializeField] private Sprite[] sprites;
     private Tween NR_RotateTween;
-    private Tween BlueFR_RotateTween, GoldenFR_RotateTween, OrangeFR_RotateTween, GreenFR_RotateTween, PurpleFR_RotateTween;
+    private Tween BlueFR_RotateTween, GoldenFR_RotateTween, OrangeFR_RotateTween, GreenFR_RotateTween, PurpleFR_RotateTween, wheelRoutine;
 
     [Header("Rotation Tween Duration")]
     [SerializeField] private float NRTweenDuration = 30;
@@ -50,8 +50,8 @@ public class BackgroundController : MonoBehaviour
         OrangeFR,
         PurpleFR
     }
-
     private Dictionary<BackgroundType, (CanvasGroup CG, CanvasGroup CircleCG, ImageAnimation ImageAnim)> backgrounds;
+    private BackgroundType currentBG;
 
     private void Awake() {
         backgrounds = new Dictionary<BackgroundType, (CanvasGroup, CanvasGroup, ImageAnimation)> {
@@ -63,10 +63,14 @@ public class BackgroundController : MonoBehaviour
         };
     }
     private void Start() {
+        currentBG = BackgroundType.Base;
         RotateBG();
     }
 
     internal void SwitchBG(BackgroundType bgType, List<int> values = null) {
+        BackgroundType temp = currentBG;
+        currentBG = bgType;
+
         foreach (var kvp in backgrounds) {
             if (kvp.Key != bgType) {
                 kvp.Value.CG.DOFade(0, 0.5f).OnComplete(() => kvp.Value.ImageAnim.StopAnimation());
@@ -85,48 +89,67 @@ public class BackgroundController : MonoBehaviour
             anim.StartAnimation();
             RotateFastBG(cg.transform.GetChild(0).GetComponent<Image>(), bgType.ToString());
             cg.DOFade(1, 0.5f);
-            if(values.Count>0) PopuplateWheel(circleCg.transform, values);
+            if(values!= null) PopuplateWheel(circleCg.transform, values);
             circleCg.DOFade(1, 0.5f);
+        }
+
+        DOVirtual.DelayedCall(.5f, ()=> {
+            if(temp!=BackgroundType.Base){
+                int childCount = backgrounds[temp].CircleCG.transform.childCount;
+                for(int i=0;i<childCount;i++){
+                    Image image=backgrounds[temp].CircleCG.transform.GetChild(i).GetComponent<Image>();
+                    image.name = "Image(" + i + ")";
+                    image.sprite = null;
+                    image.DOFade(1, 0);
+                }
+            }
+        });
+        
+    }
+
+    internal void FadeOutChildren(){
+        int childCount = backgrounds[currentBG].CircleCG.transform.childCount;
+        for(int i=0;i<childCount;i++){
+            Image image=backgrounds[currentBG].CircleCG.transform.GetChild(i).GetComponent<Image>();
+            image.DOFade(0, 0.4f);
         }
     }
     
     private void PopuplateWheel(Transform CircleTransform ,List<int> values){
         int childCount = CircleTransform.childCount;
         List<int> availableIndices = new List<int>();
+
+        // Create a list of all available indices on the wheel
         for (int i = 0; i < childCount; i++) availableIndices.Add(i);
 
-        // Ensure a random non-adjacent assignment for each value
         System.Random random = new System.Random();
-        List<int> usedIndices = new List<int>();
 
+        // Place each value at a random position on the wheel
         foreach (int value in values) {
-            // Find non-adjacent random index
-            int index;
-            do {
-                index = availableIndices[random.Next(availableIndices.Count)];
-            } while (usedIndices.Contains(index - 1) || usedIndices.Contains(index + 1));
+            // Get a random index from availableIndices
+            int randomIndex = availableIndices[random.Next(availableIndices.Count)];
+            availableIndices.Remove(randomIndex);  // Remove the used index
 
-            usedIndices.Add(index);
-            availableIndices.Remove(index);
-
-            // Assign the corresponding sprite
+            // Assign the corresponding sprite to the randomly chosen index
             Sprite targetSprite = Array.Find(sprites, sprite => sprite.name == value.ToString());
             if (targetSprite != null) {
-                Image childImage = CircleTransform.GetChild(index).GetComponent<Image>();
+                Image childImage = CircleTransform.GetChild(randomIndex).GetComponent<Image>();
                 if (childImage != null) {
                     childImage.sprite = targetSprite;
+                    childImage.name = targetSprite.name;
                 }
             } else {
                 Debug.LogWarning($"Sprite for value {value} not found in sprites array.");
             }
         }
 
-        // Fill remaining slots with random sprites
+        // Fill remaining indices with random sprites
         foreach (int index in availableIndices) {
             Sprite randomSprite = sprites[random.Next(sprites.Length)];
             Image childImage = CircleTransform.GetChild(index).GetComponent<Image>();
             if (childImage != null) {
                 childImage.sprite = randomSprite;
+                childImage.name = randomSprite.name;
             }
         }
     }
@@ -150,6 +173,12 @@ public class BackgroundController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Keypad5)){
             SwitchBG(BackgroundType.GoldenFR);
         }
+        // if(Input.GetKeyDown(KeyCode.Space)){
+        //     RotateWheel(currentBG);
+        // }
+        // if(Input.GetKeyDown(KeyCode.RightAlt)){
+        //     wheelRoutine.Kill();
+        // }
     }
 
     private void RotateBG(){
@@ -181,54 +210,100 @@ public class BackgroundController : MonoBehaviour
         }
     }
 
+
+    internal void RotateWheel(BackgroundType type){
+        Transform Wheel_Transform = backgrounds[type].CircleCG.transform;
+        wheelRoutine =  Wheel_Transform.DORotate(new Vector3(0, 0, -360f), 1.5f, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1);
+    }
+
+    internal void StopWheel(){
+        wheelRoutine.Kill();
+    }
+
     private void StopRotation(string s){
         switch(s){
             case "Base":
+                wheelRoutine.Kill();
                 BlueFR_RotateTween?.Kill();
+                BlueFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 GreenFR_RotateTween?.Kill();
+                GreenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 OrangeFR_RotateTween?.Kill();
+                OrangeFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 GoldenFR_RotateTween?.Kill();
+                GoldenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 PurpleFR_RotateTween?.Kill();
+                PurpleFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 break;
 
             case "BlueFR":
+                wheelRoutine.Kill();
                 NR_RotateTween?.Kill();
+                NRBGCircle_CG.transform.localEulerAngles = Vector3.zero;
                 GreenFR_RotateTween?.Kill();
+                GreenFR_CG.transform.localEulerAngles = Vector3.zero;
                 OrangeFR_RotateTween?.Kill();
+                OrangeFR_CG.transform.localEulerAngles = Vector3.zero;
                 GoldenFR_RotateTween?.Kill();
+                GoldenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 PurpleFR_RotateTween?.Kill();
+                PurpleFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 break;
 
             case "GreenFR":
+                wheelRoutine.Kill();
                 BlueFR_RotateTween?.Kill();
+                BlueFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 NR_RotateTween?.Kill();
+                NRBGCircle_CG.transform.localEulerAngles = Vector3.zero;
                 OrangeFR_RotateTween?.Kill();
+                OrangeFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 GoldenFR_RotateTween?.Kill();
+                GoldenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 PurpleFR_RotateTween?.Kill();
+                PurpleFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 break;
             
             case "GoldenFR":
+                wheelRoutine.Kill();
                 BlueFR_RotateTween?.Kill();
+                BlueFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 GreenFR_RotateTween?.Kill();
+                GreenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 OrangeFR_RotateTween?.Kill();
+                OrangeFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 NR_RotateTween?.Kill();
+                NRBGCircle_CG.transform.localEulerAngles = Vector3.zero;
                 PurpleFR_RotateTween?.Kill();
+                PurpleFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 break;
 
             case "OrangeFR":
+                wheelRoutine.Kill();
                 BlueFR_RotateTween?.Kill();
+                BlueFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 GreenFR_RotateTween?.Kill();
+                GreenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 NR_RotateTween?.Kill();
+                NRBGCircle_CG.transform.localEulerAngles = Vector3.zero;
                 GoldenFR_RotateTween?.Kill();
+                GoldenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 PurpleFR_RotateTween?.Kill();
+                PurpleFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 break;
 
             case "PurpleFR":
+                wheelRoutine.Kill();
                 BlueFR_RotateTween?.Kill();
+                BlueFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 GreenFR_RotateTween?.Kill();
+                GreenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 NR_RotateTween?.Kill();
+                NRBGCircle_CG.transform.localEulerAngles = Vector3.zero;
                 GoldenFR_RotateTween?.Kill();
+                GoldenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 OrangeFR_RotateTween?.Kill();
+                OrangeFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 break;
         }
     }

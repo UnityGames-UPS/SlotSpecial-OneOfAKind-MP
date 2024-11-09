@@ -8,6 +8,8 @@ using System;
 using UnityEngine;
 using UnityEngine.UI.Extensions;
 using UnityEngine.Assertions.Must;
+using Unity.VisualScripting;
+using UnityEngine.Android;
 
 public class SlotBehaviour : MonoBehaviour
 {
@@ -47,8 +49,10 @@ public class SlotBehaviour : MonoBehaviour
     [SerializeField] private CanvasGroup TopPayoutUI;
     [SerializeField] private Image BoosterImage;
     [SerializeField] private Image ActivatedImage;
-    [SerializeField] private GameObject ScatterArrowImage;
-    [SerializeField] private GameObject NormalArrowImage;
+    [SerializeField] private Image ScatterArrowImage;
+    [SerializeField] private Image NormalArrowImage;
+    [SerializeField] private Image MovementImage;
+    [SerializeField] private ImageAnimation BlastImageAnimation;
 
     [Header("Audio Management")]
     [SerializeField] private AudioController audioController;
@@ -81,11 +85,12 @@ public class SlotBehaviour : MonoBehaviour
     private bool IsSpinning = false;
     private bool CheckSpinAudio = false;
     internal bool CheckPopups = false;
+    internal bool wheelStopped = false;
 
     private int BetCounter = 0;
     private double currentBalance = 0;
     private double currentTotalBet = 0;
-    protected int Lines = 20;
+    // protected int Lines = 20;
     [SerializeField] private int IconSizeFactor = 100;       //set this parameter according to the size of the icon and spacing
     private int numberOfSlots = 5;          //number of columns
 
@@ -193,12 +198,6 @@ public class SlotBehaviour : MonoBehaviour
     {
         while (IsAutoSpin)
         {
-            // if(BoxAnimRoutine!=null && !WinAnimationFin)
-            // {
-            //     yield return new WaitUntil(() => WinAnimationFin);
-            //     StopGameAnimation();
-            // }
-
             StartSlots(IsAutoSpin);
             yield return tweenroutine;
             yield return new WaitForSeconds(.5f);
@@ -252,7 +251,7 @@ public class SlotBehaviour : MonoBehaviour
             j -= 1;
             if (FSnum_text) FSnum_text.text = j.ToString();
 
-            StartSlots(false, true);
+            StartSlots(false);
 
             yield return tweenroutine;
             yield return new WaitForSeconds(.5f);
@@ -310,8 +309,8 @@ public class SlotBehaviour : MonoBehaviour
                 if(TotalBetPlus_Button) TotalBetPlus_Button.interactable = true;
             }
         }
-        if (TotalBet_text) TotalBet_text.text = (SocketManager.initialData.Bets[BetCounter] * Lines).ToString();
-        currentTotalBet = SocketManager.initialData.Bets[BetCounter] * Lines;
+        if (TotalBet_text) TotalBet_text.text = SocketManager.initialData.Bets[BetCounter].ToString();
+        currentTotalBet = SocketManager.initialData.Bets[BetCounter];
         CompareBalance();
     }
 
@@ -352,11 +351,11 @@ public class SlotBehaviour : MonoBehaviour
     internal void SetInitialUI()
     {
         BetCounter = 0;
-        if (TotalBet_text) TotalBet_text.text = (SocketManager.initialData.Bets[BetCounter] * Lines).ToString();
+        if (TotalBet_text) TotalBet_text.text = SocketManager.initialData.Bets[BetCounter].ToString();
         if (TotalWin_text) TotalWin_text.text = "0.00";
         if (Balance_text) Balance_text.text = SocketManager.playerdata.Balance.ToString("f2");
         currentBalance = SocketManager.playerdata.Balance;
-        currentTotalBet = SocketManager.initialData.Bets[BetCounter] * Lines;
+        currentTotalBet = SocketManager.initialData.Bets[BetCounter];
         CompareBalance();
         uiManager.InitialiseUIData(SocketManager.initUIData.AbtLogo.link, SocketManager.initUIData.AbtLogo.logoSprite, SocketManager.initUIData.ToULink, SocketManager.initUIData.PopLink, SocketManager.initUIData.paylines);
     }
@@ -394,7 +393,7 @@ public class SlotBehaviour : MonoBehaviour
 
     #region SlotSpin
     //starts the spin process
-    private void StartSlots(bool autoSpin = false, bool bonus = false)
+    private void StartSlots(bool autoSpin = false)
     {
         if (audioController) audioController.PlaySpinButtonAudio();
 
@@ -415,14 +414,14 @@ public class SlotBehaviour : MonoBehaviour
         if (Win_Anim_Text.alpha!=0) Win_Anim_Text.DOFade(0, 0.5f);
         if(Win_Text_BG) Win_Text_BG.DOFade(0f, 0.5f);
 
-        tweenroutine = StartCoroutine(TweenRoutine(bonus));
+        tweenroutine = StartCoroutine(TweenRoutine());
         // StopGameAnimation();
         
         //PayCalculator.ResetLines();
     }
 
     //manage the Routine for spinning of the slots
-    private IEnumerator TweenRoutine(bool bonus = false)
+    private IEnumerator TweenRoutine()
     {
         if (currentBalance < currentTotalBet && !IsFreeSpin) // Check if balance is sufficient to place the bet
         {
@@ -436,12 +435,12 @@ public class SlotBehaviour : MonoBehaviour
         IsSpinning = true;
         // ToggleButtonGrp(false);
 
-        InitializeTweening();
-
         if (currentBalance < SocketManager.playerdata.Balance) // Deduct balance if not a bonus
         {
             BalanceDeduction();
         }
+
+        InitializeTweening();
 
         SocketManager.AccumulateResult(BetCounter);
         yield return new WaitUntil(() => SocketManager.isResultdone);
@@ -449,7 +448,8 @@ public class SlotBehaviour : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
 
-        if(ResultImage) ResultImage.sprite = SlotSymbols[SocketManager.resultData.resultSymbols];
+        int resultID = SocketManager.resultData.resultSymbols;
+        if(ResultImage) ResultImage.sprite = SlotSymbols[resultID];
 
         yield return new WaitForSeconds(.5f);
 
@@ -458,53 +458,25 @@ public class SlotBehaviour : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         // SlotStart_Button.gameObject.SetActive(true); //testing line, remove after
-        if(SocketManager.playerdata.haveWon > 0 && !SocketManager.resultData.jokerResponse.isTriggered && !SocketManager.resultData.levelup.isLevelUp && SocketManager.resultData.booster.type == "NONE" && SocketManager.resultData.freespinType == "NONE"){
-            yield return TotalWinningsAnimation(SocketManager.playerdata.haveWon);
-        }
-        else{
-            // ToggleButtonGrp(true);
-        }
 
         if(SocketManager.resultData.booster.type != "NONE"){
-            UIToggle(false);
+            TopUIToggle(false);
             BgController.SwitchBG(BackgroundController.BackgroundType.OrangeFR, SocketManager.resultData.booster.multipliers);
             yield return BoosterActivatedAnimation();
-            NormalArrowImage.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(StartWheelGame(BackgroundController.BackgroundType.OrangeFR, SocketManager.initUIData.paylines.symbols[resultID].payout, 0));
+            yield break;
         }
 
-        // CheckPayoutLineBackend(SocketManager.resultData.linesToEmit, SocketManager.resultData.FinalsymbolsToEmit, SocketManager.resultData.jackpot);
-
-        // KillAllTweens();
-
-        // if (SocketManager.playerdata.currentWining>0) WinningsTextAnimation(bonus); // Trigger winnings animation if applicable
-
-        // CheckPopups = true;
-
-        // if (SocketManager.resultData.jackpot > 0) // Check for jackpot or winnings popups
-        // {
-        //     uiManager.PopulateWin(4); 
-        // }
-        // else if(!bonus)
-        // {
-        //     CheckWinPopups();
-        // }
-        // else
-        // {
-        //     CheckPopups = false;
-        // }
-
+        if(SocketManager.playerdata.currentWining > 0 && !SocketManager.resultData.jokerResponse.isTriggered && !SocketManager.resultData.levelup.isLevelUp && SocketManager.resultData.booster.type == "NONE" && SocketManager.resultData.freespinType == "NONE"){
+            yield return TotalWinningsAnimation(SocketManager.playerdata.currentWining);
+        }
+        else{
+            ToggleButtonGrp(true);
+        }
         // if(SocketManager.playerdata.currentWining <= 0 && SocketManager.resultData.jackpot <= 0 && !SocketManager.resultData.freeSpins.isNewAdded)
         // {
         //     audioController.PlayWLAudio("lose");
-        // }
-
-        // yield return new WaitUntil(() => !CheckPopups);
-
-        // if (IsFreeSpin && BoxAnimRoutine != null && !WinAnimationFin) // Waits for winning payline animation to finish when triggered bonus
-        // {
-        //     yield return new WaitUntil(() => WinAnimationFin);
-        //     //yield return new WaitForSeconds(0.5f);
-        //     StopGameAnimation();
         // }
 
         // if (SocketManager.resultData.freeSpins.isNewAdded)
@@ -552,11 +524,102 @@ public class SlotBehaviour : MonoBehaviour
     }
     #endregion
 
-    private IEnumerator TotalWinningsAnimation(double amt){
-        WinningsTextAnimation(amt);
+    private IEnumerator StartWheelGame(BackgroundController.BackgroundType type, int basePayout, int MultiplierIndex){
+        
+        StartCoroutine(TotalWinningsAnimation(basePayout, false));
+        NormalArrowImage.DOFade(1, 0.2f);
+        BgController.RotateWheel(type); //ROTATE WHEEL
+        yield return new WaitForSeconds(2f); //WAITING FOR ROTATION ANIMATION
+        
+        NormalArrowImage.GetComponent<BoxCollider2D>().enabled = true; //TURNING ON COLLIDER TO STOP THE ROTATION
+        Stopper stopper = NormalArrowImage.GetComponent<Stopper>();
+        if(MultiplierIndex!=-1){
+            stopper.stopAT = SocketManager.resultData.booster.multipliers[MultiplierIndex].ToString(); //TELLING THE STOPPER THE LOCATION TO STOP\
+            Debug.Log("Stop AT:" + stopper.stopAT);
+        }
+        else{
+            stopper.stopAT = MultiplierIndex.ToString();
+            Debug.Log("Stop AT:" + stopper.stopAT);
+        }
+        stopper.stop = true; //TELLING STOPPER TO STOP THE ROTATION
+        
+        wheelStopped = false; 
+        yield return new WaitUntil(()=> wheelStopped); //WAITING FOR WHEEL TO STOP
+        Transform ResultImage = stopper.ImageTransform; //FETCHING THE RESULT IMAGE
+
+        NormalArrowImage.DOFade(0, 0.2f);
+        stopper.ImageTransform = null;
+        stopper.stop = false;
+        stopper.stopAT = "";
+        NormalArrowImage.GetComponent<BoxCollider2D>().enabled = false; //RESET THE STOPPER
+        
+        yield return new WaitForSeconds(1f); //WAITING FOR USER TO READ THE RESULT
+        if(MultiplierIndex!=-1){
+            ResultImage.GetComponent<Image>().DOFade(0, 0.1f);
+            MovementImage.sprite = ResultImage.GetComponent<Image>().sprite;
+            MovementImage.DOFade(1, 0); //USING THE MOVEMENT IMAGE INSTEAD OF THE WHEEL IMAGE
+        
+            Vector3 tempPosi = MovementImage.transform.localPosition;
+            yield return MovementImage.transform.DOLocalMoveY(106, .5f).SetEase(Ease.InBack, 2.5f).WaitForCompletion(); //MOVING THE IMAGE TO THE MIDDLE
+            MovementImage.DOFade(0, 0);
+            MovementImage.transform.localPosition=tempPosi; //RESETTING THE IMAGE
+
+            Win_Anim_Text.DOFade(0, 0); 
+            BlastImageAnimation.StartAnimation(); //STARTING AN ANIMATION
+            
+            yield return new WaitUntil(()=> BlastImageAnimation.textureArray[^1] == BlastImageAnimation.rendererDelegate.sprite);
+
+            BlastImageAnimation.StopAnimation();
+            
+            int winnings = int.Parse(ResultImage.GetComponent<Image>().sprite.name) * basePayout;
+            Win_Anim_Text.text = winnings.ToString("f2");
+            Win_Anim_Text.DOFade(1, .3f);
+
+            yield return new WaitForSeconds(2f);
+
+            Vector3 tempPosition2 = Win_Anim_Text.transform.localPosition;
+            yield return Win_Anim_Text.transform.DOLocalMoveY(-367f, 0.5f).WaitForCompletion();
+            CloseSlotWinningsUI();
+            Win_Anim_Text.transform.localPosition = tempPosition2;
+
+            WinningsTextAnimation(winnings);
+        }
+        else{
+            TotalWin_text.text = "0";
+            BgController.FadeOutChildren();
+            Win_Text_BG.DOFade(1, .8f);
+            yield return new WaitForSeconds(1f);
+            yield return TotalWinningsAnimation(SocketManager.playerdata.currentWining);
+        }
+
+        yield return new WaitForSeconds(.5f);
+
+        if(SocketManager.resultData.booster.type == "EXHAUSTIVE" && MultiplierIndex!=-1){
+            if(SocketManager.resultData.booster.multipliers[MultiplierIndex] != SocketManager.resultData.booster.multipliers[^1]){
+                StartCoroutine(StartWheelGame(type, basePayout, MultiplierIndex+1));
+                yield break;
+            }
+            else{
+                StartCoroutine(StartWheelGame(type, basePayout, -1));
+                yield break;
+            }
+        }
+        
+        BgController.SwitchBG(BackgroundController.BackgroundType.Base);
+        TopUIToggle(true);
+        ToggleButtonGrp(true);
+    }
+
+    private IEnumerator TotalWinningsAnimation(double amt, bool ShowTextAnimation = true){
+        if(ShowTextAnimation) WinningsTextAnimation(amt);
         Win_Anim_Text.text = amt.ToString("f2");
         Win_Text_BG.DOFade(.8f, 0.5f);
         yield return Win_Anim_Text.DOFade(1f, 0.5f);
+    }
+
+    private void CloseSlotWinningsUI(){
+        Win_Anim_Text.DOFade(0f, 0.3f);
+        Win_Text_BG.DOFade(0f, 0.2f);
     }
 
     private IEnumerator BoosterActivatedAnimation(){
@@ -573,7 +636,7 @@ public class SlotBehaviour : MonoBehaviour
         });
     }
 
-    private void UIToggle(bool toggle){
+    private void TopUIToggle(bool toggle){
         if(toggle){
             TopPayoutUI.DOFade(1, 0.5f);
         }
@@ -604,15 +667,15 @@ public class SlotBehaviour : MonoBehaviour
 
     private void WinningsTextAnimation(double amount)
     {
-        double WinAmt = 0;
-        DOTween.To(() => WinAmt, (val) => WinAmt = val, amount, 0.8f)
-        .OnUpdate(() =>{
-            if(TotalWin_text) TotalWin_text.text = WinAmt.ToString("f2");
-        })
-        .OnComplete(()=>{
-            // SlotStart_Button.gameObject.SetActive(true); //testing line, remove after
-            ToggleButtonGrp(true);
-        });
+        if(double.TryParse(TotalWin_text.text, out double WinAmt)){
+            DOTween.To(() => WinAmt, (val) => WinAmt = val, amount, 0.8f)
+            .OnUpdate(() =>{
+                if(TotalWin_text) TotalWin_text.text = WinAmt.ToString("f2");
+            })
+            .OnComplete(()=>{
+                ToggleButtonGrp(true);
+            });
+        }
     }
 
     private void BalanceDeduction()
