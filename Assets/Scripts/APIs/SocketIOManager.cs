@@ -33,7 +33,7 @@ public class SocketIOManager : MonoBehaviour
     //protected string TestSocketURI = "https://6f01c04j-5000.inc1.devtunnels.ms/";
     //protected string TestSocketURI = "https://7p68wzhv-5000.inc1.devtunnels.ms/"; //vikings
     //protected string TestSocketURI = "https://916smq0d-5001.inc1.devtunnels.ms/";
-    protected string TestSocketURI = "https://jmn3wfcb-5001.inc1.devtunnels.ms/";
+    protected string TestSocketURI = "https://2r5g8ns3-5001.inc1.devtunnels.ms/";
 
 
     [SerializeField]

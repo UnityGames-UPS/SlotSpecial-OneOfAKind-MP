@@ -34,7 +34,8 @@ public class BackgroundController : MonoBehaviour
     [SerializeField] private ImageAnimation OrangeFR_ImageAnimation;
     [SerializeField] private ImageAnimation GreenFR_ImageAnimation;
     [SerializeField] private ImageAnimation PurpleFR_ImageAnimation;
-    [SerializeField] private Sprite[] sprites;
+    [SerializeField] private Sprite[] MultiplierSprites;
+    [SerializeField] private Sprite[] LevelSprites;
     private Tween NR_RotateTween;
     private Tween BlueFR_RotateTween, GoldenFR_RotateTween, OrangeFR_RotateTween, GreenFR_RotateTween, PurpleFR_RotateTween, wheelRoutine;
 
@@ -67,7 +68,7 @@ public class BackgroundController : MonoBehaviour
         RotateBG();
     }
 
-    internal void SwitchBG(BackgroundType bgType, List<int> values = null) {
+    internal void SwitchBG(BackgroundType bgType, List<int> values = null, string type = null) {
         BackgroundType temp = currentBG;
         currentBG = bgType;
 
@@ -89,7 +90,7 @@ public class BackgroundController : MonoBehaviour
             anim.StartAnimation();
             RotateFastBG(cg.transform.GetChild(0).GetComponent<Image>(), bgType.ToString());
             cg.DOFade(1, 0.5f);
-            if(values!= null) PopuplateWheel(circleCg.transform, values);
+            if(values!= null) PopuplateWheel(circleCg.transform, values, type);
             circleCg.DOFade(1, 0.5f);
         }
 
@@ -115,7 +116,7 @@ public class BackgroundController : MonoBehaviour
         }
     }
     
-    private void PopuplateWheel(Transform CircleTransform ,List<int> values){
+    private void PopuplateWheel(Transform CircleTransform ,List<int> values, string type){
         int childCount = CircleTransform.childCount;
         List<int> availableIndices = new List<int>();
 
@@ -124,6 +125,13 @@ public class BackgroundController : MonoBehaviour
 
         System.Random random = new System.Random();
 
+        Sprite[] sprites = null;
+        if(type == "MULTIPLIER"){
+            sprites = MultiplierSprites;
+        }
+        else if(type == "LEVEL"){
+            sprites = LevelSprites;
+        }
         // Place each value at a random position on the wheel
         foreach (int value in values) {
             // Get a random index from availableIndices
@@ -143,9 +151,9 @@ public class BackgroundController : MonoBehaviour
             }
         }
 
-        // Fill remaining indices with random sprites
+        // Fill remaining indices with random MultiplierSprites
         foreach (int index in availableIndices) {
-            Sprite randomSprite = sprites[random.Next(sprites.Length)];
+            Sprite randomSprite = sprites[random.Next(sprites.Length-1)];
             Image childImage = CircleTransform.GetChild(index).GetComponent<Image>();
             if (childImage != null) {
                 childImage.sprite = randomSprite;
@@ -155,24 +163,24 @@ public class BackgroundController : MonoBehaviour
     }
 
     private void Update() {
-        if(Input.GetKeyDown(KeyCode.Keypad0)){
-            SwitchBG(BackgroundType.Base);
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad1)){
-            SwitchBG(BackgroundType.BlueFR);
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad2)){
-            SwitchBG(BackgroundType.OrangeFR);
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad3)){
-            SwitchBG(BackgroundType.GreenFR);
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad4)){
-            SwitchBG(BackgroundType.PurpleFR);
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad5)){
-            SwitchBG(BackgroundType.GoldenFR);
-        }
+        // if(Input.GetKeyDown(KeyCode.Keypad0)){
+        //     SwitchBG(BackgroundType.Base);
+        // }
+        // if(Input.GetKeyDown(KeyCode.Keypad1)){
+        //     SwitchBG(BackgroundType.BlueFR);
+        // }
+        // if(Input.GetKeyDown(KeyCode.Keypad2)){
+        //     SwitchBG(BackgroundType.OrangeFR);
+        // }
+        // if(Input.GetKeyDown(KeyCode.Keypad3)){
+        //     SwitchBG(BackgroundType.GreenFR);
+        // }
+        // if(Input.GetKeyDown(KeyCode.Keypad4)){
+        //     SwitchBG(BackgroundType.PurpleFR);
+        // }
+        // if(Input.GetKeyDown(KeyCode.Keypad5)){
+        //     SwitchBG(BackgroundType.GoldenFR);
+        // }
         // if(Input.GetKeyDown(KeyCode.Space)){
         //     RotateWheel(currentBG);
         // }
@@ -217,7 +225,17 @@ public class BackgroundController : MonoBehaviour
     }
 
     internal void StopWheel(){
-        wheelRoutine.Kill();
+        wheelRoutine.Pause();
+        // Get the current Z rotation of the wheel
+        float currentZRotation = backgrounds[currentBG].CircleCG.transform.eulerAngles.z;
+        
+        // Calculate the nearest multiple of 30
+        float targetZRotation = Mathf.Round(currentZRotation / 30) * 30;
+
+        // Rotate the wheel to the nearest 30-degree value over a short duration
+        backgrounds[currentBG].CircleCG.transform
+        .DORotate(new Vector3(0, 0, targetZRotation), 1.5f)
+        .SetEase(Ease.OutExpo); // Adjust ease for a smooth stop animation
     }
 
     private void StopRotation(string s){
