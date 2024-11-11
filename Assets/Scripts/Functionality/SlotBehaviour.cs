@@ -97,6 +97,7 @@ public class SlotBehaviour : MonoBehaviour
 
     private void Start()
     {
+        // ShuffleSlot(); //test
         IsAutoSpin = false;
 
         if (SlotStart_Button) SlotStart_Button.onClick.RemoveAllListeners();
@@ -435,21 +436,22 @@ public class SlotBehaviour : MonoBehaviour
         IsSpinning = true;
         // ToggleButtonGrp(false);
 
-        if (currentBalance < SocketManager.playerdata.Balance) // Deduct balance if not a bonus
-        {
-            BalanceDeduction();
-        }
+        // if (currentBalance < SocketManager.playerdata.Balance) // Deduct balance if not a bonus
+        // {
+        //     BalanceDeduction();
+        // }
 
         InitializeTweening();
 
-        SocketManager.AccumulateResult(BetCounter);
-        yield return new WaitUntil(() => SocketManager.isResultdone);
-        currentBalance = SocketManager.playerdata.Balance;
+        // SocketManager.AccumulateResult(BetCounter);
+        // yield return new WaitUntil(() => SocketManager.isResultdone);
+        // currentBalance = SocketManager.playerdata.Balance;
 
-        yield return new WaitForSeconds(1f);
+        // yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
-        int resultID = SocketManager.resultData.resultSymbols;
-        if(ResultImage) ResultImage.sprite = SlotSymbols[resultID];
+        // int resultID = SocketManager.resultData.resultSymbols;
+        // if(ResultImage) ResultImage.sprite = SlotSymbols[resultID];
 
         yield return new WaitForSeconds(.5f);
 
@@ -458,22 +460,23 @@ public class SlotBehaviour : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         // SlotStart_Button.gameObject.SetActive(true); //testing line, remove after
+        ToggleButtonGrp(true); //test
 
-        if(SocketManager.resultData.booster.type != "NONE"){
-            TopUIToggle(false);
-            BgController.SwitchBG(BackgroundController.BackgroundType.OrangeFR, SocketManager.resultData.booster.multipliers);
-            yield return BoosterActivatedAnimation();
-            yield return new WaitForSeconds(1f);
-            StartCoroutine(StartWheelGame(BackgroundController.BackgroundType.OrangeFR, SocketManager.initUIData.paylines.symbols[resultID].payout, 0));
-            yield break;
-        }
+        // if(SocketManager.resultData.booster.type != "NONE"){
+        //     TopUIToggle(false);
+        //     BgController.SwitchBG(BackgroundController.BackgroundType.OrangeFR, SocketManager.resultData.booster.multipliers);
+        //     yield return BoosterActivatedAnimation();
+        //     yield return new WaitForSeconds(1f);
+        //     StartCoroutine(StartWheelGame(BackgroundController.BackgroundType.OrangeFR, SocketManager.initUIData.paylines.symbols[resultID].payout, 0));
+        //     yield break;
+        // }
 
-        if(SocketManager.playerdata.currentWining > 0 && !SocketManager.resultData.jokerResponse.isTriggered && !SocketManager.resultData.levelup.isLevelUp && SocketManager.resultData.booster.type == "NONE" && SocketManager.resultData.freespinType == "NONE"){
-            yield return TotalWinningsAnimation(SocketManager.playerdata.currentWining);
-        }
-        else{
-            ToggleButtonGrp(true);
-        }
+        // if(SocketManager.playerdata.currentWining > 0 && !SocketManager.resultData.jokerResponse.isTriggered && !SocketManager.resultData.levelup.isLevelUp && SocketManager.resultData.booster.type == "NONE" && SocketManager.resultData.freespinType == "NONE"){
+        //     yield return TotalWinningsAnimation(SocketManager.playerdata.currentWining);
+        // }
+        // else{
+        //     ToggleButtonGrp(true);
+        // }
         // if(SocketManager.playerdata.currentWining <= 0 && SocketManager.resultData.jackpot <= 0 && !SocketManager.resultData.freeSpins.isNewAdded)
         // {
         //     audioController.PlayWLAudio("lose");
@@ -819,12 +822,12 @@ public class SlotBehaviour : MonoBehaviour
     private void InitializeTweening()
     {
         // ShuffleSlot(true); 
-        Slot_Transform.DOLocalMoveY(-2518f, 1f)
+        Slot_Transform.DOLocalMoveY(-2000f, 1.2f)
         .SetEase(Ease.InBack, 1.8f)
         .OnComplete(()=> {
-            Slot_Transform.localPosition = new Vector3(Slot_Transform.position.x, 2536);
+            Slot_Transform.localPosition = new Vector3(Slot_Transform.position.x, 2500f);
 
-            slotTween = Slot_Transform.DOLocalMoveY(-2518f - (512*2), 1f)
+            slotTween = Slot_Transform.DOLocalMoveY(-2000f, 1.2f)
             .SetLoops(-1, LoopType.Restart)
             .SetEase(Ease.Linear)
             .OnStepComplete(()=> ShuffleSlot(true));
@@ -841,7 +844,7 @@ public class SlotBehaviour : MonoBehaviour
         slotTween.Kill();
 
         // int tweenpos = (reqpos * IconSizeFactor) - IconSizeFactor;
-        slotTween = Slot_Transform.DOLocalMoveY(303f, 1f)
+        slotTween = Slot_Transform.DOLocalMoveY(467f, 1.2f)
         .SetEase(Ease.OutBack, 1.8f);
 
         if (audioController) audioController.PlayWLAudio("spinStop");
