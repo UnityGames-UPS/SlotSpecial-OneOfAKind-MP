@@ -15,11 +15,11 @@ public class Stopper : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("on trigger");
+        Debug.Log("on trigger enter");
         // Check if the collided object has an Image component
         if(stop){
             if(stopAT != "-1"){
-                if (string.Equals(collision.name, stopAT))
+                if (collision.name==stopAT)
                 {
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     stop = false;
@@ -30,10 +30,34 @@ public class Stopper : MonoBehaviour
                 }
             }
             else{
-                if(string.Equals(collision.name, "Empty")){
+                if(collision.name == "Empty"){
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     stop = false;
                     Debug.Log("Stopping at a empty space");
+                    slotBehaviour.wheelStopped = true;
+                    bgController.StopWheel();
+                    ImageTransform = collision.transform;
+                }
+                else if(collision.name == "Blue"){
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    stop = false;
+                    Debug.Log("Stopping at a blue");
+                    slotBehaviour.wheelStopped = true;
+                    bgController.StopWheel();
+                    ImageTransform = collision.transform;
+                }
+                else if(collision.name == "Red"){
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    stop = false;
+                    Debug.Log("Stopping at a red");
+                    slotBehaviour.wheelStopped = true;
+                    bgController.StopWheel();
+                    ImageTransform = collision.transform;
+                }
+                else if(collision.name == "Green"){
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    stop = false;
+                    Debug.Log("Stopping at a green");
                     slotBehaviour.wheelStopped = true;
                     bgController.StopWheel();
                     ImageTransform = collision.transform;
@@ -43,11 +67,11 @@ public class Stopper : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        Debug.Log("on trigger");
+        Debug.Log("on trigger exit");
         // Check if the collided object has an Image component
         if(stop){
             if(stopAT != "-1"){
-                if (string.Equals(collision.name, stopAT))
+                if (collision.name==stopAT)
                 {
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     stop = false;
@@ -58,10 +82,34 @@ public class Stopper : MonoBehaviour
                 }
             }
             else{
-                if(string.Equals(collision.name, "Empty")){
+                if(collision.name == "Empty"){
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     stop = false;
                     Debug.Log("Stopping at a empty space");
+                    slotBehaviour.wheelStopped = true;
+                    bgController.StopWheel();
+                    ImageTransform = collision.transform;
+                }
+                else if(collision.name == "Blue"){
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    stop = false;
+                    Debug.Log("Stopping at a blue");
+                    slotBehaviour.wheelStopped = true;
+                    bgController.StopWheel();
+                    ImageTransform = collision.transform;
+                }
+                else if(collision.name == "Red"){
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    stop = false;
+                    Debug.Log("Stopping at a red");
+                    slotBehaviour.wheelStopped = true;
+                    bgController.StopWheel();
+                    ImageTransform = collision.transform;
+                }
+                else if(collision.name == "Green"){
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    stop = false;
+                    Debug.Log("Stopping at a green");
                     slotBehaviour.wheelStopped = true;
                     bgController.StopWheel();
                     ImageTransform = collision.transform;
@@ -71,11 +119,11 @@ public class Stopper : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        Debug.Log("on trigger");
+        Debug.Log("on trigger stay");
         // Check if the collided object has an Image component
         if(stop){
             if(stopAT != "-1"){
-                if (string.Equals(collision.name, stopAT))
+                if (collision.name==stopAT)
                 {
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     stop = false;
@@ -86,10 +134,34 @@ public class Stopper : MonoBehaviour
                 }
             }
             else{
-                if(string.Equals(collision.name, "Empty")){
+                if(collision.name == "Empty"){
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     stop = false;
                     Debug.Log("Stopping at a empty space");
+                    slotBehaviour.wheelStopped = true;
+                    bgController.StopWheel();
+                    ImageTransform = collision.transform;
+                }
+                else if(collision.name == "Blue"){
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    stop = false;
+                    Debug.Log("Stopping at a blue");
+                    slotBehaviour.wheelStopped = true;
+                    bgController.StopWheel();
+                    ImageTransform = collision.transform;
+                }
+                else if(collision.name == "Red"){
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    stop = false;
+                    Debug.Log("Stopping at a red");
+                    slotBehaviour.wheelStopped = true;
+                    bgController.StopWheel();
+                    ImageTransform = collision.transform;
+                }
+                else if(collision.name == "Green"){
+                    gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                    stop = false;
+                    Debug.Log("Stopping at a green");
                     slotBehaviour.wheelStopped = true;
                     bgController.StopWheel();
                     ImageTransform = collision.transform;

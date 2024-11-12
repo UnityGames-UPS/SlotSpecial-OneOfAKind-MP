@@ -36,8 +36,14 @@ public class BackgroundController : MonoBehaviour
     [SerializeField] private ImageAnimation PurpleFR_ImageAnimation;
     [SerializeField] private Sprite[] MultiplierSprites;
     [SerializeField] private Sprite[] LevelSprites;
+    [SerializeField] private Sprite BlueJoker_Sprite;
+    [SerializeField] private Sprite GreenJoker_Sprite;
+    [SerializeField] private Sprite RedJoker_Sprite;
     private Tween NR_RotateTween;
     private Tween BlueFR_RotateTween, GoldenFR_RotateTween, OrangeFR_RotateTween, GreenFR_RotateTween, PurpleFR_RotateTween, wheelRoutine;
+    private Tween GlowRotation1;
+    private Tween GlowRotation2;
+
 
     [Header("Rotation Tween Duration")]
     [SerializeField] private float NRTweenDuration = 30;
@@ -51,16 +57,17 @@ public class BackgroundController : MonoBehaviour
         OrangeFR,
         PurpleFR
     }
-    private Dictionary<BackgroundType, (CanvasGroup CG, CanvasGroup CircleCG, ImageAnimation ImageAnim)> backgrounds;
+    private Dictionary<BackgroundType, (CanvasGroup CG, CanvasGroup CircleCG)> backgrounds;
     private BackgroundType currentBG;
 
     private void Awake() {
-        backgrounds = new Dictionary<BackgroundType, (CanvasGroup, CanvasGroup, ImageAnimation)> {
-            { BackgroundType.BlueFR, (BlueFR_CG, BlueFRCircle_CG, BlueFR_ImageAnimation) },
-            { BackgroundType.GreenFR, (GreenFR_CG, GreenFRCircle_CG, GreenFR_ImageAnimation) },
-            { BackgroundType.GoldenFR, (GoldenFR_CG, GoldenFRCircle_CG, GoldenFR_ImageAnimation) },
-            { BackgroundType.OrangeFR, (OrangeFR_CG, OrangeFRCircle_CG, OrangeFR_ImageAnimation) },
-            { BackgroundType.PurpleFR, (PurpleFR_CG, PurpleFRCircle_CG, PurpleFR_ImageAnimation) }
+        backgrounds = new Dictionary<BackgroundType, (CanvasGroup, CanvasGroup)> {
+            { BackgroundType.Base, (NRBG_CG, NRBGCircle_CG) },
+            { BackgroundType.BlueFR, (BlueFR_CG, BlueFRCircle_CG) },
+            { BackgroundType.GreenFR, (GreenFR_CG, GreenFRCircle_CG) },
+            { BackgroundType.GoldenFR, (GoldenFR_CG, GoldenFRCircle_CG) },
+            { BackgroundType.OrangeFR, (OrangeFR_CG, OrangeFRCircle_CG) },
+            { BackgroundType.PurpleFR, (PurpleFR_CG, PurpleFRCircle_CG) }
         };
     }
     private void Start() {
@@ -74,27 +81,31 @@ public class BackgroundController : MonoBehaviour
 
         foreach (var kvp in backgrounds) {
             if (kvp.Key != bgType) {
-                kvp.Value.CG.DOFade(0, 0.5f).OnComplete(() => kvp.Value.ImageAnim.StopAnimation());
-                kvp.Value.CircleCG.DOFade(0, 0.5f);
+                kvp.Value.CG.DOFade(0, 1f);
+                kvp.Value.CircleCG.DOFade(0, 1f);
+                if(GlowRotation1 != null || GlowRotation2 != null){
+                    GlowRotation1.Kill();
+                    GlowRotation2.Kill();
+                }
             }
         }
 
-        DOVirtual.DelayedCall(0.5f, () => StopRotation(bgType.ToString()));
+        DOVirtual.DelayedCall(1f, () => StopRotation(temp.ToString()));
 
         if (bgType == BackgroundType.Base) {
-            NRBG_CG.DOFade(1, 0.5f);
-            NRBGCircle_CG.DOFade(1, 0.5f);
+            NRBG_CG.DOFade(1, 1f);
+            NRBGCircle_CG.DOFade(1, 1f);
             RotateBG();
         } else {
-            var (cg, circleCg, anim) = backgrounds[bgType];
-            anim.StartAnimation();
+            var (cg, circleCg) = backgrounds[bgType];
+            if(values!= null || type == "JOKER1" || type == "JOKER2" || type == "JOKER3") PopuplateWheel(circleCg.transform, values, type);
+            // anim.StartAnimation();
             RotateFastBG(cg.transform.GetChild(0).GetComponent<Image>(), bgType.ToString());
-            cg.DOFade(1, 0.5f);
-            if(values!= null) PopuplateWheel(circleCg.transform, values, type);
-            circleCg.DOFade(1, 0.5f);
+            cg.DOFade(1, 1f);
+            circleCg.DOFade(1, 1f);
         }
 
-        DOVirtual.DelayedCall(.5f, ()=> {
+        DOVirtual.DelayedCall(1f, ()=> {
             if(temp!=BackgroundType.Base){
                 int childCount = backgrounds[temp].CircleCG.transform.childCount;
                 for(int i=0;i<childCount;i++){
@@ -132,6 +143,114 @@ public class BackgroundController : MonoBehaviour
         else if(type == "LEVEL"){
             sprites = LevelSprites;
         }
+        else if (type == "JOKER1")
+        {
+            int jokerCount = 6;  // Example: Specify the number of Joker placements you want
+
+            for (int i = 0; i < jokerCount; i++)
+            {
+                bool placed = false;
+
+                while (!placed && availableIndices.Count > 2)
+                {
+                    int randomIndex = availableIndices[random.Next(availableIndices.Count)];
+
+                    int leftIndex = (randomIndex - 1 + childCount) % childCount;
+                    int rightIndex = (randomIndex + 1) % childCount;
+
+                    if (availableIndices.Contains(leftIndex) && availableIndices.Contains(rightIndex))
+                    {
+                        availableIndices.Remove(randomIndex);
+                        CircleTransform.GetChild(leftIndex).name = "Empty";
+                        availableIndices.Remove(leftIndex);
+                        CircleTransform.GetChild(rightIndex).name = "Empty";
+                        availableIndices.Remove(rightIndex);
+
+                        Image childImage = CircleTransform.GetChild(randomIndex).GetComponent<Image>();
+                        if (childImage != null)
+                        {
+                            childImage.rectTransform.sizeDelta = new Vector3(350f, 311f);
+                            childImage.sprite = BlueJoker_Sprite;  // Use the specified Joker color
+                            childImage.name = "Blue";
+                        }
+                        placed = true;
+                    }
+                }
+            }
+            return;  // Exit after placing Joker sprites
+        }
+        else if(type == "JOKER2")
+        {
+            int jokerCount = 5;  // Example: Specify the number of Joker placements you want
+
+            for (int i = 0; i < jokerCount; i++)
+            {
+                bool placed = false;
+
+                while (!placed && availableIndices.Count > 2)
+                {
+                    int randomIndex = availableIndices[random.Next(availableIndices.Count)];
+
+                    int leftIndex = (randomIndex - 1 + childCount) % childCount;
+                    int rightIndex = (randomIndex + 1) % childCount;
+
+                    if (availableIndices.Contains(leftIndex) && availableIndices.Contains(rightIndex))
+                    {
+                        availableIndices.Remove(randomIndex);
+                        CircleTransform.GetChild(leftIndex).name = "Empty";
+                        availableIndices.Remove(leftIndex);
+                        CircleTransform.GetChild(rightIndex).name = "Empty";
+                        availableIndices.Remove(rightIndex);
+
+                        Image childImage = CircleTransform.GetChild(randomIndex).GetComponent<Image>();
+                        if (childImage != null)
+                        {
+                            childImage.rectTransform.sizeDelta = new Vector3(350f, 311f);
+                            childImage.sprite = GreenJoker_Sprite;  // Use the specified Joker color
+                            childImage.name = "Green";
+                        }
+                        placed = true;
+                    }
+                }
+            }
+            return;  // Exit after placing Joker sprites
+        }
+        else if(type == "JOKER3"){
+            int jokerCount = 3;  // Example: Specify the number of Joker placements you want
+
+            for (int i = 0; i < jokerCount; i++)
+            {
+                bool placed = false;
+
+                while (!placed && availableIndices.Count > 2)
+                {
+                    int randomIndex = availableIndices[random.Next(availableIndices.Count)];
+
+                    int leftIndex = (randomIndex - 1 + childCount) % childCount;
+                    int rightIndex = (randomIndex + 1) % childCount;
+
+                    if (availableIndices.Contains(leftIndex) && availableIndices.Contains(rightIndex))
+                    {
+                        availableIndices.Remove(randomIndex);
+                        CircleTransform.GetChild(leftIndex).name = "Empty";
+                        availableIndices.Remove(leftIndex);
+                        CircleTransform.GetChild(rightIndex).name = "Empty";
+                        availableIndices.Remove(rightIndex);
+
+                        Image childImage = CircleTransform.GetChild(randomIndex).GetComponent<Image>();
+                        if (childImage != null)
+                        {
+                            childImage.rectTransform.sizeDelta = new Vector3(350f, 311f);
+                            childImage.sprite = RedJoker_Sprite;  // Use the specified Joker color
+                            childImage.name = "Red";
+                        }
+                        placed = true;
+                    }
+                }
+            }
+            return;  // Exit after placing Joker sprites
+        }
+
         // Place each value at a random position on the wheel
         foreach (int value in values) {
             // Get a random index from availableIndices
@@ -143,6 +262,7 @@ public class BackgroundController : MonoBehaviour
             if (targetSprite != null) {
                 Image childImage = CircleTransform.GetChild(randomIndex).GetComponent<Image>();
                 if (childImage != null) {
+                    childImage.rectTransform.sizeDelta = new Vector3(110f, 110f);
                     childImage.sprite = targetSprite;
                     childImage.name = targetSprite.name;
                 }
@@ -156,6 +276,7 @@ public class BackgroundController : MonoBehaviour
             Sprite randomSprite = sprites[random.Next(sprites.Length-1)];
             Image childImage = CircleTransform.GetChild(index).GetComponent<Image>();
             if (childImage != null) {
+                childImage.rectTransform.sizeDelta = new Vector3(110f, 110f);
                 childImage.sprite = randomSprite;
                 childImage.name = randomSprite.name;
             }
@@ -163,30 +284,30 @@ public class BackgroundController : MonoBehaviour
     }
 
     private void Update() {
-        // if(Input.GetKeyDown(KeyCode.Keypad0)){
-        //     SwitchBG(BackgroundType.Base);
-        // }
-        // if(Input.GetKeyDown(KeyCode.Keypad1)){
-        //     SwitchBG(BackgroundType.BlueFR);
-        // }
-        // if(Input.GetKeyDown(KeyCode.Keypad2)){
-        //     SwitchBG(BackgroundType.OrangeFR);
-        // }
-        // if(Input.GetKeyDown(KeyCode.Keypad3)){
-        //     SwitchBG(BackgroundType.GreenFR);
-        // }
-        // if(Input.GetKeyDown(KeyCode.Keypad4)){
-        //     SwitchBG(BackgroundType.PurpleFR);
-        // }
-        // if(Input.GetKeyDown(KeyCode.Keypad5)){
-        //     SwitchBG(BackgroundType.GoldenFR);
-        // }
-        // if(Input.GetKeyDown(KeyCode.Space)){
-        //     RotateWheel(currentBG);
-        // }
-        // if(Input.GetKeyDown(KeyCode.RightAlt)){
-        //     wheelRoutine.Kill();
-        // }
+        if(Input.GetKeyDown(KeyCode.Keypad0)){
+            SwitchBG(BackgroundType.Base);
+        }
+        if(Input.GetKeyDown(KeyCode.Keypad1)){
+            SwitchBG(BackgroundType.BlueFR);
+        }
+        if(Input.GetKeyDown(KeyCode.Keypad2)){
+            SwitchBG(BackgroundType.OrangeFR);
+        }
+        if(Input.GetKeyDown(KeyCode.Keypad3)){
+            SwitchBG(BackgroundType.GreenFR);
+        }
+        if(Input.GetKeyDown(KeyCode.Keypad4)){
+            SwitchBG(BackgroundType.PurpleFR);
+        }
+        if(Input.GetKeyDown(KeyCode.Keypad5)){
+            SwitchBG(BackgroundType.GoldenFR);
+        }
+        if(Input.GetKeyDown(KeyCode.Space)){
+            RotateWheel();
+        }
+        if(Input.GetKeyDown(KeyCode.RightAlt)){
+            wheelRoutine.Kill();
+        }
     }
 
     private void RotateBG(){
@@ -199,6 +320,26 @@ public class BackgroundController : MonoBehaviour
         float z= image.transform.eulerAngles.z;
         z-=360;
         Tween tween = image.transform.DORotate(new Vector3(0, 0, z), FRTweenDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1);
+        
+        // Initialize both children scales
+        image.transform.GetChild(0).localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        image.transform.GetChild(1).localScale = new Vector3(0.1f, 0.1f, 0.1f);
+
+        // Start scaling the first child image
+        Tween scaleTween1 = image.transform.GetChild(0).DOScale(1.8f, 1f)
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Restart);
+
+        // Start scaling the second child image independently
+        Tween scaleTween2 = image.transform.GetChild(1).DOScale(1.8f, 1f)
+            .SetEase(Ease.Linear)
+            .SetDelay(0.5f)
+            .SetLoops(-1, LoopType.Restart);
+
+        // Assign tweens to fields for control if needed
+        GlowRotation1 = scaleTween1;
+        GlowRotation2 = scaleTween2;
+        
         switch(s){
             case "BlueFR":
             BlueFR_RotateTween = tween;
@@ -219,8 +360,8 @@ public class BackgroundController : MonoBehaviour
     }
 
 
-    internal void RotateWheel(BackgroundType type){
-        Transform Wheel_Transform = backgrounds[type].CircleCG.transform;
+    internal void RotateWheel(){
+        Transform Wheel_Transform = backgrounds[currentBG].CircleCG.transform;
         wheelRoutine =  Wheel_Transform.DORotate(new Vector3(0, 0, -360f), 1.5f, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1);
     }
 
@@ -239,89 +380,41 @@ public class BackgroundController : MonoBehaviour
     }
 
     private void StopRotation(string s){
+        Debug.Log("Stopping " + s + " rotation");
         switch(s){
             case "Base":
-                wheelRoutine.Kill();
-                BlueFR_RotateTween?.Kill();
-                BlueFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                GreenFR_RotateTween?.Kill();
-                GreenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                OrangeFR_RotateTween?.Kill();
-                OrangeFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                GoldenFR_RotateTween?.Kill();
-                GoldenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                PurpleFR_RotateTween?.Kill();
-                PurpleFRCircle_CG.transform.localEulerAngles = Vector3.zero;
+                NR_RotateTween?.Kill();
+                NRBGCircle_CG.transform.localEulerAngles = Vector3.zero;
                 break;
 
             case "BlueFR":
                 wheelRoutine.Kill();
-                NR_RotateTween?.Kill();
-                NRBGCircle_CG.transform.localEulerAngles = Vector3.zero;
-                GreenFR_RotateTween?.Kill();
-                GreenFR_CG.transform.localEulerAngles = Vector3.zero;
-                OrangeFR_RotateTween?.Kill();
-                OrangeFR_CG.transform.localEulerAngles = Vector3.zero;
-                GoldenFR_RotateTween?.Kill();
-                GoldenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                PurpleFR_RotateTween?.Kill();
-                PurpleFRCircle_CG.transform.localEulerAngles = Vector3.zero;
+                BlueFR_RotateTween?.Kill();
+                BlueFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 break;
 
             case "GreenFR":
                 wheelRoutine.Kill();
-                BlueFR_RotateTween?.Kill();
-                BlueFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                NR_RotateTween?.Kill();
-                NRBGCircle_CG.transform.localEulerAngles = Vector3.zero;
-                OrangeFR_RotateTween?.Kill();
-                OrangeFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                GoldenFR_RotateTween?.Kill();
-                GoldenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                PurpleFR_RotateTween?.Kill();
-                PurpleFRCircle_CG.transform.localEulerAngles = Vector3.zero;
+                GreenFR_RotateTween?.Kill();
+                GreenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 break;
             
             case "GoldenFR":
                 wheelRoutine.Kill();
-                BlueFR_RotateTween?.Kill();
-                BlueFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                GreenFR_RotateTween?.Kill();
-                GreenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                OrangeFR_RotateTween?.Kill();
-                OrangeFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                NR_RotateTween?.Kill();
-                NRBGCircle_CG.transform.localEulerAngles = Vector3.zero;
-                PurpleFR_RotateTween?.Kill();
-                PurpleFRCircle_CG.transform.localEulerAngles = Vector3.zero;
+                GoldenFR_RotateTween?.Kill();
+                GoldenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 break;
 
             case "OrangeFR":
                 wheelRoutine.Kill();
-                BlueFR_RotateTween?.Kill();
-                BlueFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                GreenFR_RotateTween?.Kill();
-                GreenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                NR_RotateTween?.Kill();
-                NRBGCircle_CG.transform.localEulerAngles = Vector3.zero;
-                GoldenFR_RotateTween?.Kill();
-                GoldenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                PurpleFR_RotateTween?.Kill();
-                PurpleFRCircle_CG.transform.localEulerAngles = Vector3.zero;
+                OrangeFR_RotateTween?.Kill();
+                OrangeFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 break;
 
             case "PurpleFR":
                 wheelRoutine.Kill();
-                BlueFR_RotateTween?.Kill();
-                BlueFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                GreenFR_RotateTween?.Kill();
-                GreenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                NR_RotateTween?.Kill();
-                NRBGCircle_CG.transform.localEulerAngles = Vector3.zero;
-                GoldenFR_RotateTween?.Kill();
-                GoldenFRCircle_CG.transform.localEulerAngles = Vector3.zero;
-                OrangeFR_RotateTween?.Kill();
-                OrangeFRCircle_CG.transform.localEulerAngles = Vector3.zero;
+                PurpleFR_RotateTween?.Kill();
+                PurpleFRCircle_CG.transform.localEulerAngles = Vector3.zero;
                 break;
         }
     }
