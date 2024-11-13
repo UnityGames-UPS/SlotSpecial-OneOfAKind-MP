@@ -42,6 +42,7 @@ public class SlotBehaviour : MonoBehaviour
     [SerializeField] private Sprite[] BlueJokerAnimations;
     [SerializeField] private Sprite[] GreenJokerAnimations;
     [SerializeField] private Sprite[] RedJokerAnimations;
+    [SerializeField] private Sprite Emprty_Sprite;
 
     [Header("Miscellaneous UI")]
     [SerializeField] private TMP_Text Balance_text;
@@ -63,8 +64,10 @@ public class SlotBehaviour : MonoBehaviour
     [SerializeField] private Image NormalArrowImage;
     [SerializeField] private Image MovementImage;
     [SerializeField] private ImageAnimation BlastImageAnimation;
-
-
+    [SerializeField] private ImageAnimation JokerEndAnimation;
+    [SerializeField] private Transform BigWinImage;
+    [SerializeField] private Transform HugeWinImage;
+    [SerializeField] private Transform MegaWinImage;
     [SerializeField] private CanvasGroup Joker_Start_UI;
     [SerializeField] private CanvasGroup Minor_UI;
     [SerializeField] private CanvasGroup Major_UI;
@@ -138,9 +141,7 @@ public class SlotBehaviour : MonoBehaviour
 
         if(Winnings_Cont_Bttn) Winnings_Cont_Bttn.onClick.RemoveAllListeners();
         if(Winnings_Cont_Bttn) Winnings_Cont_Bttn.onClick.AddListener(()=>{
-            Joker_End_UI.interactable=false;
-            Joker_End_UI.blocksRaycasts=false;
-            Joker_End_UI.DOFade(0, 0.5f);
+            StartCoroutine(EndJoker());
         });
 
         if (SlotStart_Button) SlotStart_Button.onClick.RemoveAllListeners();
@@ -483,13 +484,14 @@ public class SlotBehaviour : MonoBehaviour
         int resultID = SocketManager.resultData.resultSymbols;
         if(ResultImage) ResultImage.sprite = SlotSymbols[resultID];
 
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(1f);
 
         yield return StopTweening();
 
         yield return new WaitForSeconds(0.3f);
 
         if(SocketManager.resultData.jokerResponse.isTriggered){
+            yield return new WaitForSeconds(1.5f);
             Joker_Start_UI.transform.parent.gameObject.SetActive(true);
             Joker_Start_UI.interactable = true;
             Joker_Start_UI.blocksRaycasts = true;
@@ -525,10 +527,6 @@ public class SlotBehaviour : MonoBehaviour
     }
     #endregion
 
-    private void InitialJokerUI(){
-        
-    }
-
     private IEnumerator StartBlueJokerWheelGame(JokerResponse jokerResponse){
         Joker_Start_UI.interactable=false;
         Joker_Start_UI.blocksRaycasts=false;
@@ -537,10 +535,14 @@ public class SlotBehaviour : MonoBehaviour
         BgController.SwitchBG(BackgroundController.BackgroundType.BlueFR, null, "JOKER1");
         DiamondArrowImage.DOFade(1, 0.2f);
         
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         
         if(jokerResponse.blueRound == 3){
             for(int i=0;i<jokerResponse.blueRound;i++){
+                if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+                    yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
+                    yield return new WaitForSeconds(1f);
+                }
                 BgController.RotateWheel(); //ROTATE WHEEL
                 
                 yield return new WaitForSeconds(2f);
@@ -557,6 +559,7 @@ public class SlotBehaviour : MonoBehaviour
 
                 ImageAnimation ResultImageAnimation = DiamondArrowImage.GetComponent<Stopper>().ImageTransform.GetComponent<ImageAnimation>();
                 ResetDiamondArrow();
+                ResultImageAnimation.AnimationSpeed=6f;
 
                 ResultImageAnimation.textureArray.Clear();
                 ResultImageAnimation.textureArray.TrimExcess();
@@ -566,18 +569,25 @@ public class SlotBehaviour : MonoBehaviour
 
                 ResultImageAnimation.StartAnimation();
                 yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
+                ResultImageAnimation.StopAnimation();
                 JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
+                ResultImageAnimation.rendererDelegate.sprite=Emprty_Sprite;
                 ResultImageAnimation.name ="Empty";
                 yield return new WaitForSeconds(1f);
             }
             
-            Glow_Minor_Image.DOFade(1, 0.3f);
+            yield return Glow_Minor_Image.DOFade(1, 0.3f).WaitForCompletion();
+            yield return new WaitForSeconds(1f);
             Minor_UI.interactable = true;
             Minor_UI.blocksRaycasts = true;
             Minor_UI.DOFade(1, 0.5f);
         }
         else if(jokerResponse.blueRound>0&&jokerResponse.blueRound<3){
             for(int i=0;i<jokerResponse.blueRound;i++){
+                if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+                    yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
+                    yield return new WaitForSeconds(1f);
+                }
                 BgController.RotateWheel(); //ROTATE WHEEL
                 
                 yield return new WaitForSeconds(2f);
@@ -594,6 +604,7 @@ public class SlotBehaviour : MonoBehaviour
 
                 ImageAnimation ResultImageAnimation = DiamondArrowImage.GetComponent<Stopper>().ImageTransform.GetComponent<ImageAnimation>();
                 ResetDiamondArrow();
+                ResultImageAnimation.AnimationSpeed=6f;
 
                 ResultImageAnimation.textureArray.Clear();
                 ResultImageAnimation.textureArray.TrimExcess();
@@ -603,8 +614,14 @@ public class SlotBehaviour : MonoBehaviour
 
                 ResultImageAnimation.StartAnimation();
                 yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
+                ResultImageAnimation.StopAnimation();
                 JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
+                ResultImageAnimation.rendererDelegate.sprite=Emprty_Sprite;
                 ResultImageAnimation.name ="Empty";
+                yield return new WaitForSeconds(1f);
+            }
+            if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+                yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                 yield return new WaitForSeconds(1f);
             }
             BgController.RotateWheel(); //ROTATE WHEEL
@@ -622,9 +639,13 @@ public class SlotBehaviour : MonoBehaviour
             yield return new WaitForSeconds(2f);
             ResetDiamondArrow();
 
-            EndJokerGame();
+            OpenJokerGameEndingUI();
         }
         else if(jokerResponse.blueRound == 0){
+            if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+                yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
+                yield return new WaitForSeconds(1f);
+            }
             BgController.RotateWheel(); //ROTATE WHEEL
                 
             yield return new WaitForSeconds(2f);
@@ -638,8 +659,9 @@ public class SlotBehaviour : MonoBehaviour
 
             yield return new WaitUntil(()=> wheelStopped);
             yield return new WaitForSeconds(2f);
+            ResetDiamondArrow();
 
-            EndJokerGame();
+            OpenJokerGameEndingUI();
         }
     }
 
@@ -652,10 +674,14 @@ public class SlotBehaviour : MonoBehaviour
         BgController.SwitchBG(BackgroundController.BackgroundType.GreenFR, null, "JOKER2");
         DiamondArrowImage.DOFade(1, 0.2f);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         
         if(jokerResponse.greenRound == 3){
             for(int i=0;i<jokerResponse.greenRound;i++){
+                if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+                    yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
+                    yield return new WaitForSeconds(1f);
+                }
                 BgController.RotateWheel(); //ROTATE WHEEL
                 
                 yield return new WaitForSeconds(2f);
@@ -672,6 +698,7 @@ public class SlotBehaviour : MonoBehaviour
 
                 ImageAnimation ResultImageAnimation = DiamondArrowImage.GetComponent<Stopper>().ImageTransform.GetComponent<ImageAnimation>();
                 ResetDiamondArrow();
+                ResultImageAnimation.AnimationSpeed=6f;
 
                 ResultImageAnimation.textureArray.Clear();
                 ResultImageAnimation.textureArray.TrimExcess();
@@ -681,18 +708,25 @@ public class SlotBehaviour : MonoBehaviour
 
                 ResultImageAnimation.StartAnimation();
                 yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
+                ResultImageAnimation.StopAnimation();
                 JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
+                ResultImageAnimation.rendererDelegate.sprite=Emprty_Sprite;
                 ResultImageAnimation.name ="Empty";
                 yield return new WaitForSeconds(1f);
             }
             
-            Glow_Major_Image.DOFade(1, 0.3f);
+            yield return Glow_Major_Image.DOFade(1, 0.3f).WaitForCompletion();
+            yield return new WaitForSeconds(1f);
             Major_UI.interactable=true;
             Major_UI.blocksRaycasts=true;
             Major_UI.DOFade(1, 0.5f);
         }
         else if(jokerResponse.greenRound>0&&jokerResponse.greenRound<3){
             for(int i=0;i<jokerResponse.greenRound;i++){
+                if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+                    yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
+                    yield return new WaitForSeconds(1f);
+                }
                 BgController.RotateWheel(); //ROTATE WHEEL
                 
                 yield return new WaitForSeconds(2f);
@@ -709,6 +743,7 @@ public class SlotBehaviour : MonoBehaviour
 
                 ImageAnimation ResultImageAnimation = DiamondArrowImage.GetComponent<Stopper>().ImageTransform.GetComponent<ImageAnimation>();
                 ResetDiamondArrow();
+                ResultImageAnimation.AnimationSpeed=6f;
 
                 ResultImageAnimation.textureArray.Clear();
                 ResultImageAnimation.textureArray.TrimExcess();
@@ -718,8 +753,14 @@ public class SlotBehaviour : MonoBehaviour
 
                 ResultImageAnimation.StartAnimation();
                 yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
+                ResultImageAnimation.StopAnimation();
                 JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
+                ResultImageAnimation.rendererDelegate.sprite=Emprty_Sprite;
                 ResultImageAnimation.name ="Empty";
+                yield return new WaitForSeconds(1f);
+            }
+            if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+                yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                 yield return new WaitForSeconds(1f);
             }
             BgController.RotateWheel(); //ROTATE WHEEL
@@ -735,10 +776,15 @@ public class SlotBehaviour : MonoBehaviour
 
             yield return new WaitUntil(()=> wheelStopped);
             yield return new WaitForSeconds(2f);
+            ResetDiamondArrow();
 
-            EndJokerGame(true);
+            OpenJokerGameEndingUI();
         }
         else if(jokerResponse.greenRound == 0){
+            if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+                yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
+                yield return new WaitForSeconds(1f);
+            }
             BgController.RotateWheel(); //ROTATE WHEEL
                 
             yield return new WaitForSeconds(2f);
@@ -752,8 +798,9 @@ public class SlotBehaviour : MonoBehaviour
 
             yield return new WaitUntil(()=> wheelStopped);
             yield return new WaitForSeconds(2f);
+            ResetDiamondArrow();
 
-            EndJokerGame(true);
+            OpenJokerGameEndingUI();
         }
     }
 
@@ -763,19 +810,23 @@ public class SlotBehaviour : MonoBehaviour
         Major_UI.blocksRaycasts=false;
         Major_UI.DOFade(0, 0.5f);
         JokerCountText.text = "0 OF 3 JOKERS COLLECTED";
-        BgController.SwitchBG(BackgroundController.BackgroundType.OrangeFR, null, "JOKER2");
+        BgController.SwitchBG(BackgroundController.BackgroundType.OrangeFR, null, "JOKER3");
         DiamondArrowImage.DOFade(1, 0.2f);
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         
         if(jokerResponse.redRound == 3){
             for(int i=0;i<jokerResponse.redRound;i++){
+                if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+                    yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
+                    yield return new WaitForSeconds(1f);
+                }
                 BgController.RotateWheel(); //ROTATE WHEEL
                 
                 yield return new WaitForSeconds(2f);
 
                 DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-                DiamondArrowImage.GetComponent<Stopper>().stopAT="Green";
+                DiamondArrowImage.GetComponent<Stopper>().stopAT="Red";
                 Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
                 wheelStopped =false;
@@ -786,6 +837,7 @@ public class SlotBehaviour : MonoBehaviour
 
                 ImageAnimation ResultImageAnimation = DiamondArrowImage.GetComponent<Stopper>().ImageTransform.GetComponent<ImageAnimation>();
                 ResetDiamondArrow();
+                ResultImageAnimation.AnimationSpeed=6f;
 
                 ResultImageAnimation.textureArray.Clear();
                 ResultImageAnimation.textureArray.TrimExcess();
@@ -795,15 +847,23 @@ public class SlotBehaviour : MonoBehaviour
 
                 ResultImageAnimation.StartAnimation();
                 yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
+                ResultImageAnimation.StopAnimation();
                 JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
+                ResultImageAnimation.rendererDelegate.sprite=Emprty_Sprite;
                 ResultImageAnimation.name ="Empty";
                 yield return new WaitForSeconds(1f);
             }
-            
-            EndJokerGame();
+            yield return Glow_Grand_Image.DOFade(1, 0.3f).WaitForCompletion();
+            yield return new WaitForSeconds(1f);
+
+            OpenJokerGameEndingUI();
         }
         else if(jokerResponse.redRound>0&&jokerResponse.redRound<3){
             for(int i=0;i<jokerResponse.redRound;i++){
+                if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+                    yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
+                    yield return new WaitForSeconds(1f);
+                }
                 BgController.RotateWheel(); //ROTATE WHEEL
                 
                 yield return new WaitForSeconds(2f);
@@ -820,6 +880,7 @@ public class SlotBehaviour : MonoBehaviour
 
                 ImageAnimation ResultImageAnimation = DiamondArrowImage.GetComponent<Stopper>().ImageTransform.GetComponent<ImageAnimation>();
                 ResetDiamondArrow();
+                ResultImageAnimation.AnimationSpeed=6f;
 
                 ResultImageAnimation.textureArray.Clear();
                 ResultImageAnimation.textureArray.TrimExcess();
@@ -829,8 +890,14 @@ public class SlotBehaviour : MonoBehaviour
 
                 ResultImageAnimation.StartAnimation();
                 yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
+                ResultImageAnimation.StopAnimation();
                 JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
+                ResultImageAnimation.rendererDelegate.sprite=Emprty_Sprite;
                 ResultImageAnimation.name ="Empty";
+                yield return new WaitForSeconds(1f);
+            }
+            if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+                yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                 yield return new WaitForSeconds(1f);
             }
             BgController.RotateWheel(); //ROTATE WHEEL
@@ -846,12 +913,15 @@ public class SlotBehaviour : MonoBehaviour
 
             yield return new WaitUntil(()=> wheelStopped);
             yield return new WaitForSeconds(2f);
+            ResetDiamondArrow();
 
-            JokerUIToggle(false);
-            BgController.SwitchBG(BackgroundController.BackgroundType.Base);
-            ToggleButtonGrp(true);
+            OpenJokerGameEndingUI();
         }
         else if(jokerResponse.redRound == 0){
+            if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+                yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
+                yield return new WaitForSeconds(1f);
+            }
             BgController.RotateWheel(); //ROTATE WHEEL
                 
             yield return new WaitForSeconds(2f);
@@ -865,25 +935,26 @@ public class SlotBehaviour : MonoBehaviour
 
             yield return new WaitUntil(()=> wheelStopped);
             yield return new WaitForSeconds(2f);
+            ResetDiamondArrow();
 
-            EndJokerGame();
+            OpenJokerGameEndingUI();
         }
     }
 
-    private void EndJokerGame(bool showPayout=false){
-        if(showPayout){
+    private void OpenJokerGameEndingUI(){
+        if(SocketManager.resultData.jokerResponse.payout[0]!=0){
             int total = 0;
             foreach(int i in SocketManager.resultData.jokerResponse.payout){
                 total += i;
             }
             Joker_End_UI.transform.GetChild(2).GetComponent<TMP_Text>().text = total.ToString();
-            if(SocketManager.resultData.jokerResponse.payout.Count == 1){
+            if(SocketManager.playerdata.currentWining==SocketManager.initialData.Joker[0]){
                 Joker_End_UI.transform.GetChild(1).GetComponent<TMP_Text>().text = "YOU HAVE WON THE MINOR PRIZE";
             }
-            else if(SocketManager.resultData.jokerResponse.payout.Count == 2){
+            else if(SocketManager.playerdata.currentWining>SocketManager.initialData.Joker[1] && SocketManager.playerdata.currentWining<SocketManager.initialData.Joker[2]){
                 Joker_End_UI.transform.GetChild(1).GetComponent<TMP_Text>().text = "YOU HAVE WON THE MAJOR PRIZE";
             }
-            else if(SocketManager.resultData.jokerResponse.payout.Count == 3){
+            else if(SocketManager.playerdata.currentWining>SocketManager.initialData.Joker[2]){
                 Joker_End_UI.transform.GetChild(1).GetComponent<TMP_Text>().text = "YOU HAVE WON THE GRAND PRIZE";
             }
             Joker_End_UI.interactable=true;
@@ -892,7 +963,6 @@ public class SlotBehaviour : MonoBehaviour
         }
         JokerUIToggle(false);
         BgController.SwitchBG(BackgroundController.BackgroundType.Base);
-        Joker_Start_UI.transform.parent.gameObject.SetActive(false);
         ToggleButtonGrp(true);
     }
 
@@ -953,6 +1023,65 @@ public class SlotBehaviour : MonoBehaviour
             TopUIToggle(true);
             ToggleButtonGrp(true);
         }
+    }
+
+    // private void Update() {
+    //     if(Input.GetKeyDown(KeyCode.Space)){
+    //             StartCoroutine(EndJoker());
+    //         }
+    // }
+
+    private IEnumerator EndJoker(){
+        Joker_End_UI.interactable=false;
+        Joker_End_UI.blocksRaycasts=false;
+        yield return Joker_End_UI.DOFade(0, 0.3f).WaitForCompletion();
+
+        BigWinImage.parent.GetComponent<Image>().DOFade(0.8f,0f);
+        BigWinImage.parent.gameObject.SetActive(true);
+
+        Transform ImageTransform = null;
+        if(SocketManager.playerdata.currentWining==SocketManager.initialData.Joker[0]){
+            ImageTransform = BigWinImage;
+        }
+        else if(SocketManager.playerdata.currentWining>SocketManager.initialData.Joker[1] && SocketManager.playerdata.currentWining<SocketManager.initialData.Joker[2]){
+            ImageTransform = HugeWinImage;
+        }
+        else if(SocketManager.playerdata.currentWining>SocketManager.initialData.Joker[2]){
+            ImageTransform = MegaWinImage;
+        }
+
+        Tween tween = null;
+        JokerEndAnimation.doLoopAnimation=true;
+        JokerEndAnimation.StartAnimation();
+
+        TMP_Text text = ImageTransform.GetChild(0).GetComponent<TMP_Text>();
+        double WinAmt = 0;
+        DOTween.To(() => WinAmt, (val) => WinAmt = val, SocketManager.playerdata.currentWining, 1.2f)
+        .OnUpdate(() =>{
+            if(text) text.text = ((int)WinAmt).ToString();
+        });
+        
+
+        ImageTransform.DOScale(1.2f, 0.5f)
+        .SetEase(Ease.OutQuad)
+        .OnComplete(() =>
+        {
+            tween = ImageTransform.DOScale(0.8f, 0.5f)
+                .SetEase(Ease.InQuad)
+                .SetLoops(-1, LoopType.Yoyo);
+        });
+        StartCoroutine(TotalWinningsAnimation(SocketManager.playerdata.currentWining, true, false)); 
+        yield return new WaitForSeconds(2f);
+        tween.Kill();
+        ImageTransform.DOScale(1, 0.5f);
+        yield return new WaitForSeconds(2f);
+        JokerEndAnimation.StopAnimation();
+        ImageTransform.DOScale(0,0.5f);
+        yield return new WaitForSeconds(1f);
+        yield return ImageTransform.parent.GetComponent<Image>().DOFade(0,0.2f).WaitForCompletion();
+        ImageTransform.parent.gameObject.SetActive(false);
+        ImageTransform.parent.GetComponent<Image>().DOFade(0.8f,0f);
+        Joker_Start_UI.transform.parent.gameObject.SetActive(false);
     }
 
     private IEnumerator StartMultiplierWheelGame(BackgroundController.BackgroundType type, int basePayout, int MultiplierIndex){
@@ -1121,10 +1250,10 @@ public class SlotBehaviour : MonoBehaviour
     {
         if(toggle){
             TopPayoutUI.DOFade(0, 0.5f);
-            JokerCountText.text = "0 OF 3 JOKERS COLLECTED";
             Glow_Minor_Image.DOFade(0,0);
             Glow_Major_Image.DOFade(0,0);
             Glow_Grand_Image.DOFade(0,0);
+            JokerCountText.text = "0 OF 3 JOKERS COLLECTED";
             JokerUI.DOFade(1, 0.5f);
         }
         else{

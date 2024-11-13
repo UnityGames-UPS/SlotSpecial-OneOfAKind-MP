@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UI.Extensions.Tweens;
@@ -39,6 +40,7 @@ public class BackgroundController : MonoBehaviour
     [SerializeField] private Sprite BlueJoker_Sprite;
     [SerializeField] private Sprite GreenJoker_Sprite;
     [SerializeField] private Sprite RedJoker_Sprite;
+    [SerializeField] private Sprite Empty_Sprite;
     private Tween NR_RotateTween;
     private Tween BlueFR_RotateTween, GoldenFR_RotateTween, OrangeFR_RotateTween, GreenFR_RotateTween, PurpleFR_RotateTween, wheelRoutine;
     private Tween GlowRotation1;
@@ -98,7 +100,7 @@ public class BackgroundController : MonoBehaviour
             RotateBG();
         } else {
             var (cg, circleCg) = backgrounds[bgType];
-            if(values!= null || type == "JOKER1" || type == "JOKER2" || type == "JOKER3") PopuplateWheel(circleCg.transform, values, type);
+            if(values!= null || type == "JOKER1" || type == "JOKER2" || type == "JOKER3") PopulateWheel(circleCg.transform, values, type);
             // anim.StartAnimation();
             RotateFastBG(cg.transform.GetChild(0).GetComponent<Image>(), bgType.ToString());
             cg.DOFade(1, 1f);
@@ -127,7 +129,8 @@ public class BackgroundController : MonoBehaviour
         }
     }
     
-    private void PopuplateWheel(Transform CircleTransform ,List<int> values, string type){
+    private void PopulateWheel(Transform CircleTransform, List<int> values, string type)
+    {
         int childCount = CircleTransform.childCount;
         List<int> availableIndices = new List<int>();
 
@@ -137,145 +140,113 @@ public class BackgroundController : MonoBehaviour
         System.Random random = new System.Random();
 
         Sprite[] sprites = null;
-        if(type == "MULTIPLIER"){
+        Sprite jokerSprite = null;
+        string jokerColor = "";
+
+        if (type == "MULTIPLIER")
+        {
             sprites = MultiplierSprites;
         }
-        else if(type == "LEVEL"){
+        else if (type == "LEVEL")
+        {
             sprites = LevelSprites;
         }
-        else if (type == "JOKER1")
+        else if (type.StartsWith("JOKER"))
         {
-            int jokerCount = 6;  // Example: Specify the number of Joker placements you want
-
-            for (int i = 0; i < jokerCount; i++)
+            int jokerCount = 0;
+            if (type == "JOKER1")
             {
-                bool placed = false;
+                jokerCount = 5;
+                jokerSprite = BlueJoker_Sprite;
+                jokerColor = "Blue";
+            }
+            else if (type == "JOKER2")
+            {
+                jokerCount = 4;
+                jokerSprite = GreenJoker_Sprite;
+                jokerColor = "Green";
+            }
+            else if (type == "JOKER3")
+            {
+                jokerCount = 3;
+                jokerSprite = RedJoker_Sprite;
+                jokerColor = "Red";
+            }
 
-                while (!placed && availableIndices.Count > 2)
+            // Select a random starting index
+            int startIndex = random.Next(childCount);
+            bool useOddIndices = startIndex % 2 != 0;
+
+            // Collect all odd or even indices based on startIndex
+            List<int> possibleIndices = new List<int>();
+            for (int i = useOddIndices ? 1 : 0; i < childCount; i += 2)
+            {
+                possibleIndices.Add(i);
+            }
+
+            // Randomly place the specified number of Jokers
+            for (int i = 0; i < jokerCount && possibleIndices.Count > 0; i++)
+            {
+                int randomIndex = possibleIndices[random.Next(possibleIndices.Count)];
+                possibleIndices.Remove(randomIndex);
+
+                // Set the Joker at the selected index
+                Image childImage = CircleTransform.GetChild(randomIndex).GetComponent<Image>();
+                if (childImage != null)
                 {
-                    int randomIndex = availableIndices[random.Next(availableIndices.Count)];
+                    childImage.rectTransform.sizeDelta = new Vector3(350f, 311f);
+                    childImage.sprite = jokerSprite;
+                    childImage.name = jokerColor; // Set the Joker's name to its color
+                }
 
-                    int leftIndex = (randomIndex - 1 + childCount) % childCount;
-                    int rightIndex = (randomIndex + 1) % childCount;
+                // Remove this index from available indices to avoid reassigning
+                availableIndices.Remove(randomIndex);
+            }
 
-                    if (availableIndices.Contains(leftIndex) && availableIndices.Contains(rightIndex))
-                    {
-                        availableIndices.Remove(randomIndex);
-                        CircleTransform.GetChild(leftIndex).name = "Empty";
-                        availableIndices.Remove(leftIndex);
-                        CircleTransform.GetChild(rightIndex).name = "Empty";
-                        availableIndices.Remove(rightIndex);
-
-                        Image childImage = CircleTransform.GetChild(randomIndex).GetComponent<Image>();
-                        if (childImage != null)
-                        {
-                            childImage.rectTransform.sizeDelta = new Vector3(350f, 311f);
-                            childImage.sprite = BlueJoker_Sprite;  // Use the specified Joker color
-                            childImage.name = "Blue";
-                        }
-                        placed = true;
-                    }
+            // Set remaining non-Joker indices to "Empty" with an empty sprite
+            foreach (int index in availableIndices)
+            {
+                Image childImage = CircleTransform.GetChild(index).GetComponent<Image>();
+                if (childImage.gameObject.name!=jokerColor)
+                {
+                    childImage.sprite = Empty_Sprite; // Set to empty sprite
+                    childImage.name = "Empty";       // Name as "Empty"
                 }
             }
-            return;  // Exit after placing Joker sprites
-        }
-        else if(type == "JOKER2")
-        {
-            int jokerCount = 5;  // Example: Specify the number of Joker placements you want
 
-            for (int i = 0; i < jokerCount; i++)
-            {
-                bool placed = false;
-
-                while (!placed && availableIndices.Count > 2)
-                {
-                    int randomIndex = availableIndices[random.Next(availableIndices.Count)];
-
-                    int leftIndex = (randomIndex - 1 + childCount) % childCount;
-                    int rightIndex = (randomIndex + 1) % childCount;
-
-                    if (availableIndices.Contains(leftIndex) && availableIndices.Contains(rightIndex))
-                    {
-                        availableIndices.Remove(randomIndex);
-                        CircleTransform.GetChild(leftIndex).name = "Empty";
-                        availableIndices.Remove(leftIndex);
-                        CircleTransform.GetChild(rightIndex).name = "Empty";
-                        availableIndices.Remove(rightIndex);
-
-                        Image childImage = CircleTransform.GetChild(randomIndex).GetComponent<Image>();
-                        if (childImage != null)
-                        {
-                            childImage.rectTransform.sizeDelta = new Vector3(350f, 311f);
-                            childImage.sprite = GreenJoker_Sprite;  // Use the specified Joker color
-                            childImage.name = "Green";
-                        }
-                        placed = true;
-                    }
-                }
-            }
-            return;  // Exit after placing Joker sprites
-        }
-        else if(type == "JOKER3"){
-            int jokerCount = 3;  // Example: Specify the number of Joker placements you want
-
-            for (int i = 0; i < jokerCount; i++)
-            {
-                bool placed = false;
-
-                while (!placed && availableIndices.Count > 2)
-                {
-                    int randomIndex = availableIndices[random.Next(availableIndices.Count)];
-
-                    int leftIndex = (randomIndex - 1 + childCount) % childCount;
-                    int rightIndex = (randomIndex + 1) % childCount;
-
-                    if (availableIndices.Contains(leftIndex) && availableIndices.Contains(rightIndex))
-                    {
-                        availableIndices.Remove(randomIndex);
-                        CircleTransform.GetChild(leftIndex).name = "Empty";
-                        availableIndices.Remove(leftIndex);
-                        CircleTransform.GetChild(rightIndex).name = "Empty";
-                        availableIndices.Remove(rightIndex);
-
-                        Image childImage = CircleTransform.GetChild(randomIndex).GetComponent<Image>();
-                        if (childImage != null)
-                        {
-                            childImage.rectTransform.sizeDelta = new Vector3(350f, 311f);
-                            childImage.sprite = RedJoker_Sprite;  // Use the specified Joker color
-                            childImage.name = "Red";
-                        }
-                        placed = true;
-                    }
-                }
-            }
             return;  // Exit after placing Joker sprites
         }
 
         // Place each value at a random position on the wheel
-        foreach (int value in values) {
-            // Get a random index from availableIndices
+        foreach (int value in values)
+        {
             int randomIndex = availableIndices[random.Next(availableIndices.Count)];
-            availableIndices.Remove(randomIndex);  // Remove the used index
+            availableIndices.Remove(randomIndex);
 
-            // Assign the corresponding sprite to the randomly chosen index
             Sprite targetSprite = Array.Find(sprites, sprite => sprite.name == value.ToString());
-            if (targetSprite != null) {
+            if (targetSprite != null)
+            {
                 Image childImage = CircleTransform.GetChild(randomIndex).GetComponent<Image>();
-                if (childImage != null) {
+                if (childImage != null)
+                {
                     childImage.rectTransform.sizeDelta = new Vector3(110f, 110f);
                     childImage.sprite = targetSprite;
                     childImage.name = targetSprite.name;
                 }
-            } else {
+            }
+            else
+            {
                 Debug.LogWarning($"Sprite for value {value} not found in sprites array.");
             }
         }
 
         // Fill remaining indices with random MultiplierSprites
-        foreach (int index in availableIndices) {
-            Sprite randomSprite = sprites[random.Next(sprites.Length-1)];
+        foreach (int index in availableIndices)
+        {
+            Sprite randomSprite = sprites[random.Next(sprites.Length)];
             Image childImage = CircleTransform.GetChild(index).GetComponent<Image>();
-            if (childImage != null) {
+            if (childImage != null)
+            {
                 childImage.rectTransform.sizeDelta = new Vector3(110f, 110f);
                 childImage.sprite = randomSprite;
                 childImage.name = randomSprite.name;
@@ -283,43 +254,46 @@ public class BackgroundController : MonoBehaviour
         }
     }
 
-    private void Update() {
-        if(Input.GetKeyDown(KeyCode.Keypad0)){
-            SwitchBG(BackgroundType.Base);
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad1)){
-            SwitchBG(BackgroundType.BlueFR);
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad2)){
-            SwitchBG(BackgroundType.OrangeFR);
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad3)){
-            SwitchBG(BackgroundType.GreenFR);
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad4)){
-            SwitchBG(BackgroundType.PurpleFR);
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad5)){
-            SwitchBG(BackgroundType.GoldenFR);
-        }
-        if(Input.GetKeyDown(KeyCode.Space)){
-            RotateWheel();
-        }
-        if(Input.GetKeyDown(KeyCode.RightAlt)){
-            wheelRoutine.Kill();
-        }
-    }
+
+    // private void Update() {
+    //     if(Input.GetKeyDown(KeyCode.Keypad0)){
+    //         SwitchBG(BackgroundType.Base);
+    //     }
+    //     if(Input.GetKeyDown(KeyCode.Keypad1)){
+    //         SwitchBG(BackgroundType.BlueFR);
+    //     }
+    //     if(Input.GetKeyDown(KeyCode.Keypad2)){
+    //         SwitchBG(BackgroundType.OrangeFR);
+    //     }
+    //     if(Input.GetKeyDown(KeyCode.Keypad3)){
+    //         SwitchBG(BackgroundType.GreenFR);
+    //     }
+    //     if(Input.GetKeyDown(KeyCode.Keypad4)){
+    //         SwitchBG(BackgroundType.PurpleFR);
+    //     }
+    //     if(Input.GetKeyDown(KeyCode.Keypad5)){
+    //         SwitchBG(BackgroundType.GoldenFR);
+    //     }
+    //     // if(Input.GetKeyDown(KeyCode.Space)){
+    //     //     RotateWheel();
+    //     // }
+    //     if(Input.GetKeyDown(KeyCode.RightAlt)){
+    //         StopWheel();
+    //     }
+    // }
 
     private void RotateBG(){
         float z= NR_BG_Image.transform.eulerAngles.z;
         z-=360;
-        NR_RotateTween = NR_BG_Image.transform.DORotate(new Vector3(0, 0 , z), NRTweenDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1);
+        NR_RotateTween = NR_BG_Image.transform.DORotate(new Vector3(0, 0 , z), NRTweenDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear)
+        .SetLoops(-1, LoopType.Incremental);
     }
     
     private void RotateFastBG(Image image, string s){
         float z= image.transform.eulerAngles.z;
         z-=360;
-        Tween tween = image.transform.DORotate(new Vector3(0, 0, z), FRTweenDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1);
+        Tween tween = image.transform.DORotate(new Vector3(0, 0, z), FRTweenDuration, RotateMode.FastBeyond360).SetEase(Ease.Linear)
+        .SetLoops(-1, LoopType.Incremental);
         
         // Initialize both children scales
         image.transform.GetChild(0).localScale = new Vector3(0.1f, 0.1f, 0.1f);
@@ -362,11 +336,15 @@ public class BackgroundController : MonoBehaviour
 
     internal void RotateWheel(){
         Transform Wheel_Transform = backgrounds[currentBG].CircleCG.transform;
-        wheelRoutine =  Wheel_Transform.DORotate(new Vector3(0, 0, -360f), 1.5f, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1);
+        float z = Wheel_Transform.position.z;
+        z-=360;
+        wheelRoutine =  Wheel_Transform.DORotate(new Vector3(0, 0, z), 1.2f, RotateMode.FastBeyond360).SetEase(Ease.Linear)
+        .SetLoops(-1, LoopType.Incremental)
+        .SetUpdate(UpdateType.Normal);
     }
 
     internal void StopWheel(){
-        wheelRoutine.Pause();
+        wheelRoutine.Kill();
         // Get the current Z rotation of the wheel
         float currentZRotation = backgrounds[currentBG].CircleCG.transform.eulerAngles.z;
         
@@ -375,8 +353,8 @@ public class BackgroundController : MonoBehaviour
 
         // Rotate the wheel to the nearest 30-degree value over a short duration
         backgrounds[currentBG].CircleCG.transform
-        .DORotate(new Vector3(0, 0, targetZRotation), 1.5f)
-        .SetEase(Ease.OutExpo); // Adjust ease for a smooth stop animation
+        .DORotate(new Vector3(0, 0, targetZRotation), .8f)
+        .SetEase(Ease.OutBack, 2f); // Adjust ease for a smooth stop animation
     }
 
     private void StopRotation(string s){

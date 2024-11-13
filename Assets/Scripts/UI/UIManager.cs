@@ -73,6 +73,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text Minor_Text;
     [SerializeField] private TMP_Text Major_Text;
     [SerializeField] private TMP_Text Grand_Text;
+    [SerializeField] private TMP_Text JokerMinor_Text;
+    [SerializeField] private TMP_Text JokerMajor_Text;
+    [SerializeField] private TMP_Text JokerGrand_Text;
 
     [SerializeField] private AudioController audioController;
 
@@ -437,6 +440,9 @@ public class UIManager : MonoBehaviour
         Minor_Text.text = socketManager.initialData.Joker[0].ToString();
         Major_Text.text = socketManager.initialData.Joker[1].ToString();
         Grand_Text.text = socketManager.initialData.Joker[2].ToString();
+        JokerMinor_Text.text = socketManager.initialData.Joker[0].ToString();
+        JokerMajor_Text.text = socketManager.initialData.Joker[1].ToString();
+        JokerGrand_Text.text = socketManager.initialData.Joker[2].ToString();
     }
 
     private void PopulateSymbolsPayout(Paylines paylines)

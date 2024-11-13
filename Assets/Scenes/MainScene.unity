@@ -476,7 +476,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &4606661
 MonoBehaviour:
@@ -494,7 +494,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 4606658}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -1046,7 +1046,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10.00
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9b7026f0c928f4d569ec9ba563bbe1ce, type: 2}
   m_sharedMaterial: {fileID: -4740458888243674452, guid: 9b7026f0c928f4d569ec9ba563bbe1ce, type: 2}
@@ -1055,8 +1055,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:
@@ -1447,7 +1447,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.8, y: 99}
+  m_Size: {x: 30, y: 99}
   m_EdgeRadius: 0
 --- !u!114 &70016670
 MonoBehaviour:
@@ -1748,7 +1748,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &100367378
 MonoBehaviour:
@@ -1766,7 +1766,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 100367375}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -1831,6 +1831,7 @@ GameObject:
   - component: {fileID: 113085814}
   - component: {fileID: 113085813}
   - component: {fileID: 113085815}
+  - component: {fileID: 113085816}
   m_Layer: 5
   m_Name: Image (7)
   m_TagString: Untagged
@@ -1938,8 +1939,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &113085816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113085811}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 113085813}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &116652998
 GameObject:
   m_ObjectHideFlags: 0
@@ -2147,6 +2168,7 @@ GameObject:
   - component: {fileID: 121454522}
   - component: {fileID: 121454521}
   - component: {fileID: 121454523}
+  - component: {fileID: 121454524}
   m_Layer: 5
   m_Name: Image (5)
   m_TagString: Untagged
@@ -2254,8 +2276,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &121454524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121454519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 121454521}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &124066612
 GameObject:
   m_ObjectHideFlags: 0
@@ -2588,8 +2630,9 @@ GameObject:
   m_Component:
   - component: {fileID: 161107514}
   - component: {fileID: 161107516}
-  - component: {fileID: 161107515}
   - component: {fileID: 161107517}
+  - component: {fileID: 161107515}
+  - component: {fileID: 161107518}
   m_Layer: 5
   m_Name: Image (6)
   m_TagString: Untagged
@@ -2697,8 +2740,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &161107518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161107513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 161107515}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &169476488
 GameObject:
   m_ObjectHideFlags: 0
@@ -2823,6 +2886,85 @@ MonoBehaviour:
   StartOnAwake: 0
   AnimationSpeed: 20
   delayBetweenLoop: 0
+--- !u!1 &171191367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 171191368}
+  - component: {fileID: 171191370}
+  - component: {fileID: 171191369}
+  m_Layer: 5
+  m_Name: Panel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &171191368
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171191367}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 813289813}
+  - {fileID: 2037884368}
+  - {fileID: 203482978}
+  - {fileID: 897520654}
+  m_Father: {fileID: 501562387}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &171191369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171191367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7607843}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &171191370
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 171191367}
+  m_CullTransparentMesh: 1
 --- !u!1 &182233024
 GameObject:
   m_ObjectHideFlags: 0
@@ -2985,6 +3127,7 @@ GameObject:
   - component: {fileID: 200643968}
   - component: {fileID: 200643967}
   - component: {fileID: 200643969}
+  - component: {fileID: 200643970}
   m_Layer: 5
   m_Name: Image (4)
   m_TagString: Untagged
@@ -3092,8 +3235,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &200643970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200643965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 200643967}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &201345326
 GameObject:
   m_ObjectHideFlags: 0
@@ -3214,7 +3377,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &201345331
 MonoBehaviour:
@@ -3232,10 +3395,86 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 201345328}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
+--- !u!1 &203482977
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 203482978}
+  - component: {fileID: 203482980}
+  - component: {fileID: 203482979}
+  m_Layer: 5
+  m_Name: HugeWinImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &203482978
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203482977}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 677603751}
+  m_Father: {fileID: 171191368}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 884, y: 2158}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &203482979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203482977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: aff3ffe0f2a7f4db3bca6b436cffed91, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &203482980
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 203482977}
+  m_CullTransparentMesh: 1
 --- !u!1 &226271848
 GameObject:
   m_ObjectHideFlags: 0
@@ -3295,8 +3534,9 @@ GameObject:
   m_Component:
   - component: {fileID: 229335062}
   - component: {fileID: 229335064}
-  - component: {fileID: 229335063}
   - component: {fileID: 229335065}
+  - component: {fileID: 229335063}
+  - component: {fileID: 229335066}
   m_Layer: 5
   m_Name: Image (10)
   m_TagString: Untagged
@@ -3404,8 +3644,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &229335066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 229335061}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 229335063}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &243346143
 GameObject:
   m_ObjectHideFlags: 0
@@ -3526,7 +3786,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &243346148
 MonoBehaviour:
@@ -3544,7 +3804,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 243346145}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -3678,7 +3938,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 254445676}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -3763,7 +4023,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &260160283
 GameObject:
@@ -4314,7 +4574,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &339046113
 MonoBehaviour:
@@ -4332,7 +4592,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 339046110}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -5299,6 +5559,9 @@ MonoBehaviour:
   Minor_Text: {fileID: 1895613126}
   Major_Text: {fileID: 2032197904}
   Grand_Text: {fileID: 1100166914}
+  JokerMinor_Text: {fileID: 1027868726}
+  JokerMajor_Text: {fileID: 2057230265}
+  JokerGrand_Text: {fileID: 912659347}
   audioController: {fileID: 1030743558465206379}
   slotManager: {fileID: 2046803210}
   socketManager: {fileID: 500036492}
@@ -5669,7 +5932,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &383004408
 MonoBehaviour:
@@ -5687,7 +5950,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 383004405}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -6645,7 +6908,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &470941392
 MonoBehaviour:
@@ -6663,7 +6926,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 470941389}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -6974,7 +7237,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &501201621
 GameObject:
@@ -7083,12 +7346,13 @@ RectTransform:
   - {fileID: 1423208326}
   - {fileID: 535330526}
   - {fileID: 625997423}
+  - {fileID: 171191368}
   m_Father: {fileID: 1485219722}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2340, y: 1080}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &510186936
 GameObject:
@@ -7764,6 +8028,7 @@ MonoBehaviour:
   BlueJoker_Sprite: {fileID: 21300000, guid: 54646d97ca032429b9e9e177219b0ba4, type: 3}
   GreenJoker_Sprite: {fileID: 21300000, guid: 3290f869ee5664faf9769494d45f8ac6, type: 3}
   RedJoker_Sprite: {fileID: 21300000, guid: 1ed9506c81ebb447181073d89ff2f79c, type: 3}
+  Empty_Sprite: {fileID: 21300000, guid: 41295aafca81a434dbb667eec627a643, type: 3}
   NRTweenDuration: 30
   FRTweenDuration: 7
 --- !u!4 &552797527
@@ -7829,8 +8094,9 @@ GameObject:
   m_Component:
   - component: {fileID: 564295613}
   - component: {fileID: 564295615}
-  - component: {fileID: 564295614}
   - component: {fileID: 564295616}
+  - component: {fileID: 564295614}
+  - component: {fileID: 564295617}
   m_Layer: 5
   m_Name: Image (3)
   m_TagString: Untagged
@@ -7938,8 +8204,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &564295617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 564295612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 564295614}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &574994041
 GameObject:
   m_ObjectHideFlags: 0
@@ -8060,7 +8346,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &574994046
 MonoBehaviour:
@@ -8078,7 +8364,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 574994043}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -8486,8 +8772,9 @@ GameObject:
   m_Component:
   - component: {fileID: 619910279}
   - component: {fileID: 619910281}
-  - component: {fileID: 619910280}
   - component: {fileID: 619910282}
+  - component: {fileID: 619910280}
+  - component: {fileID: 619910283}
   m_Layer: 5
   m_Name: Image (11)
   m_TagString: Untagged
@@ -8595,8 +8882,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &619910283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619910278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 619910280}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &625997422
 GameObject:
   m_ObjectHideFlags: 0
@@ -8980,7 +9287,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 652574603}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -9221,6 +9528,7 @@ GameObject:
   - component: {fileID: 666382197}
   - component: {fileID: 666382196}
   - component: {fileID: 666382198}
+  - component: {fileID: 666382199}
   m_Layer: 5
   m_Name: Image (10)
   m_TagString: Untagged
@@ -9328,8 +9636,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &666382199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 666382194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 666382196}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &667963265
 GameObject:
   m_ObjectHideFlags: 0
@@ -9786,6 +10114,7 @@ GameObject:
   - component: {fileID: 676572774}
   - component: {fileID: 676572773}
   - component: {fileID: 676572775}
+  - component: {fileID: 676572776}
   m_Layer: 5
   m_Name: Image (1)
   m_TagString: Untagged
@@ -9893,8 +10222,162 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &676572776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 676572771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 676572773}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
+--- !u!1 &677603750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 677603751}
+  - component: {fileID: 677603753}
+  - component: {fileID: 677603752}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &677603751
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677603750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 203482978}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -133.57}
+  m_SizeDelta: {x: 314.29, y: 102.38}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &677603752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677603750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "0\x03"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 1
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 0.99607843, g: 0.89411765, b: 0.68235296, a: 1}
+    topRight: {r: 0.85490197, g: 0.05882353, b: 0.05882353, a: 1}
+    bottomLeft: {r: 0.79607844, g: 0.6039216, b: 0.24313726, a: 1}
+    bottomRight: {r: 0.99607843, g: 0.9254902, b: 0.3882353, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 103.63
+  m_fontSizeBase: 103.63
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &677603753
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 677603750}
+  m_CullTransparentMesh: 1
 --- !u!1 &679687426
 GameObject:
   m_ObjectHideFlags: 0
@@ -10300,7 +10783,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &695465954
 MonoBehaviour:
@@ -10318,7 +10801,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 695465951}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -10901,7 +11384,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &721811473
 MonoBehaviour:
@@ -10919,7 +11402,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 721811470}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -11532,7 +12015,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &766685036
 MonoBehaviour:
@@ -11550,7 +12033,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 766685033}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -11811,6 +12294,141 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 786765633}
   m_CullTransparentMesh: 1
+--- !u!1 &813289812
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 813289813}
+  - component: {fileID: 813289816}
+  - component: {fileID: 813289815}
+  - component: {fileID: 813289814}
+  m_Layer: 5
+  m_Name: CoinWinningsBG_ImageAnimation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &813289813
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813289812}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 171191368}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 2340, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &813289814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813289812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray:
+  - {fileID: 21300000, guid: 311412a2ff20b41c49f5a3a42423aabd, type: 3}
+  - {fileID: 21300000, guid: bd028b667a54249c5a263b09f1f70e46, type: 3}
+  - {fileID: 21300000, guid: c8a2776704a50460dbfdd35d7f017362, type: 3}
+  - {fileID: 21300000, guid: 146fa1f88bcf841e1b4ca8d0d9f04e0f, type: 3}
+  - {fileID: 21300000, guid: 960423ca0948846289c82dbd4885298d, type: 3}
+  - {fileID: 21300000, guid: 24dce10f773914a6681f07d867faf185, type: 3}
+  - {fileID: 21300000, guid: cf9c520c4bfc04f05bede54cd9e4159e, type: 3}
+  - {fileID: 21300000, guid: 0f3f4ce8881a5404a8aeb73bbcd92d3f, type: 3}
+  - {fileID: 21300000, guid: 9a5c4392df5cb46eea283b88ce2bbc56, type: 3}
+  - {fileID: 21300000, guid: 6006160ae7ae645d1b8b774634df8be6, type: 3}
+  - {fileID: 21300000, guid: 8cd25a36b8d434cb1ab1ec5081994d61, type: 3}
+  - {fileID: 21300000, guid: 33b686faea2d54761911996abbf9f12b, type: 3}
+  - {fileID: 21300000, guid: eb2dd48d3a78f42ab873e9af86f96033, type: 3}
+  - {fileID: 21300000, guid: 6fd7dc7094f6244edafbbe9672b74b02, type: 3}
+  - {fileID: 21300000, guid: 7e11da8e70ae54a7c9d1d5c3d6581440, type: 3}
+  - {fileID: 21300000, guid: 43ad6db7945e6463891c202ad918cf68, type: 3}
+  - {fileID: 21300000, guid: 73655d7c753df481eba8e2166b34a112, type: 3}
+  - {fileID: 21300000, guid: d6dd36bd942454f20976e97d1cc24704, type: 3}
+  - {fileID: 21300000, guid: 73d44e8d938104800be3197c722bdb65, type: 3}
+  - {fileID: 21300000, guid: 2a7560602f70642f299ee5aac9512c16, type: 3}
+  - {fileID: 21300000, guid: 40585f720a21e446696cdbb8c80bb02d, type: 3}
+  - {fileID: 21300000, guid: fc73535cb119f4f35a34ea1b1fd28731, type: 3}
+  - {fileID: 21300000, guid: 9c96683c9aa774534a8fd952f2f86f85, type: 3}
+  - {fileID: 21300000, guid: 7501105ebdf194c0c8b43d4e111acab6, type: 3}
+  - {fileID: 21300000, guid: 8cc2be905a8f2426082ac744dba1bc1f, type: 3}
+  - {fileID: 21300000, guid: a0b218c0fde474f03a8b7c7c90de7bd8, type: 3}
+  - {fileID: 21300000, guid: ba8a4d4a6a124493dbbacddf9b83eea2, type: 3}
+  - {fileID: 21300000, guid: 685c3028b30a24152ae0e3711af7154f, type: 3}
+  - {fileID: 21300000, guid: a17963e61f73d4a518182f6909117672, type: 3}
+  - {fileID: 21300000, guid: 62ce83189d70543c58dbf72dc25a30f4, type: 3}
+  - {fileID: 21300000, guid: fd8b078f427b64d8380b2b100e59958e, type: 3}
+  - {fileID: 21300000, guid: bca6f5b4ebdc540d0a90f84b2a91da6a, type: 3}
+  - {fileID: 21300000, guid: 75d22d86ef95243d9802035a74fe3513, type: 3}
+  - {fileID: 21300000, guid: 495febfe0ed694693b6bf8807e95dd74, type: 3}
+  - {fileID: 21300000, guid: 64f61b9bcf91d451484c20f23b1f9420, type: 3}
+  - {fileID: 21300000, guid: 5c7f29d85b0dd4617872846d2348ef92, type: 3}
+  - {fileID: 21300000, guid: eee3a8dd6ff2d45859d876f6d6b30e1b, type: 3}
+  - {fileID: 21300000, guid: 759a3887c3619439e8b74b4c480d4384, type: 3}
+  - {fileID: 21300000, guid: 66b801fae0d6f4c2d83ea06503d86c86, type: 3}
+  rendererDelegate: {fileID: 813289815}
+  useSharedMaterial: 1
+  doLoopAnimation: 1
+  StartOnAwake: 1
+  AnimationSpeed: 25
+  delayBetweenLoop: 0
+--- !u!114 &813289815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813289812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 311412a2ff20b41c49f5a3a42423aabd, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &813289816
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813289812}
+  m_CullTransparentMesh: 1
 --- !u!1 &813518729
 GameObject:
   m_ObjectHideFlags: 0
@@ -12050,7 +12668,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &830912932
 GameObject:
@@ -13190,6 +13808,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883263057}
   m_CullTransparentMesh: 1
+--- !u!1 &897520653
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 897520654}
+  - component: {fileID: 897520656}
+  - component: {fileID: 897520655}
+  m_Layer: 5
+  m_Name: MegaWInImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &897520654
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897520653}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 1376550673}
+  m_Father: {fileID: 171191368}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 884, y: 2158}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &897520655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897520653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 9b05d9153a78d4e3aab78e7391d09270, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &897520656
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 897520653}
+  m_CullTransparentMesh: 1
 --- !u!1 &901737306
 GameObject:
   m_ObjectHideFlags: 0
@@ -13947,8 +14641,9 @@ GameObject:
   m_Component:
   - component: {fileID: 943646582}
   - component: {fileID: 943646584}
-  - component: {fileID: 943646583}
   - component: {fileID: 943646585}
+  - component: {fileID: 943646583}
+  - component: {fileID: 943646586}
   m_Layer: 5
   m_Name: Image (9)
   m_TagString: Untagged
@@ -14056,8 +14751,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &943646586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943646581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 943646583}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &947171057
 GameObject:
   m_ObjectHideFlags: 0
@@ -14226,7 +14941,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &978870613
 GameObject:
@@ -14500,7 +15215,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &981971429
 MonoBehaviour:
@@ -14518,7 +15233,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 981971426}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -14641,6 +15356,7 @@ GameObject:
   - component: {fileID: 1006036566}
   - component: {fileID: 1006036565}
   - component: {fileID: 1006036567}
+  - component: {fileID: 1006036568}
   m_Layer: 5
   m_Name: Image (8)
   m_TagString: Untagged
@@ -14748,8 +15464,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &1006036568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1006036563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 1006036565}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &1010792806
 GameObject:
   m_ObjectHideFlags: 0
@@ -14869,7 +15605,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &1017129684
 GameObject:
@@ -14883,6 +15619,7 @@ GameObject:
   - component: {fileID: 1017129687}
   - component: {fileID: 1017129686}
   - component: {fileID: 1017129688}
+  - component: {fileID: 1017129689}
   m_Layer: 5
   m_Name: Image (11)
   m_TagString: Untagged
@@ -14990,8 +15727,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &1017129689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017129684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 1017129686}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &1018035664
 GameObject:
   m_ObjectHideFlags: 0
@@ -15002,8 +15759,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1018035665}
   - component: {fileID: 1018035667}
-  - component: {fileID: 1018035666}
   - component: {fileID: 1018035668}
+  - component: {fileID: 1018035666}
+  - component: {fileID: 1018035669}
   m_Layer: 5
   m_Name: Image (1)
   m_TagString: Untagged
@@ -15111,8 +15869,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &1018035669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018035664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 1018035666}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &1020185764
 GameObject:
   m_ObjectHideFlags: 0
@@ -15441,7 +16219,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &1044945924
 GameObject:
@@ -15511,13 +16289,13 @@ MonoBehaviour:
     serializedVersion: 2
     rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
-  m_enableVertexGradient: 0
+  m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:
-    topLeft: {r: 1, g: 1, b: 1, a: 1}
+    topLeft: {r: 0.34117648, g: 0.34117648, b: 0.34117648, a: 1}
     topRight: {r: 1, g: 1, b: 1, a: 1}
     bottomLeft: {r: 1, g: 1, b: 1, a: 1}
-    bottomRight: {r: 1, g: 1, b: 1, a: 1}
+    bottomRight: {r: 0.34117648, g: 0.34117648, b: 0.34117648, a: 1}
   m_fontColorGradientPreset: {fileID: 0}
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
@@ -16256,6 +17034,7 @@ GameObject:
   - component: {fileID: 1074067680}
   - component: {fileID: 1074067679}
   - component: {fileID: 1074067681}
+  - component: {fileID: 1074067682}
   m_Layer: 5
   m_Name: Image (9)
   m_TagString: Untagged
@@ -16363,8 +17142,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &1074067682
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1074067677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 1074067679}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &1075630747
 GameObject:
   m_ObjectHideFlags: 0
@@ -16873,7 +17672,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &1114380717
 MonoBehaviour:
@@ -16891,7 +17690,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 1114380714}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -17483,8 +18282,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1179649329}
   - component: {fileID: 1179649331}
-  - component: {fileID: 1179649330}
   - component: {fileID: 1179649332}
+  - component: {fileID: 1179649330}
+  - component: {fileID: 1179649333}
   m_Layer: 5
   m_Name: Image (5)
   m_TagString: Untagged
@@ -17592,8 +18392,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &1179649333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179649328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 1179649330}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &1187479091
 GameObject:
   m_ObjectHideFlags: 0
@@ -17644,6 +18464,7 @@ GameObject:
   - component: {fileID: 1191043471}
   - component: {fileID: 1191043470}
   - component: {fileID: 1191043472}
+  - component: {fileID: 1191043473}
   m_Layer: 5
   m_Name: Image (2)
   m_TagString: Untagged
@@ -17751,8 +18572,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &1191043473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1191043468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 1191043470}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &1192480432
 GameObject:
   m_ObjectHideFlags: 0
@@ -17763,8 +18604,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1192480433}
   - component: {fileID: 1192480435}
-  - component: {fileID: 1192480434}
   - component: {fileID: 1192480436}
+  - component: {fileID: 1192480434}
+  - component: {fileID: 1192480437}
   m_Layer: 5
   m_Name: Image (4)
   m_TagString: Untagged
@@ -17872,8 +18714,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &1192480437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1192480432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 1192480434}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &1202583360
 GameObject:
   m_ObjectHideFlags: 0
@@ -18314,7 +19176,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &1261692294
 MonoBehaviour:
@@ -18332,7 +19194,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 1261692291}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -18958,7 +19820,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &1301951257
 GameObject:
@@ -19558,6 +20420,140 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1365709085}
+  m_CullTransparentMesh: 1
+--- !u!1 &1376550672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1376550673}
+  - component: {fileID: 1376550675}
+  - component: {fileID: 1376550674}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1376550673
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376550672}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 897520654}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -133.57}
+  m_SizeDelta: {x: 314.29, y: 102.38}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1376550674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376550672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "0\x03"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 1
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 0.99607843, g: 0.89411765, b: 0.68235296, a: 1}
+    topRight: {r: 0.85490197, g: 0.05882353, b: 0.05882353, a: 1}
+    bottomLeft: {r: 0.79607844, g: 0.6039216, b: 0.24313726, a: 1}
+    bottomRight: {r: 0.99607843, g: 0.9254902, b: 0.3882353, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 103.63
+  m_fontSizeBase: 103.63
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1376550675
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1376550672}
   m_CullTransparentMesh: 1
 --- !u!1 &1377498574
 GameObject:
@@ -20519,7 +21515,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &1437813293
 GameObject:
@@ -20641,7 +21637,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &1437813298
 MonoBehaviour:
@@ -20659,7 +21655,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 1437813295}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -21050,7 +22046,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &1485219721
 GameObject:
@@ -21406,7 +22402,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &1514854760
 MonoBehaviour:
@@ -21424,7 +22420,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 1514854757}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -22375,8 +23371,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1608988185}
   - component: {fileID: 1608988187}
-  - component: {fileID: 1608988186}
   - component: {fileID: 1608988188}
+  - component: {fileID: 1608988186}
+  - component: {fileID: 1608988189}
   m_Layer: 5
   m_Name: Image (7)
   m_TagString: Untagged
@@ -22484,8 +23481,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &1608988189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1608988184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 1608988186}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &1616498992
 GameObject:
   m_ObjectHideFlags: 0
@@ -22606,7 +23623,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &1616498997
 MonoBehaviour:
@@ -22624,7 +23641,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 1616498994}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -22640,6 +23657,7 @@ GameObject:
   - component: {fileID: 1620636012}
   - component: {fileID: 1620636011}
   - component: {fileID: 1620636013}
+  - component: {fileID: 1620636014}
   m_Layer: 5
   m_Name: Image (6)
   m_TagString: Untagged
@@ -22747,8 +23765,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &1620636014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620636009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 1620636011}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &1622937884
 GameObject:
   m_ObjectHideFlags: 0
@@ -23003,7 +24041,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &1623262211
 MonoBehaviour:
@@ -23021,7 +24059,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 1623262208}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -23177,6 +24215,7 @@ GameObject:
   - component: {fileID: 1640580968}
   - component: {fileID: 1640580967}
   - component: {fileID: 1640580969}
+  - component: {fileID: 1640580970}
   m_Layer: 5
   m_Name: Image (3)
   m_TagString: Untagged
@@ -23284,8 +24323,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &1640580970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640580965}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 1640580967}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &1652249392
 GameObject:
   m_ObjectHideFlags: 0
@@ -23405,7 +24464,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &1654478399
 GameObject:
@@ -23527,7 +24586,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &1654478404
 MonoBehaviour:
@@ -23545,7 +24604,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 1654478401}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -23559,8 +24618,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1661749724}
   - component: {fileID: 1661749726}
-  - component: {fileID: 1661749725}
   - component: {fileID: 1661749727}
+  - component: {fileID: 1661749725}
+  - component: {fileID: 1661749728}
   m_Layer: 5
   m_Name: Image (8)
   m_TagString: Untagged
@@ -23668,8 +24728,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &1661749728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1661749723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 1661749725}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &1678005717
 GameObject:
   m_ObjectHideFlags: 0
@@ -23884,7 +24964,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 7.8, y: 99}
+  m_Size: {x: 30, y: 99}
   m_EdgeRadius: 0
 --- !u!50 &1696501089
 Rigidbody2D:
@@ -24043,9 +25123,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1704116924}
   - component: {fileID: 1704116927}
+  - component: {fileID: 1704116928}
   - component: {fileID: 1704116926}
   - component: {fileID: 1704116925}
-  - component: {fileID: 1704116928}
   m_Layer: 5
   m_Name: Image (0)
   m_TagString: Untagged
@@ -24088,7 +25168,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 1704116926}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -24173,7 +25253,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &1704493505
 GameObject:
@@ -24490,7 +25570,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &1710333408
 MonoBehaviour:
@@ -24508,7 +25588,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 1710333405}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -24766,7 +25846,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &1724013409
 MonoBehaviour:
@@ -24784,7 +25864,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 1724013406}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -24947,7 +26027,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &1729169942
 MonoBehaviour:
@@ -24965,7 +26045,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 1729169939}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -25741,6 +26821,140 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791006763}
   m_CullTransparentMesh: 1
+--- !u!1 &1795238533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1795238534}
+  - component: {fileID: 1795238536}
+  - component: {fileID: 1795238535}
+  m_Layer: 5
+  m_Name: Text (TMP)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1795238534
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795238533}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2037884368}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -133.57}
+  m_SizeDelta: {x: 314.29, y: 102.38}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1795238535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795238533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_text: "0\x03"
+  m_isRightToLeft: 0
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontSharedMaterials: []
+  m_fontMaterial: {fileID: 0}
+  m_fontMaterials: []
+  m_fontColor32:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_enableVertexGradient: 1
+  m_colorMode: 3
+  m_fontColorGradient:
+    topLeft: {r: 0.99607843, g: 0.89411765, b: 0.68235296, a: 1}
+    topRight: {r: 0.85490197, g: 0.05882353, b: 0.05882353, a: 1}
+    bottomLeft: {r: 0.79607844, g: 0.6039216, b: 0.24313726, a: 1}
+    bottomRight: {r: 0.99607843, g: 0.9254902, b: 0.3882353, a: 1}
+  m_fontColorGradientPreset: {fileID: 0}
+  m_spriteAsset: {fileID: 0}
+  m_tintAllSprites: 0
+  m_StyleSheet: {fileID: 0}
+  m_TextStyleHashCode: -1183493901
+  m_overrideHtmlColors: 0
+  m_faceColor:
+    serializedVersion: 2
+    rgba: 4294967295
+  m_fontSize: 103.63
+  m_fontSizeBase: 103.63
+  m_fontWeight: 400
+  m_enableAutoSizing: 0
+  m_fontSizeMin: 18
+  m_fontSizeMax: 72
+  m_fontStyle: 0
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
+  m_textAlignment: 65535
+  m_characterSpacing: 0
+  m_wordSpacing: 0
+  m_lineSpacing: 0
+  m_lineSpacingMax: 0
+  m_paragraphSpacing: 0
+  m_charWidthMaxAdj: 0
+  m_enableWordWrapping: 1
+  m_wordWrappingRatios: 0.4
+  m_overflowMode: 0
+  m_linkedTextComponent: {fileID: 0}
+  parentLinkedComponent: {fileID: 0}
+  m_enableKerning: 1
+  m_enableExtraPadding: 0
+  checkPaddingRequired: 0
+  m_isRichText: 1
+  m_parseCtrlCharacters: 1
+  m_isOrthographic: 1
+  m_isCullingEnabled: 0
+  m_horizontalMapping: 0
+  m_verticalMapping: 0
+  m_uvLineOffset: 0
+  m_geometrySortingOrder: 0
+  m_IsTextObjectScaleStatic: 0
+  m_VertexBufferAutoSizeReduction: 0
+  m_useMaxVisibleDescender: 1
+  m_pageToDisplay: 1
+  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_isUsingLegacyAnimationComponent: 0
+  m_isVolumetricText: 0
+  m_hasFontAssetChanged: 0
+  m_baseMaterial: {fileID: 0}
+  m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!222 &1795238536
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795238533}
+  m_CullTransparentMesh: 1
 --- !u!1 &1801564880
 GameObject:
   m_ObjectHideFlags: 0
@@ -26049,7 +27263,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &1825328970
 MonoBehaviour:
@@ -26067,7 +27281,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 1825328967}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -26474,7 +27688,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &1848967108
 GameObject:
@@ -26735,7 +27949,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &1856808253
 GameObject:
@@ -27453,7 +28667,7 @@ GameObject:
   - component: {fileID: 1918196146}
   - component: {fileID: 1918196147}
   m_Layer: 5
-  m_Name: Joker
+  m_Name: LeftJokerUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27614,7 +28828,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!114 &1937221070
 MonoBehaviour:
@@ -27632,7 +28846,7 @@ MonoBehaviour:
   textureArray: []
   rendererDelegate: {fileID: 1937221067}
   useSharedMaterial: 1
-  doLoopAnimation: 1
+  doLoopAnimation: 0
   StartOnAwake: 0
   AnimationSpeed: 5
   delayBetweenLoop: 0
@@ -28171,7 +29385,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
 --- !u!1 &1974583245
 GameObject:
@@ -28616,6 +29830,82 @@ RectTransform:
   m_AnchoredPosition: {x: 422, y: -472.5}
   m_SizeDelta: {x: 430, y: 115}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &2037884367
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2037884368}
+  - component: {fileID: 2037884370}
+  - component: {fileID: 2037884369}
+  m_Layer: 5
+  m_Name: BigWin_Image
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2037884368
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037884367}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 1795238534}
+  m_Father: {fileID: 171191368}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 884, y: 2158}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2037884369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037884367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 4c5a49908d87a45d5a3a47c1f486dc1c, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 1
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &2037884370
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2037884367}
+  m_CullTransparentMesh: 1
 --- !u!1 &2044916081
 GameObject:
   m_ObjectHideFlags: 0
@@ -29098,6 +30388,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b7222a62c158b4e76823a90e137be41f, type: 3}
   - {fileID: 21300000, guid: dae3587daaeb14ea68b0562231655ddd, type: 3}
   - {fileID: 21300000, guid: 2841237b91c764f3b9769a724f70e1bf, type: 3}
+  Emprty_Sprite: {fileID: 21300000, guid: 2841237b91c764f3b9769a724f70e1bf, type: 3}
   Balance_text: {fileID: 1771885944}
   TotalBet_text: {fileID: 1875856110}
   TotalWin_text: {fileID: 23625003}
@@ -29106,7 +30397,7 @@ MonoBehaviour:
   BigWin_Text: {fileID: 683631912}
   BonusWin_Text: {fileID: 57034470}
   TopPayoutUI: {fileID: 1739350161}
-  JokerUI: {fileID: 0}
+  JokerUI: {fileID: 1918196147}
   Glow_Minor_Image: {fileID: 398727945}
   Glow_Major_Image: {fileID: 182233026}
   Glow_Grand_Image: {fileID: 116653000}
@@ -29117,6 +30408,10 @@ MonoBehaviour:
   NormalArrowImage: {fileID: 70016667}
   MovementImage: {fileID: 260160286}
   BlastImageAnimation: {fileID: 766847773}
+  JokerEndAnimation: {fileID: 813289814}
+  BigWinImage: {fileID: 2037884368}
+  HugeWinImage: {fileID: 203482978}
+  MegaWinImage: {fileID: 897520654}
   Joker_Start_UI: {fileID: 880655953}
   Minor_UI: {fileID: 1423208329}
   Major_UI: {fileID: 535330529}
@@ -29294,8 +30589,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2056396344}
   - component: {fileID: 2056396346}
-  - component: {fileID: 2056396345}
   - component: {fileID: 2056396347}
+  - component: {fileID: 2056396345}
+  - component: {fileID: 2056396348}
   m_Layer: 5
   m_Name: Image (2)
   m_TagString: Untagged
@@ -29403,8 +30699,28 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 10, y: 90}
+  m_Size: {x: 90, y: 90}
   m_EdgeRadius: 0
+--- !u!114 &2056396348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056396343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d9ae1bf2ec654621a0c3eaff2a909fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAnimationState: 0
+  textureArray: []
+  rendererDelegate: {fileID: 2056396345}
+  useSharedMaterial: 1
+  doLoopAnimation: 0
+  StartOnAwake: 0
+  AnimationSpeed: 5
+  delayBetweenLoop: 0
 --- !u!1 &2057230263
 GameObject:
   m_ObjectHideFlags: 0
