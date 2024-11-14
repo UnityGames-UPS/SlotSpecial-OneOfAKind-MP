@@ -395,7 +395,7 @@ public class UIManager : MonoBehaviour
         {
             string text = null;
             if(paylines.symbols[i+1].payout!=0){
-                Debug.Log("symbol name " + paylines.symbols[i+1].Name + " amt : " + paylines.symbols[i+1].payout.ToString());
+                // Debug.Log("symbol name " + paylines.symbols[i+1].Name + " amt : " + paylines.symbols[i+1].payout.ToString());
                 text = paylines.symbols[i+1].payout.ToString();
             }
             SymbolsText[i].text = text;

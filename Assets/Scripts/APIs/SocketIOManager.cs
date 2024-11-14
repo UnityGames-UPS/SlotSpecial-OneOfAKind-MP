@@ -482,6 +482,7 @@ public class FreeSpinResponse
     public List<Levelup> levelUp { get; set; }
     public List<Booster> booster { get; set; }
     public List<int> reTriggered { get; set; }
+    public List<int> count { get; set; }
 }
 
 [Serializable]

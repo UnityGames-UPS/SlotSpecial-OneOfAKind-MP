@@ -107,10 +107,10 @@ public class BackgroundController : MonoBehaviour
             int count = backgrounds[bgType].CircleCG.transform.childCount;
             for(int i = 0; i < count; i++){
                 if(i == 0 || i == 11 || i == 10 || i == 9){
-                    backgrounds[bgType].CircleCG.transform.name = "PURPLE";
+                    backgrounds[bgType].CircleCG.transform.GetChild(i).name = "PURPLE";
                 }
                 else{
-                    backgrounds[bgType].CircleCG.transform.name = "BLUE";
+                    backgrounds[bgType].CircleCG.transform.GetChild(i).name = "BLUE";
                 }
             }
         } 
@@ -374,7 +374,7 @@ public class BackgroundController : MonoBehaviour
     }
 
     private void StopRotation(string s){
-        Debug.Log("Stopping " + s + " rotation");
+        // Debug.Log("Stopping " + s + " rotation");
         switch(s){
             case "Base":
                 NR_RotateTween?.Kill();

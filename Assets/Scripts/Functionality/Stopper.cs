@@ -80,7 +80,7 @@ public class Stopper : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        // Debug.Log("on trigger stay");
+        Debug.Log("on trigger stay");
         // Check if the collided object has an Image component
         if(stop){
             Debug.Log("Inside stop");
