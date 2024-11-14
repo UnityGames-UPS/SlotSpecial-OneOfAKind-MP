@@ -1,0 +1,1296 @@
+fileFormatVersion: 2
+guid: b436be3ad6d6f4d6eb09285f92771c26
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: one of a kind ui111-02_1
+      rect:
+        serializedVersion: 2
+        x: 5452
+        y: 9405
+        width: 1006
+        height: 1010
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff37303689f464d6db8269ff39a0de92
+      internalID: 142259257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_2
+      rect:
+        serializedVersion: 2
+        x: 6563
+        y: 9405
+        width: 1007
+        height: 1010
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 897372292fea649c5b38fbbb9ce650cc
+      internalID: 2055971650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_3
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 9614
+        width: 713
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8fe10f3ca830144a780509615fd10510
+      internalID: 1853741308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_4
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 9614
+        width: 713
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc0281bbf570c46acbfd94fd8f019bec
+      internalID: -961374204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_5
+      rect:
+        serializedVersion: 2
+        x: 1950
+        y: 9614
+        width: 713
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e857b0ceb5f8c42729bdab601d8b3a9b
+      internalID: 576901262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_8
+      rect:
+        serializedVersion: 2
+        x: 7648
+        y: 9790
+        width: 1000
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3337da45bfd484841a7b4ffe6c64745a
+      internalID: 831601151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_10
+      rect:
+        serializedVersion: 2
+        x: 8816
+        y: 9785
+        width: 824
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47a13869873c542e1ba9898b92c6e6f1
+      internalID: -400073456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_12
+      rect:
+        serializedVersion: 2
+        x: 2816
+        y: 9571
+        width: 2339
+        height: 586
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17c0047d6e46645a392cbcf610dd50c1
+      internalID: -430986339
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_22
+      rect:
+        serializedVersion: 2
+        x: 7648
+        y: 9156
+        width: 1000
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6878ae2edbb7c4f3782aa850bf04d763
+      internalID: -1490973845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_23
+      rect:
+        serializedVersion: 2
+        x: 8816
+        y: 9151
+        width: 824
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc70f8e99f5cc4457a340f7803211de2
+      internalID: -1976009311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_30
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 8780
+        width: 713
+        height: 697
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7edbe9e555b9e4705b0ca31545e49bba
+      internalID: -16690669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_31
+      rect:
+        serializedVersion: 2
+        x: 1028
+        y: 8780
+        width: 713
+        height: 697
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c902702a6350242538ed539824c4a443
+      internalID: -973929313
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_32
+      rect:
+        serializedVersion: 2
+        x: 1942
+        y: 8780
+        width: 713
+        height: 697
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f30351eb16f5a4bdebc6835082237c36
+      internalID: -8718292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_35
+      rect:
+        serializedVersion: 2
+        x: 2816
+        y: 8747
+        width: 2370
+        height: 579
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa0fdde1e2ae643efa785be51ff69bc8
+      internalID: 1861929318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_36
+      rect:
+        serializedVersion: 2
+        x: 5452
+        y: 8298
+        width: 1006
+        height: 1010
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c04f3d8390b947ef97ade3827afd062
+      internalID: 111182458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_37
+      rect:
+        serializedVersion: 2
+        x: 6563
+        y: 8292
+        width: 1007
+        height: 1010
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32b76b0530b4243428fd5ffa08d96f3c
+      internalID: -857042690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_41
+      rect:
+        serializedVersion: 2
+        x: 7648
+        y: 8518
+        width: 1000
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 909ea7250c22c4d6a8e8a7cb8aba0385
+      internalID: -111139241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_43
+      rect:
+        serializedVersion: 2
+        x: 8816
+        y: 8514
+        width: 824
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3039c7940443d4c89ac7b40d12846104
+      internalID: -675660981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_53
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 7911
+        width: 703
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e16e12f2bb2bb4b889186288d77b665d
+      internalID: -119421456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_54
+      rect:
+        serializedVersion: 2
+        x: 1031
+        y: 7911
+        width: 703
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb930bd512f094fdcae349b094f3b2da
+      internalID: 1879261506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_55
+      rect:
+        serializedVersion: 2
+        x: 1942
+        y: 7911
+        width: 703
+        height: 709
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e36397b06f0794f7aba3017c15217021
+      internalID: -1947555469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_56
+      rect:
+        serializedVersion: 2
+        x: 2811
+        y: 7922
+        width: 2344
+        height: 594
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 611cec93229464c09aa93d499b51619f
+      internalID: 1563429208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_63
+      rect:
+        serializedVersion: 2
+        x: 7648
+        y: 7878
+        width: 1000
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3cf9243627ab04fc1955c4b53506dd3f
+      internalID: 219963987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_64
+      rect:
+        serializedVersion: 2
+        x: 8817
+        y: 7883
+        width: 824
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 096867242d23c4ace9ed0050afa5620f
+      internalID: -1384056114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_70
+      rect:
+        serializedVersion: 2
+        x: 5452
+        y: 7216
+        width: 1006
+        height: 1010
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbde9990816f848b3be2030047625ec3
+      internalID: 54619474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_71
+      rect:
+        serializedVersion: 2
+        x: 6563
+        y: 7222
+        width: 1007
+        height: 1010
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 831790ab475444f22945b32372264d66
+      internalID: -224743055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_83
+      rect:
+        serializedVersion: 2
+        x: 159
+        y: 7059
+        width: 640
+        height: 708
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d8ac11a8f20c461e8c1f2ae55359b90
+      internalID: 277666494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_85
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 7059
+        width: 640
+        height: 708
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd0d05b3d2f6948da896cb5e75607234
+      internalID: 1804151521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_86
+      rect:
+        serializedVersion: 2
+        x: 1973
+        y: 7059
+        width: 640
+        height: 708
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbcae02427f8040a18b181643bce3cf8
+      internalID: -419965688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_89
+      rect:
+        serializedVersion: 2
+        x: 2959
+        y: 7084
+        width: 1049
+        height: 554
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 833ee992606784472a827d63bcdfd2a7
+      internalID: -375473825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_92
+      rect:
+        serializedVersion: 2
+        x: 3830
+        y: 3792
+        width: 5864
+        height: 3306
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea26ba4db596d45dd9293ebb92e2d79b
+      internalID: -1998789491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_101
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 6237
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 985062167205d4bc1bdbfa8a8c595a7f
+      internalID: -1232495465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_102
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 6237
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccbcea686cd0841658bae6386ff69631
+      internalID: -279060963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_104
+      rect:
+        serializedVersion: 2
+        x: 1535
+        y: 6237
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 518ae02d616344721814e683047b53c4
+      internalID: 1051674450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_107
+      rect:
+        serializedVersion: 2
+        x: 2217
+        y: 6237
+        width: 500
+        height: 500
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb864c81020494ba7a9726dd58c80a89
+      internalID: -1429329387
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_116
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 5126
+        width: 494
+        height: 499
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a421c50866f7496bbff744e08027dcb
+      internalID: 1059496438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_118
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 5126
+        width: 494
+        height: 499
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a340a5a432d3e44128c288ef41fa61ae
+      internalID: -148340345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_119
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 5126
+        width: 494
+        height: 499
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e9849b575da51484fa456fa50c9d531b
+      internalID: 757854328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_121
+      rect:
+        serializedVersion: 2
+        x: 3037
+        y: 5126
+        width: 494
+        height: 499
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bfcf2aa846ae444bb697fe9cb0c99fb
+      internalID: 1585279677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_130
+      rect:
+        serializedVersion: 2
+        x: 89
+        y: 4336
+        width: 495
+        height: 499
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 156f7869cfe3941b0a7389a1c6bd2791
+      internalID: 36636293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_131
+      rect:
+        serializedVersion: 2
+        x: 1126
+        y: 4336
+        width: 495
+        height: 499
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a553c8aa4a944c3980a5470db337ed9
+      internalID: 1666221785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_132
+      rect:
+        serializedVersion: 2
+        x: 2082
+        y: 4336
+        width: 495
+        height: 499
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aac025c357e204941bec6f7f68493221
+      internalID: 1200733844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_133
+      rect:
+        serializedVersion: 2
+        x: 3036
+        y: 4336
+        width: 495
+        height: 499
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e579d1eacdf3c4c98871b5bce8756ce7
+      internalID: -2093179492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_144
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 3459
+        width: 1626
+        height: 540
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b7711acc4c7a42588a58138b35c415f
+      internalID: -845201008
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_148
+      rect:
+        serializedVersion: 2
+        x: 3728
+        y: 121
+        width: 5856
+        height: 3322
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d6884664d500b4cefae262733c20db1d
+      internalID: -267211860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_149
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 2556
+        width: 1753
+        height: 541
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11182c23e697544a7b0149d48b1ff7b1
+      internalID: -1049474920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: one of a kind ui111-02_153
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 1650
+        width: 2044
+        height: 555
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dae30dd8fe7b3429e980d46a1afb946d
+      internalID: 783387025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      one of a kind ui111-02_0: 270702915
+      one of a kind ui111-02_1: 142259257
+      one of a kind ui111-02_10: -400073456
+      one of a kind ui111-02_100: 281368460
+      one of a kind ui111-02_101: -1232495465
+      one of a kind ui111-02_102: -279060963
+      one of a kind ui111-02_103: 772240201
+      one of a kind ui111-02_104: 1051674450
+      one of a kind ui111-02_105: -872063748
+      one of a kind ui111-02_106: 499334836
+      one of a kind ui111-02_107: -1429329387
+      one of a kind ui111-02_108: 1049261485
+      one of a kind ui111-02_109: 1814917106
+      one of a kind ui111-02_11: -69750310
+      one of a kind ui111-02_110: 1643453725
+      one of a kind ui111-02_111: -1328134175
+      one of a kind ui111-02_112: 566493790
+      one of a kind ui111-02_113: -83202498
+      one of a kind ui111-02_114: 486461785
+      one of a kind ui111-02_115: 471084038
+      one of a kind ui111-02_116: 1059496438
+      one of a kind ui111-02_117: -1874758104
+      one of a kind ui111-02_118: -148340345
+      one of a kind ui111-02_119: 757854328
+      one of a kind ui111-02_12: -430986339
+      one of a kind ui111-02_120: 1561382977
+      one of a kind ui111-02_121: 1585279677
+      one of a kind ui111-02_122: -1709382567
+      one of a kind ui111-02_123: 1266656822
+      one of a kind ui111-02_124: -602040269
+      one of a kind ui111-02_125: -782014313
+      one of a kind ui111-02_126: -655619625
+      one of a kind ui111-02_127: -241477756
+      one of a kind ui111-02_128: 401615394
+      one of a kind ui111-02_129: -26823312
+      one of a kind ui111-02_13: 602090668
+      one of a kind ui111-02_130: 36636293
+      one of a kind ui111-02_131: 1666221785
+      one of a kind ui111-02_132: 1200733844
+      one of a kind ui111-02_133: -2093179492
+      one of a kind ui111-02_134: -2107445217
+      one of a kind ui111-02_135: 1203561482
+      one of a kind ui111-02_136: 407478475
+      one of a kind ui111-02_137: -1653281311
+      one of a kind ui111-02_138: -1140929494
+      one of a kind ui111-02_139: 445617617
+      one of a kind ui111-02_14: -1595900967
+      one of a kind ui111-02_140: 1389566389
+      one of a kind ui111-02_141: -21520436
+      one of a kind ui111-02_142: -392718587
+      one of a kind ui111-02_143: 1288486953
+      one of a kind ui111-02_144: -845201008
+      one of a kind ui111-02_145: -1625835900
+      one of a kind ui111-02_146: -477952175
+      one of a kind ui111-02_147: 1537530020
+      one of a kind ui111-02_148: -267211860
+      one of a kind ui111-02_149: -1049474920
+      one of a kind ui111-02_15: -141346795
+      one of a kind ui111-02_150: -660275662
+      one of a kind ui111-02_151: -1597873123
+      one of a kind ui111-02_152: -407119211
+      one of a kind ui111-02_153: 783387025
+      one of a kind ui111-02_154: -287085491
+      one of a kind ui111-02_155: -666771151
+      one of a kind ui111-02_16: -758324781
+      one of a kind ui111-02_17: 735556227
+      one of a kind ui111-02_18: 339959177
+      one of a kind ui111-02_19: -1676151156
+      one of a kind ui111-02_2: 2055971650
+      one of a kind ui111-02_20: -1031628582
+      one of a kind ui111-02_21: 11714875
+      one of a kind ui111-02_22: -1490973845
+      one of a kind ui111-02_23: -1976009311
+      one of a kind ui111-02_24: -176744369
+      one of a kind ui111-02_25: 1062190334
+      one of a kind ui111-02_26: -1201856386
+      one of a kind ui111-02_27: -733740720
+      one of a kind ui111-02_28: 2105255567
+      one of a kind ui111-02_29: -551237528
+      one of a kind ui111-02_3: 1853741308
+      one of a kind ui111-02_30: -16690669
+      one of a kind ui111-02_31: -973929313
+      one of a kind ui111-02_32: -8718292
+      one of a kind ui111-02_33: -1040750505
+      one of a kind ui111-02_34: 563901611
+      one of a kind ui111-02_35: 1861929318
+      one of a kind ui111-02_36: 111182458
+      one of a kind ui111-02_37: -857042690
+      one of a kind ui111-02_38: 1235461246
+      one of a kind ui111-02_39: -2090296864
+      one of a kind ui111-02_4: -961374204
+      one of a kind ui111-02_40: -1118801360
+      one of a kind ui111-02_41: -111139241
+      one of a kind ui111-02_42: -1097781535
+      one of a kind ui111-02_43: -675660981
+      one of a kind ui111-02_44: 949881722
+      one of a kind ui111-02_45: 51621757
+      one of a kind ui111-02_46: 1173257840
+      one of a kind ui111-02_47: 54469296
+      one of a kind ui111-02_48: -981415863
+      one of a kind ui111-02_49: -468054343
+      one of a kind ui111-02_5: 576901262
+      one of a kind ui111-02_50: 1457678010
+      one of a kind ui111-02_51: -1377596909
+      one of a kind ui111-02_52: -1738260675
+      one of a kind ui111-02_53: -119421456
+      one of a kind ui111-02_54: 1879261506
+      one of a kind ui111-02_55: -1947555469
+      one of a kind ui111-02_56: 1563429208
+      one of a kind ui111-02_57: -1680752422
+      one of a kind ui111-02_58: 993227454
+      one of a kind ui111-02_59: 1990694545
+      one of a kind ui111-02_6: -1332215922
+      one of a kind ui111-02_60: 521767213
+      one of a kind ui111-02_61: -735060791
+      one of a kind ui111-02_62: 1385942332
+      one of a kind ui111-02_63: 219963987
+      one of a kind ui111-02_64: -1384056114
+      one of a kind ui111-02_65: 1433721321
+      one of a kind ui111-02_66: 1716334658
+      one of a kind ui111-02_67: -616448848
+      one of a kind ui111-02_68: 1485381103
+      one of a kind ui111-02_69: -1671821502
+      one of a kind ui111-02_7: -1998518995
+      one of a kind ui111-02_70: 54619474
+      one of a kind ui111-02_71: -224743055
+      one of a kind ui111-02_72: -855390128
+      one of a kind ui111-02_73: 1069547735
+      one of a kind ui111-02_74: -1013694433
+      one of a kind ui111-02_75: 706570399
+      one of a kind ui111-02_76: -1668461201
+      one of a kind ui111-02_77: -1077977050
+      one of a kind ui111-02_78: -206930121
+      one of a kind ui111-02_79: -547487977
+      one of a kind ui111-02_8: 831601151
+      one of a kind ui111-02_80: 205119938
+      one of a kind ui111-02_81: -1081537266
+      one of a kind ui111-02_82: 111588357
+      one of a kind ui111-02_83: 277666494
+      one of a kind ui111-02_84: -2082954451
+      one of a kind ui111-02_85: 1804151521
+      one of a kind ui111-02_86: -419965688
+      one of a kind ui111-02_87: -1475307727
+      one of a kind ui111-02_88: 951398003
+      one of a kind ui111-02_89: -375473825
+      one of a kind ui111-02_9: -1776564677
+      one of a kind ui111-02_90: 1648111389
+      one of a kind ui111-02_91: 1609038185
+      one of a kind ui111-02_92: -1998789491
+      one of a kind ui111-02_93: 1075868347
+      one of a kind ui111-02_94: -2032487414
+      one of a kind ui111-02_95: 59824255
+      one of a kind ui111-02_96: -1170253305
+      one of a kind ui111-02_97: -1567802376
+      one of a kind ui111-02_98: 469827171
+      one of a kind ui111-02_99: 124771176
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
