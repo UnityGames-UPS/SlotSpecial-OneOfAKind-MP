@@ -11,6 +11,7 @@ public class Stopper : MonoBehaviour
     [SerializeField] internal Transform ImageTransform;
     [SerializeField] internal Transform ResultTransform;
     [SerializeField] private SlotBehaviour slotBehaviour;
+    [SerializeField] private BonusController JokerController;
     [SerializeField] private BackgroundController bgController;
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,6 +28,7 @@ public class Stopper : MonoBehaviour
                     stop = false;
                     Debug.Log("Stopping wheel at: " + stopAT + " and object name = " + collision.name);
                     slotBehaviour.wheelStopped = true;
+                    JokerController.wheelStopped = true;
                     bgController.StopWheel();
                     ImageTransform = collision.transform;
                 }
@@ -37,6 +39,7 @@ public class Stopper : MonoBehaviour
                     stop = false;
                     Debug.Log("Stopping at a empty space");
                     slotBehaviour.wheelStopped = true;
+                    JokerController.wheelStopped = true;
                     bgController.StopWheel();
                     ImageTransform = collision.transform;
                 }
@@ -57,6 +60,7 @@ public class Stopper : MonoBehaviour
                     stop = false;
                     Debug.Log("Stopping wheel at: " + stopAT + " and object name = " + collision.name);
                     slotBehaviour.wheelStopped = true;
+                    JokerController.wheelStopped = true;
                     bgController.StopWheel();
                     ImageTransform = collision.transform;
                 }
@@ -67,6 +71,7 @@ public class Stopper : MonoBehaviour
                     stop = false;
                     Debug.Log("Stopping at a empty space");
                     slotBehaviour.wheelStopped = true;
+                    JokerController.wheelStopped = true;
                     bgController.StopWheel();
                     ImageTransform = collision.transform;
                 }
@@ -87,6 +92,7 @@ public class Stopper : MonoBehaviour
                     stop = false;
                     Debug.Log("Stopping wheel at: " + stopAT + " and object name = " + collision.name);
                     slotBehaviour.wheelStopped = true;
+                    JokerController.wheelStopped = true;
                     bgController.StopWheel();
                     ImageTransform = collision.transform;
                 }
@@ -97,6 +103,7 @@ public class Stopper : MonoBehaviour
                     stop = false;
                     Debug.Log("Stopping at a empty space");
                     slotBehaviour.wheelStopped = true;
+                    JokerController.wheelStopped = true;
                     bgController.StopWheel();
                     ImageTransform = collision.transform;
                 }

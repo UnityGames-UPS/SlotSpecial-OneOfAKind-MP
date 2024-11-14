@@ -28,6 +28,7 @@ public class BackgroundController : MonoBehaviour
     [SerializeField] private CanvasGroup OrangeFRCircle_CG;
     [SerializeField] private CanvasGroup GreenFRCircle_CG;
     [SerializeField] private CanvasGroup PurpleFRCircle_CG;
+    [SerializeField] private CanvasGroup FreeSpinCircle_CG;
     
     [Header("BG Image Animations")]
     [SerializeField] private ImageAnimation BlueFR_ImageAnimation;
@@ -57,7 +58,8 @@ public class BackgroundController : MonoBehaviour
         GreenFR,
         GoldenFR,
         OrangeFR,
-        PurpleFR
+        PurpleFR,
+        FreeSpin,
     }
     private Dictionary<BackgroundType, (CanvasGroup CG, CanvasGroup CircleCG)> backgrounds;
     private BackgroundType currentBG;
@@ -69,7 +71,8 @@ public class BackgroundController : MonoBehaviour
             { BackgroundType.GreenFR, (GreenFR_CG, GreenFRCircle_CG) },
             { BackgroundType.GoldenFR, (GoldenFR_CG, GoldenFRCircle_CG) },
             { BackgroundType.OrangeFR, (OrangeFR_CG, OrangeFRCircle_CG) },
-            { BackgroundType.PurpleFR, (PurpleFR_CG, PurpleFRCircle_CG) }
+            { BackgroundType.PurpleFR, (PurpleFR_CG, PurpleFRCircle_CG) },
+            { BackgroundType.FreeSpin, (NRBG_CG, FreeSpinCircle_CG) }
         };
     }
     private void Start() {
@@ -83,7 +86,7 @@ public class BackgroundController : MonoBehaviour
 
         foreach (var kvp in backgrounds) {
             if (kvp.Key != bgType) {
-                kvp.Value.CG.DOFade(0, 1f);
+                if(kvp.Value.CG!=backgrounds[bgType].CG) kvp.Value.CG.DOFade(0, 1f);
                 kvp.Value.CircleCG.DOFade(0, 1f);
                 if(GlowRotation1 != null || GlowRotation2 != null){
                     GlowRotation1.Kill();
@@ -92,13 +95,26 @@ public class BackgroundController : MonoBehaviour
             }
         }
 
-        DOVirtual.DelayedCall(1f, () => StopRotation(temp.ToString()));
+        if(backgrounds[temp].CG != backgrounds[currentBG].CG) DOVirtual.DelayedCall(1f, () => StopRotation(temp.ToString()));
 
         if (bgType == BackgroundType.Base) {
             NRBG_CG.DOFade(1, 1f);
             NRBGCircle_CG.DOFade(1, 1f);
             RotateBG();
-        } else {
+        }
+        else if(bgType == BackgroundType.FreeSpin){
+            FreeSpinCircle_CG.DOFade(1, 1f);
+            int count = backgrounds[bgType].CircleCG.transform.childCount;
+            for(int i = 0; i < count; i++){
+                if(i == 0 || i == 11 || i == 10 || i == 9){
+                    backgrounds[bgType].CircleCG.transform.name = "PURPLE";
+                }
+                else{
+                    backgrounds[bgType].CircleCG.transform.name = "BLUE";
+                }
+            }
+        } 
+        else {
             var (cg, circleCg) = backgrounds[bgType];
             if(values!= null || type == "JOKER1" || type == "JOKER2" || type == "JOKER3") PopulateWheel(circleCg.transform, values, type);
             // anim.StartAnimation();
@@ -113,7 +129,7 @@ public class BackgroundController : MonoBehaviour
                 for(int i=0;i<childCount;i++){
                     Image image=backgrounds[temp].CircleCG.transform.GetChild(i).GetComponent<Image>();
                     image.name = "Image(" + i + ")";
-                    image.sprite = null;
+                    image.sprite = Empty_Sprite;
                     image.DOFade(1, 0);
                 }
             }
@@ -393,6 +409,11 @@ public class BackgroundController : MonoBehaviour
                 wheelRoutine.Kill();
                 PurpleFR_RotateTween?.Kill();
                 PurpleFRCircle_CG.transform.localEulerAngles = Vector3.zero;
+                break;
+            case "FreeSpin":
+                wheelRoutine.Kill();
+                NR_RotateTween?.Kill();
+                FreeSpinCircle_CG.transform.localEulerAngles = Vector3.zero;
                 break;
         }
     }

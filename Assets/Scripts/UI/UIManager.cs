@@ -372,62 +372,6 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    internal void PopulateWin(int value)
-    {
-        switch (value)
-        {
-            case 1:
-                if (Win_Image) Win_Image.sprite = BigWin_Sprite;
-                break;
-            case 2:
-                if (Win_Image) Win_Image.sprite = HugeWin_Sprite;
-                break;
-            case 3:
-                if (Win_Image) Win_Image.sprite = MegaWin_Sprite;
-                break;
-            case 4:
-                if (Win_Image) Win_Image.sprite = Jackpot_Sprite;
-                JackpotImageAnimation.StartAnimation();
-                break;
-        }
-
-        StartPopupAnim();
-    }
-
-    //private void Update()
-    //{
-    //    if (Input.GetKeyDown(KeyCode.Space))
-    //    {
-    //        PopulateWin(4);
-    //        Debug.Log("Called");
-    //    }
-    //}
-
-    private void StartPopupAnim()
-    {
-        if (WinPopup_Object) WinPopup_Object.SetActive(true);
-        if (MainPopup_Object) MainPopup_Object.SetActive(true);
-
-        audioController.PlayWLAudio("bigwin");
-
-        Win_Image.rectTransform.DOScale(new Vector3(1, 1, 1), .5f).SetEase(Ease.OutCirc);
-
-        ImageRotationTween = WinBgAnimation.DORotate(new Vector3(0, 0, 360), 2f, RotateMode.FastBeyond360)
-            .SetEase(Ease.Linear) // Make the rotation constant
-            .SetLoops(-1, LoopType.Incremental); // Rotate infinitely in an incremental way
-
-        WinBgAnimation.DOScale(Vector3.one, .6f).SetEase(Ease.OutCirc);
-
-        DOVirtual.DelayedCall(3f, () =>
-        {
-            Win_Image.rectTransform.DOScale(Vector3.zero, .5f).SetEase(Ease.InBack).OnComplete(() => ClosePopup(WinPopup_Object));
-
-            WinBgAnimation.DOScale(Vector3.zero, .5f).SetEase(Ease.InBack).OnComplete(()=> ImageRotationTween.Kill());
-
-            slotManager.CheckPopups = false;
-        });
-    }
-
     internal void ADfunction()
     {
         OpenPopup(ADPopup_Object); 
@@ -447,39 +391,15 @@ public class UIManager : MonoBehaviour
 
     private void PopulateSymbolsPayout(Paylines paylines)
     {
-        // for (int i = 0; i < SymbolsText.Count; i++)
-        // {
-        //     string text = null;
-        //     if (paylines.symbols[i].Multiplier[0][0] != 0)
-        //     {
-        //         text += "5x - " + paylines.symbols[i].Multiplier[0][0];
-        //     }
-        //     if (paylines.symbols[i].Multiplier[1][0] != 0)
-        //     {
-        //         text += "\n4x - " + paylines.symbols[i].Multiplier[1][0];
-        //     }
-        //     if (paylines.symbols[i].Multiplier[2][0] != 0)
-        //     {
-        //         text += "\n3x - " + paylines.symbols[i].Multiplier[2][0];
-        //     }
-        //     if (SymbolsText[i]) SymbolsText[i].text = text;
-        // }
-
-        // for (int i = 0; i < paylines.symbols.Count; i++)
-        // {
-        //     if (paylines.symbols[i].Name.ToUpper() == "FREESPIN")
-        //     {
-        //         if (FreeSpin_Text) FreeSpin_Text.text = paylines.symbols[i].description.ToString();
-        //     }            
-        //     if (paylines.symbols[i].Name.ToUpper() == "JACKPOT")
-        //     {
-        //         if (Jackpot_Text) Jackpot_Text.text = paylines.symbols[i].description.ToString();
-        //     }
-        //     if (paylines.symbols[i].Name.ToUpper() == "WILD")
-        //     {
-        //         if (Wild_Text) Wild_Text.text = paylines.symbols[i].description.ToString();
-        //     }
-        // }
+        for (int i = 0; i < SymbolsText.Count; i++)
+        {
+            string text = null;
+            if(paylines.symbols[i+1].payout!=0){
+                Debug.Log("symbol name " + paylines.symbols[i+1].Name + " amt : " + paylines.symbols[i+1].payout.ToString());
+                text = paylines.symbols[i+1].payout.ToString();
+            }
+            SymbolsText[i].text = text;
+        }
     }
 
     private void CallOnExitFunction()
