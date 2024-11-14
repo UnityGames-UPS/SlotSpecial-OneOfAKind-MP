@@ -538,7 +538,6 @@ public class SlotBehaviour : MonoBehaviour
 
     private void PopulateTopSymbolUI()
     {
-        
         for(int i = 0; i < TopPurpleTransforms.Length; i++){
             
         }
