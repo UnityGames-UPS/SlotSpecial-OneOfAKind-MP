@@ -16,17 +16,17 @@ public class Stopper : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("on trigger enter");
+        // Debug.Log("on trigger enter");
         // Check if the collided object has an Image component
         if(stop){
-            Debug.Log("Inside stop");
+            // Debug.Log("Inside stop");
             if(stopAT != "-1"){
-                Debug.Log("Inside -1");
+                // Debug.Log("Inside -1");
                 if (collision.name==stopAT)
                 {
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     stop = false;
-                    Debug.Log("Stopping wheel at: " + stopAT + " and object name = " + collision.name);
+                    // Debug.Log("Stopping wheel at: " + stopAT + " and object name = " + collision.name);
                     slotBehaviour.wheelStopped = true;
                     JokerController.wheelStopped = true;
                     bgController.StopWheel();
@@ -37,7 +37,7 @@ public class Stopper : MonoBehaviour
                 if(collision.name == "Empty"){
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     stop = false;
-                    Debug.Log("Stopping at a empty space");
+                    // Debug.Log("Stopping at a empty space");
                     slotBehaviour.wheelStopped = true;
                     JokerController.wheelStopped = true;
                     bgController.StopWheel();
@@ -48,17 +48,17 @@ public class Stopper : MonoBehaviour
     }
 
     private void OnTriggerExit2D(Collider2D collision) {
-        Debug.Log("on trigger exit");
+        // Debug.Log("on trigger exit");
         // Check if the collided object has an Image component
         if(stop){
-            Debug.Log("Inside stop");
+            // Debug.Log("Inside stop");
             if(stopAT != "-1"){
-                Debug.Log("Inside -1");
+                // Debug.Log("Inside -1");
                 if (collision.name==stopAT)
                 {
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     stop = false;
-                    Debug.Log("Stopping wheel at: " + stopAT + " and object name = " + collision.name);
+                    // Debug.Log("Stopping wheel at: " + stopAT + " and object name = " + collision.name);
                     slotBehaviour.wheelStopped = true;
                     JokerController.wheelStopped = true;
                     bgController.StopWheel();
@@ -69,7 +69,7 @@ public class Stopper : MonoBehaviour
                 if(collision.name == "Empty"){
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     stop = false;
-                    Debug.Log("Stopping at a empty space");
+                    // Debug.Log("Stopping at a empty space");
                     slotBehaviour.wheelStopped = true;
                     JokerController.wheelStopped = true;
                     bgController.StopWheel();
@@ -80,17 +80,17 @@ public class Stopper : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D collision) {
-        Debug.Log("on trigger stay");
+        // Debug.Log("on trigger stay");
         // Check if the collided object has an Image component
         if(stop){
-            Debug.Log("Inside stop");
+            // Debug.Log("Inside stop");
             if(stopAT != "-1"){
-                Debug.Log("Inside -1");
+                // Debug.Log("Inside -1");
                 if (collision.name==stopAT)
                 {
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     stop = false;
-                    Debug.Log("Stopping wheel at: " + stopAT + " and object name = " + collision.name);
+                    // Debug.Log("Stopping wheel at: " + stopAT + " and object name = " + collision.name);
                     slotBehaviour.wheelStopped = true;
                     JokerController.wheelStopped = true;
                     bgController.StopWheel();
@@ -101,7 +101,7 @@ public class Stopper : MonoBehaviour
                 if(collision.name == "Empty"){
                     gameObject.GetComponent<BoxCollider2D>().enabled = false;
                     stop = false;
-                    Debug.Log("Stopping at a empty space");
+                    // Debug.Log("Stopping at a empty space");
                     slotBehaviour.wheelStopped = true;
                     JokerController.wheelStopped = true;
                     bgController.StopWheel();

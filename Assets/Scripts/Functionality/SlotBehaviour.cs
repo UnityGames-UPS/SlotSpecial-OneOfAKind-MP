@@ -16,87 +16,73 @@ public class SlotBehaviour : MonoBehaviour
 {
     [Header("Sprites")]
     [SerializeField] private Sprite[] SlotSymbols;  //images taken initially
-
     [Header("Slot Images")]
     [SerializeField] private Image[] TotalSlotImages;     //class to store total images
     [SerializeField] private Image ResultImage;     //class to store the result matrix
-    private bool EmptyResult = false;
     [Header("Slots Transforms")]
     [SerializeField] private Transform Slot_Transform;
+    [Header("Animated Sprites")]
+    [SerializeField] private List<Animations> SlotAnimations;
+    [Header("Images")]
     [SerializeField] private Image[] TopPurpleTransforms;
-
+    [SerializeField] private Image DiamondArrowImage;
+    [SerializeField] private Image Win_Text_BG;
+    [SerializeField] private Image BoosterImage;
+    [SerializeField] private Image ActivatedImage;
+    [SerializeField] private Image NormalArrowImage;
+    [SerializeField] private Image MovementImage;
     [Header("Buttons")]
     [SerializeField] private Button SlotStart_Button;
     [SerializeField] private Button AutoSpin_Button;
     [SerializeField] private Button AutoSpinStop_Button;
     [SerializeField] private Button TotalBetPlus_Button;
     [SerializeField] private Button TotalBetMinus_Button;
-    [SerializeField] private Button LineBetPlus_Button;
-    [SerializeField] private Button LineBetMinus_Button;
     [SerializeField] private Button FSContinue_Button;
     [SerializeField] private Button FSendContinue_Button;
-
-    [Header("Animated Sprites")]
-    [SerializeField] private List<Animations> SlotAnimations;
-
-    [Header("Miscellaneous UI")]
+    [Header("Texts")]
     [SerializeField] private TMP_Text Balance_text;
     [SerializeField] private TMP_Text TotalBet_text;
     [SerializeField] private TMP_Text TotalWin_text;
-    [SerializeField] private TMP_Text Win_Anim_Text;
+    [SerializeField] private TMP_Text SlotWinnings_Text;
     [SerializeField] private TMP_Text FreeSpinAnim_Text;
-    [SerializeField] private Image Win_Text_BG;
+    [SerializeField] private TMP_Text TWCount_Text;
+    [SerializeField] private TMP_Text FSCount_Text;
+    [SerializeField] private TMP_Text FreeSpinPopupCountText;
+    [Header ("Canvas Groups")]
     [SerializeField] private CanvasGroup TopPayoutUI;
     [SerializeField] private CanvasGroup FreeSpinsUI;
     [SerializeField] private CanvasGroup TopPurpleUI;
-    [SerializeField] private TMP_Text TWCount_Text;
-    [SerializeField] private TMP_Text FSCount_Text;
-    [SerializeField] private Image BoosterImage;
-    [SerializeField] private Image ActivatedImage;
-    [SerializeField] private Image NormalArrowImage;
-    [SerializeField] private Image MovementImage;
-    [SerializeField] private ImageAnimation BlastImageAnimation;
     [SerializeField] private CanvasGroup Joker_Start_UI;
-    [SerializeField] private Image DiamondArrowImage;
+    [Header ("Misc UI")]
+    [SerializeField] private ImageAnimation BlastImageAnimation;
     [SerializeField] private Transform FreeSpinPopupUI;
-    [SerializeField] private TMP_Text FreeSpinPopupCountText;
-    [Header("Audio Management")]
+    [SerializeField] private RectTransform FreeSpinTextLoc;
+    [Header("Controllers")]
     [SerializeField] private AudioController audioController;
-
     [SerializeField] private UIManager uiManager;
     [SerializeField] private BackgroundController BgController; 
-
-    [Header("BonusGame Popup")]
     [SerializeField] private BonusController _bonusManager;
-
-    [Header("Free Spins Board")]
-    [SerializeField] private GameObject FSBoard_Object;
-    [SerializeField] private TMP_Text FSnum_text;
-    int tweenHeight = 0;
-    private Tween slotTween;
     [SerializeField] private SocketIOManager SocketManager;
+    //private variables
+    private GameData FreeSpinData;
+    private ImageAnimation SlotImageAnimationScript;
+    private Tween slotTween;
     private Coroutine AutoSpinRoutine = null;
-    private Coroutine FreeSpinRoutine = null;
     private Coroutine tweenroutine;
     private bool IsAutoSpin = false;
     private bool IsFreeSpin = false;
     private bool IsSpinning = false;
     private bool CheckSpinAudio = false;
-    internal bool CheckPopups = false;
-    internal bool wheelStopped = false;
-    internal bool featuredTriggered = false;
     private int BetCounter = 0;
     private double currentBalance = 0;
     private double currentTotalBet = 0;
     private int multiplierWinnings;
     private int freeSpinCount;
     private int FreeSpinWinnings;
-    // protected int Lines = 20;
-    [SerializeField] private int IconSizeFactor = 100;       //set this parameter according to the size of the icon and spacing
-    private int numberOfSlots = 5;          //number of columns
-    private ImageAnimation SlotImageAnimationScript;
-    private GameData FreeSpinData;
-    [SerializeField] private RectTransform FreeSpinTextLoc;
+    private bool EmptyResult = false;
+    //internal variables
+    internal bool wheelStopped = false;
+    internal bool featuredTriggered = false;    
 
     private void Start()
     {
@@ -135,20 +121,6 @@ public class SlotBehaviour : MonoBehaviour
             ChangeBet(false);
         });
 
-        if (LineBetPlus_Button) LineBetPlus_Button.onClick.RemoveAllListeners();
-        if (LineBetPlus_Button) LineBetPlus_Button.onClick.AddListener(delegate
-        {
-            uiManager.CanCloseMenu();
-            ChangeBet(true);
-        });
-
-        if (LineBetMinus_Button) LineBetMinus_Button.onClick.RemoveAllListeners();
-        if (LineBetMinus_Button) LineBetMinus_Button.onClick.AddListener(delegate
-        {
-            uiManager.CanCloseMenu();
-            ChangeBet(false);
-        });
-
         if (AutoSpin_Button) AutoSpin_Button.onClick.RemoveAllListeners();
         if (AutoSpin_Button) AutoSpin_Button.onClick.AddListener(delegate
         {
@@ -162,13 +134,7 @@ public class SlotBehaviour : MonoBehaviour
             uiManager.CanCloseMenu();
             StopAutoSpin();
         });
-
-        if (FSBoard_Object) FSBoard_Object.SetActive(false);
-
-        tweenHeight = (17 * IconSizeFactor) - 280;
     }
-
-    
 
     #region Autospin
     private void AutoSpin()
@@ -244,12 +210,10 @@ public class SlotBehaviour : MonoBehaviour
             }
             if (BetCounter == SocketManager.initialData.Bets.Count - 1)
             {
-                if (LineBetPlus_Button) LineBetPlus_Button.interactable = false;
                 if (TotalBetPlus_Button) TotalBetPlus_Button.interactable = false;
             }
             if (BetCounter > 0)
             {
-                if (LineBetPlus_Button) LineBetMinus_Button.interactable = true;
                 if (TotalBetMinus_Button) TotalBetMinus_Button.interactable = true;
             }
         }
@@ -261,12 +225,10 @@ public class SlotBehaviour : MonoBehaviour
             }
             if (BetCounter == 0)
             {
-                if(LineBetMinus_Button) LineBetMinus_Button.interactable = false;
                 if(TotalBetMinus_Button) TotalBetMinus_Button.interactable = false;
             }
             if (BetCounter < SocketManager.initialData.Bets.Count - 1)
             {
-                if(LineBetPlus_Button) LineBetPlus_Button.interactable = true;
                 if(TotalBetPlus_Button) TotalBetPlus_Button.interactable = true;
             }
         }
@@ -387,12 +349,11 @@ public class SlotBehaviour : MonoBehaviour
         if (currentBalance < currentTotalBet) // Check if balance is sufficient to place the bet
         {
             CompareBalance();
+            IsSpinning = false;
             StopAutoSpin();
             yield return new WaitForSeconds(1);
             yield break;
         }
-
-        // CheckSpinAudio = true;
         IsSpinning = true;
 
         BalanceDeduction();
@@ -844,7 +805,7 @@ public class SlotBehaviour : MonoBehaviour
             MovementImage.DOFade(0, 0);
             MovementImage.transform.localPosition=tempPosi; //RESETTING THE IMAGE
 
-            Win_Anim_Text.DOFade(0, 0); 
+            SlotWinnings_Text.DOFade(0, 0); 
             BlastImageAnimation.StartAnimation(); //STARTING AN ANIMATION
             
             yield return new WaitUntil(()=> BlastImageAnimation.textureArray[^1] == BlastImageAnimation.rendererDelegate.sprite); //WAITIN FOR ANIMATION TO FINISH
@@ -853,16 +814,16 @@ public class SlotBehaviour : MonoBehaviour
             
             int winnings = int.Parse(ResultImage.GetComponent<Image>().sprite.name) * basePayout;
             multiplierWinnings += winnings;
-            Win_Anim_Text.text = winnings.ToString("f2");
-            Win_Anim_Text.DOFade(1, .3f);
+            SlotWinnings_Text.text = winnings.ToString("f2");
+            SlotWinnings_Text.DOFade(1, .3f);
 
             yield return new WaitForSeconds(2f);
 
-            Vector3 tempPosition2 = Win_Anim_Text.transform.localPosition;
+            Vector3 tempPosition2 = SlotWinnings_Text.transform.localPosition;
             bool scalingStarted = false;
-            yield return Win_Anim_Text.transform.DOLocalMoveY(-367f, 0.5f)
+            yield return SlotWinnings_Text.transform.DOLocalMoveY(-367f, 0.5f)
             .OnUpdate(()=>{
-                if(Win_Anim_Text.transform.localPosition.y < 299f && scalingStarted == false){
+                if(SlotWinnings_Text.transform.localPosition.y < 299f && scalingStarted == false){
                     scalingStarted = true;
                     CloseSlotWinningsUI(true);
                     if(double.TryParse(TotalWin_text.text, out double currUIwin)){
@@ -875,7 +836,7 @@ public class SlotBehaviour : MonoBehaviour
                 }
             })
             .WaitForCompletion();
-            Win_Anim_Text.transform.localPosition = tempPosition2;
+            SlotWinnings_Text.transform.localPosition = tempPosition2;
         }
         else{ //ENDING EXHAUSTIVE MULTIPLAYER GAME
             TotalWin_text.text = "0";
@@ -955,18 +916,18 @@ public class SlotBehaviour : MonoBehaviour
 
     internal IEnumerator TotalWinningsAnimation(double amt, bool ShowTextAnimation = true, bool ToggleButtonsInTheEnd = true){
         if(ShowTextAnimation) WinningsTextAnimation(amt, ToggleButtonsInTheEnd);
-        Win_Anim_Text.text = amt.ToString("f2");
-        if(Win_Anim_Text.transform.localScale==Vector3.zero) Win_Anim_Text.transform.localScale=Vector3.one;
+        SlotWinnings_Text.text = amt.ToString("f2");
+        if(SlotWinnings_Text.transform.localScale==Vector3.zero) SlotWinnings_Text.transform.localScale=Vector3.one;
         Win_Text_BG.DOFade(.8f, 0.5f);
-        yield return Win_Anim_Text.DOFade(1f, 0.5f);
+        yield return SlotWinnings_Text.DOFade(1f, 0.5f);
     }
 
     private void CloseSlotWinningsUI(bool scaleAnim=false){
         if(scaleAnim){
-            Win_Anim_Text.transform.DOScale(0, 0.3f);
+            SlotWinnings_Text.transform.DOScale(0, 0.3f);
         }
         else{
-            Win_Anim_Text.DOFade(0f, 0.3f);
+            SlotWinnings_Text.DOFade(0f, 0.3f);
         }
         Win_Text_BG.DOFade(0f, 0.3f);
     }
@@ -1084,6 +1045,7 @@ public class SlotBehaviour : MonoBehaviour
         yield return new WaitUntil(() => IsRegister);
 
         slotTween.Kill();
+        EmptyResult = false;
 
         // int tweenpos = (reqpos * IconSizeFactor) - IconSizeFactor;
         slotTween = Slot_Transform.DOLocalMoveY(467f, 1.2f)
