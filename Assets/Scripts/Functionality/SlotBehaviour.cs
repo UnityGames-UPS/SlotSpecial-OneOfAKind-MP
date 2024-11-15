@@ -302,8 +302,7 @@ public class SlotBehaviour : MonoBehaviour
             }
         }
         // if(SlotImageAnimationScript.textureArray.count)
-        SlotImageAnimationScript.AnimationSpeed = 10 * (lastIndex-startIndex);
-
+        SlotImageAnimationScript.AnimationSpeed = SlotImageAnimationScript.textureArray.Count;
     }
 
     #region SlotSpin
@@ -360,12 +359,9 @@ public class SlotBehaviour : MonoBehaviour
         }
         if(ResultImage) ResultImage.sprite = SlotSymbols[resultID];
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         yield return StopTweening();
-        if(SocketManager.playerdata.currentWining > 0){
-            audioController.PlayWLAudio("win");
-        }
         yield return new WaitForSeconds(0.3f);
 
         if(SocketManager.resultData.freeSpinResponse.isTriggered){
@@ -460,6 +456,7 @@ public class SlotBehaviour : MonoBehaviour
             checkPopups = false;
             StartCoroutine(PlayWinningsAnimation(SocketManager.playerdata.currentWining));
             yield return new WaitUntil(()=>checkPopups);
+            BalanceAddition(SocketManager.playerdata.currentWining);
             yield return TotalWinningsAnimation(SocketManager.playerdata.currentWining);
         }
         else{
@@ -528,6 +525,11 @@ public class SlotBehaviour : MonoBehaviour
         TopPurpleUI.DOFade(0, 0.5f);
 
         BgController.SwitchBG(BackgroundController.BackgroundType.Base);
+        double.TryParse(TWCount_Text.text, out double twCount);
+        if(FreeSpinData.freeSpinResponse.payout != twCount){
+            Debug.LogError("Free spins winnings is different from the one backend sent");
+        }
+        BalanceAddition(FreeSpinData.freeSpinResponse.payout);
         StartCoroutine(TotalWinningsAnimation(FreeSpinData.freeSpinResponse.payout));
         TopUIToggle(true);
         freeSpinCount =0;
@@ -583,7 +585,7 @@ public class SlotBehaviour : MonoBehaviour
         FSCount_Text.text = freeSpinCount.ToString();
 
         InitializeTweening();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(2.5f);
         int resultID = FreeSpinData.freeSpinResponse.symbols[index];
         if(resultID == 0){
             EmptyResult = true;
@@ -627,7 +629,7 @@ public class SlotBehaviour : MonoBehaviour
             yield return new WaitForSeconds(1f);
             Vector3 temp = FreeSpinAnim_Text.transform.localPosition; // Save the local position
             bool scalingStarted = false;
-            audioController.PlayWLAudio("FSCount");
+            audioController.PlayWLAudio("pop");
             yield return FreeSpinAnim_Text.transform.DOLocalMove(FreeSpinTextLoc.transform.localPosition, 0.2f)
             .OnUpdate(()=>{
                 if(FreeSpinAnim_Text.transform.position.x>390 && !scalingStarted){
@@ -672,7 +674,7 @@ public class SlotBehaviour : MonoBehaviour
         NormalArrowImage.DOFade(1, 0.2f);
         yield return new WaitForSeconds(2f);
         BgController.RotateWheel(); //ROTATE WHEEL
-        yield return new WaitForSeconds(2f); //WAITING FOR ROTATION ANIMATION
+        yield return new WaitForSeconds(3f); //WAITING FOR ROTATION ANIMATION
 
         NormalArrowImage.GetComponent<BoxCollider2D>().enabled = true; //TURNING ON COLLIDER TO STOP THE ROTATIO
         Stopper stopper = NormalArrowImage.GetComponent<Stopper>();
@@ -706,6 +708,7 @@ public class SlotBehaviour : MonoBehaviour
 
         Vector3 tempPosi = MovementImage.transform.localPosition;
         yield return MovementImage.transform.DOLocalMoveY(106, .5f).SetEase(Ease.InBack, 2.5f).WaitForCompletion(); //MOVING THE IMAGE TO THE MIDDLE
+        audioController.PlayWLAudio("levelUp");
         MovementImage.DOFade(0, 0);
         MovementImage.transform.localPosition=tempPosi; //RESETTING THE IMAGE
 
@@ -734,12 +737,13 @@ public class SlotBehaviour : MonoBehaviour
                 yield break;
             }
             else{
+                BgController.SwitchBG(BackgroundController.BackgroundType.Base); //ENDING SIMPLE MULTIPLAYER GAME
                 checkPopups =false;
                 StartCoroutine(PlayWinningsAnimation(payout));
                 yield return new WaitUntil(()=>checkPopups);
+                BalanceAddition(payout);
                 yield return TotalWinningsAnimation(payout, true, false);
                 yield return new WaitForSeconds(2f);
-                BgController.SwitchBG(BackgroundController.BackgroundType.Base); //ENDING SIMPLE MULTIPLAYER GAME
                 TopUIToggle(true);
                 ToggleButtonGrp(true);
             }
@@ -756,18 +760,18 @@ public class SlotBehaviour : MonoBehaviour
                 yield return StartMultiplierWheelGame(SocketManager.initUIData.paylines.symbols[FreeSpinData.freeSpinResponse.levelUp[i].level].payout, 0, true, i); //CAN BE CHANGED ACCORDING TO FREE SPIN
             }
             else{
-                checkPopups =false;
-                StartCoroutine(PlayWinningsAnimation(payout));
-                yield return new WaitUntil(()=>checkPopups);
-                yield return TotalWinningsAnimation(payout, true, false);
-                FreeSpinWinningsTextAnimation(payout);
-                yield return new WaitForSeconds(2f);
                 if(FreeSpinData.freespinType == "BLUE"){
                     BgController.SwitchBG(BackgroundController.BackgroundType.GoldenFR); //ENDING SIMPLE MULTIPLAYER GAME
                 }
                 else{
                     BgController.SwitchBG(BackgroundController.BackgroundType.PurpleFR); //ENDING SIMPLE MULTIPLAYER GAME
                 }
+                checkPopups =false;
+                StartCoroutine(PlayWinningsAnimation(payout));
+                yield return new WaitUntil(()=>checkPopups);
+                yield return TotalWinningsAnimation(payout, true, false);
+                FreeSpinWinningsTextAnimation(payout);
+                yield return new WaitForSeconds(2f);
             }
         }
     }
@@ -778,7 +782,7 @@ public class SlotBehaviour : MonoBehaviour
         NormalArrowImage.DOFade(1, 0.2f);
         yield return new WaitForSeconds(2f);
         BgController.RotateWheel(); //ROTATE WHEEL
-        yield return new WaitForSeconds(2f); //WAITING FOR ROTATION ANIMATION
+        yield return new WaitForSeconds(3f); //WAITING FOR ROTATION ANIMATION
         
         NormalArrowImage.GetComponent<BoxCollider2D>().enabled = true; //TURNING ON COLLIDER TO STOP THE ROTATIO
         Stopper stopper = NormalArrowImage.GetComponent<Stopper>();
@@ -822,7 +826,7 @@ public class SlotBehaviour : MonoBehaviour
 
             SlotWinnings_Text.DOFade(0, 0); 
             BlastImageAnimation.StartAnimation(); //STARTING AN ANIMATION
-            
+            audioController.PlayWLAudio("pop");
             yield return new WaitUntil(()=> BlastImageAnimation.textureArray[^1] == BlastImageAnimation.rendererDelegate.sprite); //WAITIN FOR ANIMATION TO FINISH
 
             BlastImageAnimation.StopAnimation(); //STOPPING ANIMATION
@@ -865,6 +869,7 @@ public class SlotBehaviour : MonoBehaviour
                 checkPopups =false;
                 StartCoroutine(PlayWinningsAnimation(multiplierWinnings));
                 yield return new WaitUntil(()=>checkPopups);
+                BalanceAddition(multiplierWinnings);
                 yield return TotalWinningsAnimation(multiplierWinnings, true, false);
             } 
             else{
@@ -914,6 +919,7 @@ public class SlotBehaviour : MonoBehaviour
                 checkPopups =false;
                 StartCoroutine(PlayWinningsAnimation(multiplierWinnings));
                 yield return new WaitUntil(()=>checkPopups);
+                BalanceAddition(multiplierWinnings);
                 yield return TotalWinningsAnimation(multiplierWinnings, true, false);
             }
         }
@@ -997,6 +1003,16 @@ public class SlotBehaviour : MonoBehaviour
         }
     }
 
+    private void BalanceAddition(double amount){
+        if(double.TryParse(Balance_text.text, out double balance)){
+            audioController.PlayWLAudio("win");
+            DOTween.To(()=> balance, (val)=> balance = val, amount + balance, 0.8f)
+            .OnUpdate(()=>{
+                Balance_text.text = balance.ToString("f2");
+            });
+        }
+    }
+
     private void FreeSpinWinningsTextAnimation(double amount){
         double.TryParse(TWCount_Text.text, out double TWCount);
         DOTween.To(() => TWCount, (val) => TWCount = val, amount + TWCount, 0.8f)
@@ -1075,11 +1091,10 @@ public class SlotBehaviour : MonoBehaviour
         slotTween.Kill();
         EmptyResult = false;
 
-        // int tweenpos = (reqpos * IconSizeFactor) - IconSizeFactor;
+        if (audioController) audioController.PlayWLAudio("spinStop");
         slotTween = Slot_Transform.DOLocalMoveY(467f, 1.2f)
         .SetEase(Ease.OutBack, 1.8f);
 
-        if (audioController) audioController.PlayWLAudio("spinStop");
         yield return slotTween.WaitForCompletion();
         slotTween.Kill();
     }
