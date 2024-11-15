@@ -11,41 +11,23 @@ using UnityEngine.UIElements;
 
 public class SocketIOManager : MonoBehaviour
 {
-    [SerializeField]
-    private SlotBehaviour slotManager;
-
-    [SerializeField]
-    private UIManager uiManager;
-
+    [Header("Controllers")]
+    [SerializeField] private SlotBehaviour slotManager;
+    [SerializeField] private UIManager uiManager;
+    [Header("Test Token")]
+    [SerializeField] private string testToken;
     internal GameData initialData = null;
     internal UIData initUIData = null;
     internal GameData resultData = null;
     internal PlayerData playerdata = null;
-    [SerializeField] internal List<string> bonusdata = null;
     internal bool isResultdone = false;
-    // internal List<List<int>> LineData = null;
-
-
     private SocketManager manager;
-
     protected string SocketURI = null;
-    // protected string TestSocketURI = "https://game-crm-rtp-backend.onrender.com/";
-    //protected string TestSocketURI = "https://6f01c04j-5000.inc1.devtunnels.ms/";
-    //protected string TestSocketURI = "https://7p68wzhv-5000.inc1.devtunnels.ms/"; //vikings
-    //protected string TestSocketURI = "https://916smq0d-5001.inc1.devtunnels.ms/";
     protected string TestSocketURI = "http://localhost:5001/";
-
-
-    [SerializeField]
-    private string testToken;
-
     protected string gameID = "SL-ONE";
     // protected string gameID = "";
-
     internal bool isLoaded = false;
-
     internal bool SetInit = false;
-
     private const int maxReconnectionAttempts = 6;
     private readonly TimeSpan reconnectionDelay = TimeSpan.FromSeconds(10);
 

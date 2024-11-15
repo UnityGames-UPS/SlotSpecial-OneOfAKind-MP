@@ -9,7 +9,6 @@ public class BackgroundController : MonoBehaviour
 {
     [Header("Background Images")]
     [SerializeField] private Image NR_BG_Image;
-
     [Header("BG Canvas Group")]
     [SerializeField] private CanvasGroup NRBG_CG;
     [SerializeField] private CanvasGroup BlueFR_CG;
@@ -26,19 +25,22 @@ public class BackgroundController : MonoBehaviour
     [SerializeField] private CanvasGroup GreenFRCircle_CG;
     [SerializeField] private CanvasGroup PurpleFRCircle_CG;
     [SerializeField] private CanvasGroup FreeSpinCircle_CG;
+    [Header("Sprites")]
     [SerializeField] private Sprite[] MultiplierSprites;
     [SerializeField] private Sprite[] LevelSprites;
     [SerializeField] private Sprite BlueJoker_Sprite;
     [SerializeField] private Sprite GreenJoker_Sprite;
     [SerializeField] private Sprite RedJoker_Sprite;
     [SerializeField] private Sprite Empty_Sprite;
+    [Header("Rotation Tween Duration")]
+    [SerializeField] private float NRTweenDuration = 30;
+    [SerializeField] private float FRTweenDuration = 5;
+
+    [SerializeField] private AudioController audioController;
     private Tween NR_RotateTween;
     private Tween BlueFR_RotateTween, GoldenFR_RotateTween, OrangeFR_RotateTween, GreenFR_RotateTween, PurpleFR_RotateTween, wheelRoutine;
     private Tween GlowRotation1;
     private Tween GlowRotation2;
-    [Header("Rotation Tween Duration")]
-    [SerializeField] private float NRTweenDuration = 30;
-    [SerializeField] private float FRTweenDuration = 5;
 
     public enum BackgroundType {
         Base,
@@ -69,6 +71,7 @@ public class BackgroundController : MonoBehaviour
     }
 
     internal void SwitchBG(BackgroundType bgType, List<int> values = null, string type = null) {
+        audioController.PlayWLAudio("BGChange");
         BackgroundType temp = currentBG;
         currentBG = bgType;
 
@@ -327,11 +330,12 @@ public class BackgroundController : MonoBehaviour
         z-=360;
         wheelRoutine = Wheel_Transform.DORotate(new Vector3(0, 0, z), 1.2f, RotateMode.FastBeyond360)
         .SetEase(Ease.Linear)
-        .SetLoops(-1, LoopType.Incremental)
-        .SetUpdate(UpdateType.Fixed);
+        .SetLoops(-1, LoopType.Incremental);
+        audioController.PlaySpinButtonAudio();
     }
 
     internal void StopWheel(){
+        audioController.StopWLAaudio();
         wheelRoutine.Kill();
         // Get the current Z rotation of the wheel
         float currentZRotation = backgrounds[currentBG].CircleCG.transform.eulerAngles.z;

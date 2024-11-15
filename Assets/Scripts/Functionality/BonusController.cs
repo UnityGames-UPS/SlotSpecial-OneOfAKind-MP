@@ -6,35 +6,45 @@ using UnityEngine.UI;
 
 public class BonusController : MonoBehaviour
 {
+    [Header("Sprites")]
     [SerializeField] private Sprite GreenJokerSymbol;  //images taken initially
     [SerializeField] private Sprite RedJokerSymbol;  //images taken initially
     [SerializeField] private Sprite[] BlueJokerAnimations;
     [SerializeField] private Sprite[] GreenJokerAnimations;
     [SerializeField] private Sprite[] RedJokerAnimations;
     [SerializeField] private Sprite Emprty_Sprite;
+    [Header("Image Animation")]
+    [SerializeField] private ImageAnimation JokerEndAnimation;  
+    [Header("Canvas Group")]
     [SerializeField] private CanvasGroup TopPayoutUI;
     [SerializeField] private CanvasGroup Joker_Start_UI;
     [SerializeField] private CanvasGroup JokerUI;
-    [SerializeField] private Image Glow_Minor_Image;
-    [SerializeField] private Image Glow_Major_Image;
-    [SerializeField] private Image Glow_Grand_Image;
-    [SerializeField] private TMP_Text JokerCountText;
-    [SerializeField] private Image DiamondArrowImage;
-    [SerializeField] private ImageAnimation JokerEndAnimation;  
-    [SerializeField] private Transform BigWinImage;
-    [SerializeField] private Transform HugeWinImage;
-    [SerializeField] private Transform MegaWinImage;
     [SerializeField] private CanvasGroup Minor_UI;
     [SerializeField] private CanvasGroup Major_UI;
     [SerializeField] private CanvasGroup Joker_End_UI;
+    [Header("Images")]
+    [SerializeField] private Image ResultImage;     //class to store the result matrix
+    [SerializeField] private Image Glow_Minor_Image;
+    [SerializeField] private Image Glow_Major_Image;
+    [SerializeField] private Image Glow_Grand_Image;
+    [SerializeField] private Image DiamondArrowImage;
+    [Header("Text")]
+    [SerializeField] private TMP_Text JokerCountText;
+    [Header("Transform")]
+    [SerializeField] private Transform BigWinImage;
+    [SerializeField] private Transform HugeWinImage;
+    [SerializeField] private Transform MegaWinImage;
+    [Header("Buttons")]
     [SerializeField] private Button JokerStart_Cont_Bttn;
     [SerializeField] private Button MinorSecured_Cont_Bttn;
     [SerializeField] private Button MajorSecured_Cont_Bttn;
     [SerializeField] private Button Winnings_Cont_Bttn;
+    [Header("Controller")]
     [SerializeField] private SocketIOManager SocketManager;
     [SerializeField] private BackgroundController BgController; 
     [SerializeField] private SlotBehaviour slotBehaviour;
-    [SerializeField] private Image ResultImage;     //class to store the result matrix
+    [SerializeField] private UIManager uIManager;
+    [SerializeField] private AudioController audioController;
     internal bool wheelStopped = false;
     
     
@@ -62,6 +72,7 @@ public class BonusController : MonoBehaviour
     }
 
     private IEnumerator StartBlueJokerWheelGame(JokerResponse jokerResponse){
+        audioController.SwitchBGSound(true);
         Joker_Start_UI.interactable=false;
         Joker_Start_UI.blocksRaycasts=false;
         Joker_Start_UI.DOFade(0, 0.5f);
@@ -403,7 +414,7 @@ public class BonusController : MonoBehaviour
                 yield return new WaitForSeconds(2f);
 
                 DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-                DiamondArrowImage.GetComponent<Stopper>().stopAT="Green";
+                DiamondArrowImage.GetComponent<Stopper>().stopAT="Red";
                 Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
                 wheelStopped =false;
@@ -495,18 +506,23 @@ public class BonusController : MonoBehaviour
             Joker_End_UI.blocksRaycasts=true;
             Joker_End_UI.DOFade(1, 0.5f);
         }
+        else{
+            audioController.SwitchBGSound(false);
+        }
         JokerUIToggle(false);
         BgController.SwitchBG(BackgroundController.BackgroundType.Base);
         slotBehaviour.ToggleButtonGrp(true);
     }
 
     private IEnumerator EndJoker(){
+        audioController.SwitchBGSound(false);
         Joker_End_UI.interactable=false;
         Joker_End_UI.blocksRaycasts=false;
         yield return Joker_End_UI.DOFade(0, 0.3f).WaitForCompletion();
+        Joker_Start_UI.transform.parent.gameObject.SetActive(false);
 
-        BigWinImage.parent.GetComponent<Image>().DOFade(0.8f,0f);
-        BigWinImage.parent.gameObject.SetActive(true);
+
+        uIManager.OpenPopup(BigWinImage.parent.gameObject);
 
         Transform ImageTransform = null;
         if(SocketManager.playerdata.currentWining==SocketManager.initialData.Joker[0]){
@@ -522,6 +538,7 @@ public class BonusController : MonoBehaviour
         Tween tween = null;
         JokerEndAnimation.doLoopAnimation=true;
         JokerEndAnimation.StartAnimation();
+        audioController.PlayWLAudio("coin");
 
         TMP_Text text = ImageTransform.GetChild(0).GetComponent<TMP_Text>();
         double WinAmt = 0;
@@ -547,10 +564,7 @@ public class BonusController : MonoBehaviour
         JokerEndAnimation.StopAnimation();
         ImageTransform.DOScale(0,0.5f);
         yield return new WaitForSeconds(1f);
-        yield return ImageTransform.parent.GetComponent<Image>().DOFade(0,0.2f).WaitForCompletion();
-        ImageTransform.parent.gameObject.SetActive(false);
-        ImageTransform.parent.GetComponent<Image>().DOFade(0.8f,0f);
-        Joker_Start_UI.transform.parent.gameObject.SetActive(false);
+        uIManager.ClosePopup(BigWinImage.parent.gameObject);
     }
 
     private void ResetDiamondArrow(){

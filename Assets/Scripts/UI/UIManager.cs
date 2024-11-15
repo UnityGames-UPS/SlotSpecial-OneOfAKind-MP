@@ -10,27 +10,14 @@ public class UIManager : MonoBehaviour
 {
     [Header("Popus UI")]
     [SerializeField] private GameObject MainPopup_Object;
-
-    [Header("Win Popup")]
-    [SerializeField] private Image Win_Image;
-    [SerializeField] private GameObject WinPopup_Object;
-    [SerializeField] private TMP_Text Win_Text;
-    [SerializeField] private RectTransform WinBgAnimation;
-    [SerializeField] private Sprite BigWin_Sprite, HugeWin_Sprite, MegaWin_Sprite, Jackpot_Sprite;
-    [SerializeField] private ImageAnimation JackpotImageAnimation;
-    private Tween ImageRotationTween;
-
     [Header("Disconnection Popup")]
     [SerializeField] private Button CloseDisconnect_Button;
     [SerializeField] private GameObject DisconnectPopup_Object;
-
     [Header("AnotherDevice Popup")]
     [SerializeField] private GameObject ADPopup_Object;
-
     [Header("LowBalance Popup")]
     [SerializeField] private Button LBExit_Button;
     [SerializeField] private GameObject LBPopup_Object;
-
     [Header("Audio Objects")]
     [SerializeField] private GameObject Settings_Object;
     [SerializeField] private Button SettingsQuit_Button;
@@ -38,18 +25,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button Music_Button;
     [SerializeField] private RectTransform SoundToggle_RT;
     [SerializeField] private RectTransform MusicToggle_RT;
-
     [Header("Paytable Objects")]
     [SerializeField] private GameObject PaytableMenuObject;
     [SerializeField] private Button Paytable_Button;
     [SerializeField] private Button PaytableClose_Button;
     [SerializeField] private Button PaytableLeft_Button;
     [SerializeField] private Button PaytableRight_Button;
-    [SerializeField] private TMP_Text FreeSpin_Text;
-    [SerializeField] private TMP_Text Jackpot_Text;
-    [SerializeField] private TMP_Text Wild_Text;
     [SerializeField] private List<GameObject> GameRulesPages = new();
-    private int PageIndex;
 
     [Header("Game Quit Objects")]
     [SerializeField] private Button Quit_Button;
@@ -77,12 +59,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TMP_Text JokerMajor_Text;
     [SerializeField] private TMP_Text JokerGrand_Text;
 
+    [Header("Controllers")]
     [SerializeField] private AudioController audioController;
-
     [SerializeField] private SlotBehaviour slotManager;
-
     [SerializeField] private SocketIOManager socketManager;
-
+    private int PageIndex;
     private bool isMusic = true;
     private bool isSound = true;
     private bool isExit = false;
@@ -409,17 +390,17 @@ public class UIManager : MonoBehaviour
         slotManager.CallCloseSocket();
     }
 
-    private void OpenPopup(GameObject Popup)
+    internal void OpenPopup(GameObject Popup)
     {
-        if (audioController) audioController.PlayButtonAudio();
+        if (audioController && Popup!=MainPopup_Object.transform.GetChild(1).gameObject) audioController.PlayButtonAudio();
 
         if (Popup) Popup.SetActive(true);
         if (MainPopup_Object) MainPopup_Object.SetActive(true);
     }
 
-    private void ClosePopup(GameObject Popup)
+    internal void ClosePopup(GameObject Popup)
     {
-        if (audioController) audioController.PlayButtonAudio();
+        if (audioController && Popup!=MainPopup_Object.transform.GetChild(1).gameObject) audioController.PlayButtonAudio();
         if (Popup) Popup.SetActive(false);
         if (!DisconnectPopup_Object.activeSelf) 
         {
