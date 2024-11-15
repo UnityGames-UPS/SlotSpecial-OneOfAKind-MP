@@ -7,9 +7,7 @@ public class AudioController : MonoBehaviour
     [SerializeField] internal AudioSource audioPlayer_button;
     [SerializeField] internal AudioSource audioSpin_button;
     [SerializeField] private AudioClip[] clips;
-    [SerializeField] private AudioClip[] Bonusclips;
     [SerializeField] private AudioSource bg_audioBonus;
-    [SerializeField] private AudioSource audioPlayer_Bonus;
 
     private void Start()
     {
@@ -61,20 +59,26 @@ public class AudioController : MonoBehaviour
         int index = 0;
         switch (type)
         {
-            case "bigwin":
+            case "coin":
                 index = 0;
                 break;
             case "win":
                 index = 1;
                 break;
-            case "lose":
+            case "spinStop":
                 index = 2;
                 break;
-            case "spinStop":
+            case "FreeSpins":
                 index = 3;
                 break;
-            case "megaWin":
-                index = 4;
+            case "FSCount":
+                index =4;
+                break;
+            case "Booster":
+                index =5;
+                break;
+            case "BGChange":
+                index =6;
                 break;
         }
         StopWLAaudio();
@@ -110,7 +114,6 @@ public class AudioController : MonoBehaviour
                 audioPlayer_button.mute = toggle;
                 audioPlayer_wl.mute = toggle;
                 audioSpin_button.mute = toggle;
-                audioPlayer_Bonus.mute = toggle;
                 break;
         }
     }
