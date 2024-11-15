@@ -71,7 +71,7 @@ public class AudioController : MonoBehaviour
             case "FreeSpins":
                 index = 3;
                 break;
-            case "FSCount":
+            case "pop":
                 index =4;
                 break;
             case "Booster":
@@ -79,6 +79,9 @@ public class AudioController : MonoBehaviour
                 break;
             case "BGChange":
                 index =6;
+                break;
+            case "levelUp":
+                index =7;
                 break;
         }
         StopWLAaudio();

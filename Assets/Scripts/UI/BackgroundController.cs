@@ -71,7 +71,7 @@ public class BackgroundController : MonoBehaviour
     }
 
     internal void SwitchBG(BackgroundType bgType, List<int> values = null, string type = null) {
-        audioController.PlayWLAudio("BGChange");
+        if(bgType!=BackgroundType.OrangeFR && bgType != BackgroundType.GreenFR && bgType != BackgroundType.Base){audioController.PlayWLAudio("BGChange");}
         BackgroundType temp = currentBG;
         currentBG = bgType;
 

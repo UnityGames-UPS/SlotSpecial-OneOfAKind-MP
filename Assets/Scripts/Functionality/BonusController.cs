@@ -90,7 +90,7 @@ public class BonusController : MonoBehaviour
                 }
                 BgController.RotateWheel(); //ROTATE WHEEL
                 
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(3f);
 
                 DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
                 DiamondArrowImage.GetComponent<Stopper>().stopAT="Blue";
@@ -113,6 +113,7 @@ public class BonusController : MonoBehaviour
                 }
 
                 ResultImageAnimation.StartAnimation();
+                audioController.PlayWLAudio("pop");
                 yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
                 ResultImageAnimation.StopAnimation();
                 JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
@@ -135,7 +136,7 @@ public class BonusController : MonoBehaviour
                 }
                 BgController.RotateWheel(); //ROTATE WHEEL
                 
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(3f);
 
                 DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
                 DiamondArrowImage.GetComponent<Stopper>().stopAT="Blue";
@@ -158,6 +159,7 @@ public class BonusController : MonoBehaviour
                 }
 
                 ResultImageAnimation.StartAnimation();
+                audioController.PlayWLAudio("pop");
                 yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
                 ResultImageAnimation.StopAnimation();
                 JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
@@ -171,7 +173,7 @@ public class BonusController : MonoBehaviour
             }
             BgController.RotateWheel(); //ROTATE WHEEL
                 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
 
             DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
             DiamondArrowImage.GetComponent<Stopper>().stopAT="Empty";
@@ -193,7 +195,7 @@ public class BonusController : MonoBehaviour
             }
             BgController.RotateWheel(); //ROTATE WHEEL
                 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
 
             DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
             DiamondArrowImage.GetComponent<Stopper>().stopAT="Empty";
@@ -229,7 +231,7 @@ public class BonusController : MonoBehaviour
                 }
                 BgController.RotateWheel(); //ROTATE WHEEL
                 
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(3f);
 
                 DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
                 DiamondArrowImage.GetComponent<Stopper>().stopAT="Green";
@@ -252,6 +254,7 @@ public class BonusController : MonoBehaviour
                 }
 
                 ResultImageAnimation.StartAnimation();
+                audioController.PlayWLAudio("pop");
                 yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
                 ResultImageAnimation.StopAnimation();
                 JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
@@ -274,7 +277,7 @@ public class BonusController : MonoBehaviour
                 }
                 BgController.RotateWheel(); //ROTATE WHEEL
                 
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(3f);
 
                 DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
                 DiamondArrowImage.GetComponent<Stopper>().stopAT="Green";
@@ -297,6 +300,7 @@ public class BonusController : MonoBehaviour
                 }
 
                 ResultImageAnimation.StartAnimation();
+                audioController.PlayWLAudio("pop");
                 yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
                 ResultImageAnimation.StopAnimation();
                 JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
@@ -310,7 +314,7 @@ public class BonusController : MonoBehaviour
             }
             BgController.RotateWheel(); //ROTATE WHEEL
                 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
 
             DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
             DiamondArrowImage.GetComponent<Stopper>().stopAT="Empty";
@@ -332,7 +336,7 @@ public class BonusController : MonoBehaviour
             }
             BgController.RotateWheel(); //ROTATE WHEEL
                 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
 
             DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
             DiamondArrowImage.GetComponent<Stopper>().stopAT="Empty";
@@ -368,7 +372,7 @@ public class BonusController : MonoBehaviour
                 }
                 BgController.RotateWheel(); //ROTATE WHEEL
                 
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(3f);
 
                 DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
                 DiamondArrowImage.GetComponent<Stopper>().stopAT="Red";
@@ -391,6 +395,7 @@ public class BonusController : MonoBehaviour
                 }
 
                 ResultImageAnimation.StartAnimation();
+                audioController.PlayWLAudio("pop");
                 yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
                 ResultImageAnimation.StopAnimation();
                 JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
@@ -411,7 +416,7 @@ public class BonusController : MonoBehaviour
                 }
                 BgController.RotateWheel(); //ROTATE WHEEL
                 
-                yield return new WaitForSeconds(2f);
+                yield return new WaitForSeconds(3f);
 
                 DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
                 DiamondArrowImage.GetComponent<Stopper>().stopAT="Red";
@@ -429,11 +434,12 @@ public class BonusController : MonoBehaviour
 
                 ResultImageAnimation.textureArray.Clear();
                 ResultImageAnimation.textureArray.TrimExcess();
-                foreach(Sprite s in GreenJokerAnimations){
+                foreach(Sprite s in RedJokerAnimations){
                     ResultImageAnimation.textureArray.Add(s);
                 }
 
                 ResultImageAnimation.StartAnimation();
+                audioController.PlayWLAudio("pop");
                 yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
                 ResultImageAnimation.StopAnimation();
                 JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
@@ -447,7 +453,7 @@ public class BonusController : MonoBehaviour
             }
             BgController.RotateWheel(); //ROTATE WHEEL
                 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
 
             DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
             DiamondArrowImage.GetComponent<Stopper>().stopAT="Empty";
@@ -469,7 +475,7 @@ public class BonusController : MonoBehaviour
             }
             BgController.RotateWheel(); //ROTATE WHEEL
                 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(3f);
 
             DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
             DiamondArrowImage.GetComponent<Stopper>().stopAT="Empty";
