@@ -35,7 +35,7 @@ public class BackgroundController : MonoBehaviour
     [Header("Rotation Tween Duration")]
     [SerializeField] private float NRTweenDuration = 30;
     [SerializeField] private float FRTweenDuration = 5;
-
+    [SerializeField] private Transform startsImageAnim_Transform;
     [SerializeField] private AudioController audioController;
     private Tween NR_RotateTween;
     private Tween BlueFR_RotateTween, GoldenFR_RotateTween, OrangeFR_RotateTween, GreenFR_RotateTween, PurpleFR_RotateTween, wheelRoutine;
@@ -64,6 +64,7 @@ public class BackgroundController : MonoBehaviour
             { BackgroundType.PurpleFR, (PurpleFR_CG, PurpleFRCircle_CG) },
             { BackgroundType.FreeSpin, (NRBG_CG, FreeSpinCircle_CG) }
         };
+        startsImageAnim_Transform.DORotate(new Vector3(0, 0 , 360), 300, RotateMode.FastBeyond360).SetEase(Ease.Linear);
     }
     private void Start() {
         currentBG = BackgroundType.Base;
