@@ -562,6 +562,7 @@ public class BonusController : MonoBehaviour
                 .SetEase(Ease.InQuad)
                 .SetLoops(-1, LoopType.Yoyo);
         });
+        slotBehaviour.BalanceAddition(SocketManager.playerdata.currentWining);
         StartCoroutine(slotBehaviour.TotalWinningsAnimation(SocketManager.playerdata.currentWining, true, false)); 
         yield return new WaitForSeconds(2f);
         tween.Kill();

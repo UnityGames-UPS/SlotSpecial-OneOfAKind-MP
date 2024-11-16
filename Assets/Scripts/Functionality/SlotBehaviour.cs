@@ -525,12 +525,14 @@ public class SlotBehaviour : MonoBehaviour
         TopPurpleUI.DOFade(0, 0.5f);
 
         BgController.SwitchBG(BackgroundController.BackgroundType.Base);
-        double.TryParse(TWCount_Text.text, out double twCount);
-        if(FreeSpinData.freeSpinResponse.payout != twCount){
-            Debug.LogError("Free spins winnings is different from the one backend sent");
+        if(FreeSpinData.freeSpinResponse.payout>0){
+            double.TryParse(TWCount_Text.text, out double twCount);
+            if(FreeSpinData.freeSpinResponse.payout != twCount){
+                Debug.LogError("Free spins winnings is different from the one backend sent");
+            }
+            BalanceAddition(FreeSpinData.freeSpinResponse.payout);
+            StartCoroutine(TotalWinningsAnimation(FreeSpinData.freeSpinResponse.payout));
         }
-        BalanceAddition(FreeSpinData.freeSpinResponse.payout);
-        StartCoroutine(TotalWinningsAnimation(FreeSpinData.freeSpinResponse.payout));
         TopUIToggle(true);
         freeSpinCount =0;
     }
@@ -738,6 +740,7 @@ public class SlotBehaviour : MonoBehaviour
             }
             else{
                 BgController.SwitchBG(BackgroundController.BackgroundType.Base); //ENDING SIMPLE MULTIPLAYER GAME
+                audioController.SwitchBGSound(false);
                 checkPopups =false;
                 StartCoroutine(PlayWinningsAnimation(payout));
                 yield return new WaitUntil(()=>checkPopups);
@@ -766,6 +769,7 @@ public class SlotBehaviour : MonoBehaviour
                 else{
                     BgController.SwitchBG(BackgroundController.BackgroundType.PurpleFR); //ENDING SIMPLE MULTIPLAYER GAME
                 }
+                audioController.SwitchBGSound(false);
                 checkPopups =false;
                 StartCoroutine(PlayWinningsAnimation(payout));
                 yield return new WaitUntil(()=>checkPopups);
@@ -860,26 +864,7 @@ public class SlotBehaviour : MonoBehaviour
         else{ //ENDING EXHAUSTIVE MULTIPLAYER GAME
             TotalWin_text.text = "0";
             BgController.FadeOutChildren();
-            // Win_Text_BG.DOFade(0.8f, .8f);
             yield return new WaitForSeconds(1f);
-            if(!FS){
-                if(multiplierWinnings!=SocketManager.playerdata.currentWining){
-                    Debug.LogError("Error while checking if winnings match multiplier Winnings: "+ multiplierWinnings + "SocketManager.playerdata.currentWining: "+ SocketManager.playerdata.currentWining);
-                }
-                checkPopups =false;
-                StartCoroutine(PlayWinningsAnimation(multiplierWinnings));
-                yield return new WaitUntil(()=>checkPopups);
-                BalanceAddition(multiplierWinnings);
-                yield return TotalWinningsAnimation(multiplierWinnings, true, false);
-            } 
-            else{
-                checkPopups =false;
-                StartCoroutine(PlayWinningsAnimation(multiplierWinnings));
-                yield return new WaitUntil(()=>checkPopups);
-                FreeSpinWinningsTextAnimation(multiplierWinnings);
-                yield return TotalWinningsAnimation(multiplierWinnings, true, false);
-                yield break;
-            }
         }
 
         yield return new WaitForSeconds(.5f);
@@ -895,13 +880,13 @@ public class SlotBehaviour : MonoBehaviour
                     yield return StartMultiplierWheelGame(basePayout, -1, true, i);
                 }
             }
-            else if(FreeSpinData.freeSpinResponse.booster[i].type == "SIMPLE"){
-                checkPopups =false;
-                StartCoroutine(PlayWinningsAnimation(multiplierWinnings));
-                yield return new WaitUntil(()=>checkPopups);
-                FreeSpinWinningsTextAnimation(multiplierWinnings);
-                yield return TotalWinningsAnimation(multiplierWinnings, true, false);
-            }
+            // else if(FreeSpinData.freeSpinResponse.booster[i].type == "SIMPLE"){
+                // checkPopups =false;
+                // StartCoroutine(PlayWinningsAnimation(multiplierWinnings));
+                // yield return new WaitUntil(()=>checkPopups);
+                // FreeSpinWinningsTextAnimation(multiplierWinnings);
+                // yield return TotalWinningsAnimation(multiplierWinnings, true, false);
+            // }
         }
         else{
             if(SocketManager.resultData.booster.type == "EXHAUSTIVE" && MultiplierIndex!=-1){
@@ -915,17 +900,25 @@ public class SlotBehaviour : MonoBehaviour
                     yield break;
                 }
             }
-            else if(SocketManager.resultData.booster.type == "SIMPLE"){
-                checkPopups =false;
-                StartCoroutine(PlayWinningsAnimation(multiplierWinnings));
-                yield return new WaitUntil(()=>checkPopups);
-                BalanceAddition(multiplierWinnings);
-                yield return TotalWinningsAnimation(multiplierWinnings, true, false);
-            }
+            // else if(SocketManager.resultData.booster.type == "SIMPLE"){
+                // checkPopups =false;
+                // StartCoroutine(PlayWinningsAnimation(multiplierWinnings));
+                // yield return new WaitUntil(()=>checkPopups);
+                // BalanceAddition(multiplierWinnings);
+                // yield return TotalWinningsAnimation(multiplierWinnings, true, false);
+            // }
         }
         
         if(!FS){
             BgController.SwitchBG(BackgroundController.BackgroundType.Base); //ENDING SIMPLE MULTIPLAYER GAME
+            if(multiplierWinnings!=SocketManager.playerdata.currentWining){
+                Debug.LogError("Error while checking if winnings match multiplier Winnings: "+ multiplierWinnings + "SocketManager.playerdata.currentWining: "+ SocketManager.playerdata.currentWining);
+            }
+            checkPopups =false;
+            StartCoroutine(PlayWinningsAnimation(multiplierWinnings));
+            yield return new WaitUntil(()=>checkPopups);
+            BalanceAddition(multiplierWinnings);
+            yield return TotalWinningsAnimation(multiplierWinnings, true, false);
             TopUIToggle(true);
             ToggleButtonGrp(true);
         }
@@ -936,7 +929,13 @@ public class SlotBehaviour : MonoBehaviour
             else{
                 BgController.SwitchBG(BackgroundController.BackgroundType.PurpleFR); //ENDING SIMPLE MULTIPLAYER GAME
             }
+            checkPopups =false;
+            StartCoroutine(PlayWinningsAnimation(multiplierWinnings));
+            yield return new WaitUntil(()=>checkPopups);
+            FreeSpinWinningsTextAnimation(multiplierWinnings);
+            yield return TotalWinningsAnimation(multiplierWinnings, true, false);
         }
+        audioController.SwitchBGSound(false);
     }
 
     private void ResetNormalArrow(){
@@ -967,6 +966,7 @@ public class SlotBehaviour : MonoBehaviour
     }
 
     private IEnumerator BoosterActivatedAnimation(){
+        audioController.SwitchBGSound(true);
         Vector3 tempPosi1=BoosterImage.transform.localPosition;
         Vector3 tempPosi2=ActivatedImage.transform.localPosition;
         BoosterImage.transform.DOLocalMoveX(0, .5f).SetEase(Ease.OutExpo);
@@ -1003,7 +1003,7 @@ public class SlotBehaviour : MonoBehaviour
         }
     }
 
-    private void BalanceAddition(double amount){
+    internal void BalanceAddition(double amount){
         if(double.TryParse(Balance_text.text, out double balance)){
             audioController.PlayWLAudio("win");
             DOTween.To(()=> balance, (val)=> balance = val, amount + balance, 0.8f)
