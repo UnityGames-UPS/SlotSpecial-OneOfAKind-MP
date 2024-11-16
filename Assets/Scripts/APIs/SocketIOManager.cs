@@ -300,7 +300,7 @@ public class SocketIOManager : MonoBehaviour
         message.data = new BetData();
         message.data.currentBet = currBet;
         message.data.spins = 1;
-        message.data.currentLines = 20;
+        message.data.currentLines = 1;
         message.id = "SPIN";
 
         // Serialize message data to JSON
