@@ -725,7 +725,7 @@ public class SlotBehaviour : MonoBehaviour
             this.ResultImage.sprite = SlotSymbols[FreeSpinData.freeSpinResponse.levelUp[i].level];
 
         yield return new WaitForSeconds(2f);
-        int payout = 0;
+        double payout = 0;
         if(!FS){
             payout = SocketManager.initUIData.paylines.symbols[SocketManager.resultData.levelup.level].payout;
             if(SocketManager.resultData.booster.type != "NONE"){
@@ -780,7 +780,7 @@ public class SlotBehaviour : MonoBehaviour
         }
     }
 
-    private IEnumerator StartMultiplierWheelGame(int basePayout, int MultiplierIndex, bool FS = false, int i = 0){
+    private IEnumerator StartMultiplierWheelGame(double basePayout, int MultiplierIndex, bool FS = false, int i = 0){
         if(MultiplierIndex == 0) multiplierWinnings = 0;
         StartCoroutine(TotalWinningsAnimation(basePayout, false));
         NormalArrowImage.DOFade(1, 0.2f);
@@ -835,7 +835,7 @@ public class SlotBehaviour : MonoBehaviour
 
             BlastImageAnimation.StopAnimation(); //STOPPING ANIMATION
             
-            int winnings = int.Parse(ResultImage.GetComponent<Image>().sprite.name) * basePayout;
+            int winnings = (int)(int.Parse(ResultImage.GetComponent<Image>().sprite.name) * basePayout);
             multiplierWinnings += winnings;
             SlotWinnings_Text.text = winnings.ToString("f2");
             SlotWinnings_Text.DOFade(1, .3f);

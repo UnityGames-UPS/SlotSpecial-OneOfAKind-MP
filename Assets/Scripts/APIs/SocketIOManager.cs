@@ -23,7 +23,7 @@ public class SocketIOManager : MonoBehaviour
     internal bool isResultdone = false;
     private SocketManager manager;
     protected string SocketURI = null;
-    protected string TestSocketURI = "https://game-crm-rtp-backend.onrender.com/";
+    protected string TestSocketURI = "http://localhost:5001/";
     protected string gameID = "SL-ONE";
     // protected string gameID = "";
     internal bool isLoaded = false;
@@ -418,7 +418,7 @@ public class AbtLogo
 [Serializable]
 public class GameData
 {
-    public List<int> Bets { get; set; }
+    public List<double> Bets { get; set; }
     public List<int> LevelUp { get; set; }
     public List<int> Booster { get; set; }
     public List<int> Joker { get; set; }
@@ -434,7 +434,7 @@ public class GameData
 public class JokerResponse
 {
     public bool isTriggered { get; set; }
-    public List<int> payout { get; set; }
+    public List<double> payout { get; set; }
     public int blueRound { get; set; }
     public int greenRound { get; set; }
     public int redRound { get; set; }
@@ -460,7 +460,7 @@ public class FreeSpinResponse
     public bool isTriggered { get; set; }
     public List<List<int>> topSymbols { get; set; }
     public List<int> symbols { get; set; }
-    public int payout { get; set; }
+    public double payout { get; set; }
     public List<Levelup> levelUp { get; set; }
     public List<Booster> booster { get; set; }
     public List<int> reTriggered { get; set; }
@@ -530,7 +530,7 @@ public class Symbol
     public object symbolsCount { get; set; }
     public object increaseValue { get; set; }
     public object description { get; set; }
-    public int payout { get; set; }
+    public double payout { get; set; }
 }
 
 [Serializable]
