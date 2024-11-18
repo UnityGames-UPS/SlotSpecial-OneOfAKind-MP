@@ -23,7 +23,8 @@ public class SocketIOManager : MonoBehaviour
     internal bool isResultdone = false;
     private SocketManager manager;
     protected string SocketURI = null;
-    protected string TestSocketURI = "http://localhost:5001/";
+    // protected string TestSocketURI = "http://localhost:5001/";
+    protected string TestSocketURI = "https://game-crm-rtp-backend.onrender.com/";
     protected string gameID = "SL-ONE";
     // protected string gameID = "";
     internal bool isLoaded = false;
