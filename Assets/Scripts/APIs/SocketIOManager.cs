@@ -422,7 +422,7 @@ public class GameData
     public List<double> Bets { get; set; }
     public List<int> LevelUp { get; set; }
     public List<int> Booster { get; set; }
-    public List<int> Joker { get; set; }
+    public List<double> Joker { get; set; }
     public int resultSymbols { get; set; }
     public JokerResponse jokerResponse { get; set; }
     public Levelup levelup { get; set; }
