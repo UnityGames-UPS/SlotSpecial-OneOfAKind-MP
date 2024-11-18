@@ -80,7 +80,7 @@ public class SlotBehaviour : MonoBehaviour
     internal double currentTotalBet = 0;
     private double multiplierWinnings;
     private int freeSpinCount;
-    private int FreeSpinWinnings;
+    private double FreeSpinWinnings;
     private bool EmptyResult = false;
     private bool checkPopups;
     //internal variables
@@ -172,7 +172,7 @@ public class SlotBehaviour : MonoBehaviour
         {
             StartSlots(IsAutoSpin);
             yield return tweenroutine;
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(1.5f);
         }
     }
 
@@ -448,7 +448,8 @@ public class SlotBehaviour : MonoBehaviour
             TopUIToggle(false);
             BgController.SwitchBG(BackgroundController.BackgroundType.OrangeFR, SocketManager.resultData.booster.multipliers, "MULTIPLIER");
             yield return BoosterActivatedAnimation();
-            StartCoroutine(StartMultiplierWheelGame(SocketManager.initUIData.paylines.symbols[resultID].payout*currentTotalBet, 0));
+            Debug.Log("SocketManager.initUIData.paylines.symbols[resultID].payout: " +SocketManager.initUIData.paylines.symbols[resultID].payout + " currentTotalBet: " + currentTotalBet );
+            StartCoroutine(StartMultiplierWheelGame(SocketManager.initUIData.paylines.symbols[resultID].payout * currentTotalBet, 0));
             IsSpinning = false;
             yield break;
         }
@@ -489,10 +490,11 @@ public class SlotBehaviour : MonoBehaviour
         audioController.PlayWLAudio("coin");
 
         TMP_Text text = ImageTransform.GetChild(0).GetComponent<TMP_Text>();
+        double truncatedValue = Math.Floor(amount * 100) / 100;
         double WinAmt = 0;
-        DOTween.To(() => WinAmt, (val) => WinAmt = val, amount, 1.2f)
+        DOTween.To(() => WinAmt, (val) => WinAmt = val, truncatedValue, 1.2f)
         .OnUpdate(() =>{
-            if(text) text.text = ((int)WinAmt).ToString();
+            if(text) text.text = WinAmt.ToString("f2");
         });
         
         ImageTransform.DOScale(1.2f, 0.5f)
@@ -567,7 +569,9 @@ public class SlotBehaviour : MonoBehaviour
         if(FreeSpinWinnings != SocketManager.playerdata.currentWining){
             // Debug.LogError("Error while checking if the winnings showed is equal to the winngs sent through backend");
         }
-        FSendUI.transform.GetChild(2).GetComponent<TMP_Text>().text = FreeSpinWinnings.ToString("f2");
+        double truncatedValue = Math.Floor(FreeSpinWinnings * 100) / 100;
+        string formattedValue = truncatedValue.ToString("F2");
+        FSendUI.transform.GetChild(2).GetComponent<TMP_Text>().text = formattedValue;
         FSendUI.interactable = true;
         FSendUI.blocksRaycasts = true;
         FSendUI.DOFade(1, 0.5f);
@@ -834,7 +838,9 @@ public class SlotBehaviour : MonoBehaviour
             
             double winnings = int.Parse(ResultImage.GetComponent<Image>().sprite.name) * basePayout;
             multiplierWinnings += winnings;
-            SlotWinnings_Text.text = winnings.ToString("f2");
+            double truncatedValue = Math.Floor(winnings * 100) / 100;
+            string formattedValue = truncatedValue.ToString("F2");
+            SlotWinnings_Text.text = formattedValue;
             SlotWinnings_Text.DOFade(1, .3f);
 
             yield return new WaitForSeconds(2f);
@@ -931,8 +937,10 @@ public class SlotBehaviour : MonoBehaviour
     }
 
     internal IEnumerator TotalWinningsAnimation(double amt, bool ShowTextAnimation = true, bool ToggleButtonsInTheEnd = true){
-        if(ShowTextAnimation) WinningsTextAnimation(amt, ToggleButtonsInTheEnd);
-        SlotWinnings_Text.text = amt.ToString("f2");
+        double truncatedValue = Math.Floor(amt * 100) / 100;
+        string formattedValue = truncatedValue.ToString("F2");
+        if(ShowTextAnimation) WinningsTextAnimation(truncatedValue, ToggleButtonsInTheEnd);
+        SlotWinnings_Text.text = formattedValue;
         if(SlotWinnings_Text.transform.localScale==Vector3.zero) SlotWinnings_Text.transform.localScale=Vector3.one;
         Win_Text_BG.DOFade(.8f, 0.5f);
         yield return SlotWinnings_Text.DOFade(1f, 0.5f);
@@ -975,8 +983,9 @@ public class SlotBehaviour : MonoBehaviour
 
     private void WinningsTextAnimation(double amount, bool ToggleButtonsInTheEnd = true)
     {
+        double truncatedValue = Math.Floor(amount * 100) / 100;
         if(double.TryParse(TotalWin_text.text, out double WinAmt)){
-            DOTween.To(() => WinAmt, (val) => WinAmt = val, amount, 0.8f)
+            DOTween.To(() => WinAmt, (val) => WinAmt = val, truncatedValue, 0.8f)
             .OnUpdate(() =>{
                 if(TotalWin_text) TotalWin_text.text = WinAmt.ToString("f2");
             })
@@ -998,7 +1007,9 @@ public class SlotBehaviour : MonoBehaviour
 
     private void FreeSpinWinningsTextAnimation(double amount){
         double.TryParse(TWCount_Text.text, out double TWCount);
-        DOTween.To(() => TWCount, (val) => TWCount = val, amount + TWCount, 0.8f)
+        double truncatedValue = Math.Floor(amount + TWCount * 100) / 100;
+        
+        DOTween.To(() => TWCount, (val) => TWCount = val, truncatedValue, 0.8f)
         .OnUpdate(() =>{
             if(TWCount_Text) TWCount_Text.text = TWCount.ToString("f2");
         });
