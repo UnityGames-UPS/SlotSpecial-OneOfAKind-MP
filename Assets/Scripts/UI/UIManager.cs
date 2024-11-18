@@ -370,14 +370,14 @@ public class UIManager : MonoBehaviour
         JokerGrand_Text.text = socketManager.initialData.Joker[2].ToString();
     }
 
-    private void PopulateSymbolsPayout(Paylines paylines)
+    internal void PopulateSymbolsPayout(Paylines paylines)
     {
         for (int i = 0; i < SymbolsText.Count; i++)
         {
             string text = null;
             if(paylines.symbols[i+1].payout!=0){
                 // Debug.Log("symbol name " + paylines.symbols[i+1].Name + " amt : " + paylines.symbols[i+1].payout.ToString());
-                text = paylines.symbols[i+1].payout.ToString();
+                text = (paylines.symbols[i+1].payout * slotManager.currentTotalBet).ToString();
             }
             SymbolsText[i].text = text;
         }
