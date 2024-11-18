@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -136,111 +136,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: paytable etc_0
-      rect:
-        serializedVersion: 2
-        x: 420
-        y: 890
-        width: 72
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: e4529baa4ce81412abf1bed0c629de19
-      internalID: -1546365156
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_1
-      rect:
-        serializedVersion: 2
-        x: 631
-        y: 919
-        width: 509
-        height: 118
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 36e8895710fc4463785ce8ba705f499c
-      internalID: -922679758
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_2
-      rect:
-        serializedVersion: 2
-        x: 422
-        y: 829
-        width: 72
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 95472ffea5c5a4a52a5648cc922dae17
-      internalID: -1395433580
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_3
-      rect:
-        serializedVersion: 2
-        x: 631
-        y: 784
-        width: 509
-        height: 118
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 171341c6cd1a2485b88c07c095053e46
-      internalID: 1893226359
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_4
-      rect:
-        serializedVersion: 2
-        x: 1261
-        y: 775
-        width: 510
-        height: 118
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4328c67cf1cd1409c8eb811010371252
-      internalID: -825856938
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: paytable etc_5
       rect:
         serializedVersion: 2
@@ -249,7 +144,7 @@ TextureImporter:
         width: 100
         height: 146
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -257,27 +152,6 @@ TextureImporter:
       bones: []
       spriteID: e6101202d46f041a6bd7f7be08623d75
       internalID: 1612045845
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_6
-      rect:
-        serializedVersion: 2
-        x: 422
-        y: 766
-        width: 73
-        height: 49
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 7e89c9c56ae1a46efaf584068fe5e61f
-      internalID: 2035374374
       vertices: []
       indices: 
       edges: []
@@ -291,7 +165,7 @@ TextureImporter:
         width: 100
         height: 147
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -299,90 +173,6 @@ TextureImporter:
       bones: []
       spriteID: 8f0d90d636314476e986e3a0fa68d5be
       internalID: -401937662
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_8
-      rect:
-        serializedVersion: 2
-        x: 631
-        y: 648
-        width: 509
-        height: 118
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 15c4dd865b46f4d3d9583d5f299c569c
-      internalID: -1418930045
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_9
-      rect:
-        serializedVersion: 2
-        x: 1261
-        y: 631
-        width: 510
-        height: 118
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ee0e88e2e1dbc4455bbc4f004b934ba3
-      internalID: -434371571
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_10
-      rect:
-        serializedVersion: 2
-        x: 631
-        y: 495
-        width: 509
-        height: 118
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 27317e27b03354221a4bada35074cf8c
-      internalID: -1582068743
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_11
-      rect:
-        serializedVersion: 2
-        x: 1261
-        y: 493
-        width: 510
-        height: 118
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2897f51105c2748d6b16ae487b4be546
-      internalID: 365392083
       vertices: []
       indices: 
       edges: []
@@ -396,7 +186,7 @@ TextureImporter:
         width: 100
         height: 145
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -404,48 +194,6 @@ TextureImporter:
       bones: []
       spriteID: 0f3157e1db7434cbda92363438430ef7
       internalID: -641987145
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_13
-      rect:
-        serializedVersion: 2
-        x: 631
-        y: 360
-        width: 509
-        height: 118
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c07eb5f312c974ed3bec063dfa8b962e
-      internalID: 1302633229
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_14
-      rect:
-        serializedVersion: 2
-        x: 1271
-        y: 355
-        width: 507
-        height: 119
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 05a9c882e56ae4344b8cf3e9b118b2cf
-      internalID: 488296257
       vertices: []
       indices: 
       edges: []
@@ -459,7 +207,7 @@ TextureImporter:
         width: 98
         height: 145
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -467,69 +215,6 @@ TextureImporter:
       bones: []
       spriteID: 1ea51089a093b4c9ca50f6acdb60b046
       internalID: 486516886
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_16
-      rect:
-        serializedVersion: 2
-        x: 631
-        y: 224
-        width: 509
-        height: 118
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 63d0d6f98b877421d890a7a92e8a2d4f
-      internalID: -384206203
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_17
-      rect:
-        serializedVersion: 2
-        x: 1271
-        y: 213
-        width: 507
-        height: 118
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 50d3a8df000e2493ebc1c62a6435b4ac
-      internalID: -1529917295
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: paytable etc_18
-      rect:
-        serializedVersion: 2
-        x: 1271
-        y: 81
-        width: 507
-        height: 118
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 42bb6a51b67b94cf695c914bcb93ba12
-      internalID: 1774917213
       vertices: []
       indices: 
       edges: []
