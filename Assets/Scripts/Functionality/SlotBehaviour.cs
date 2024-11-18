@@ -529,7 +529,7 @@ public class SlotBehaviour : MonoBehaviour
         if(FreeSpinData.freeSpinResponse.payout>0){
             double.TryParse(TWCount_Text.text, out double twCount);
             if(FreeSpinData.freeSpinResponse.payout != twCount){
-                Debug.LogError("Free spins winnings is different from the one backend sent");
+                // Debug.LogError("Free spins winnings is different from the one backend sent");
             }
             BalanceAddition(FreeSpinData.freeSpinResponse.payout);
             StartCoroutine(TotalWinningsAnimation(FreeSpinData.freeSpinResponse.payout));
@@ -565,7 +565,7 @@ public class SlotBehaviour : MonoBehaviour
 
         CanvasGroup FSendUI = FreeSpinPopupUI.GetChild(1).GetComponent<CanvasGroup>();
         if(FreeSpinWinnings != SocketManager.playerdata.currentWining){
-            Debug.LogError("Error while checking if the winnings showed is equal to the winngs sent through backend");
+            // Debug.LogError("Error while checking if the winnings showed is equal to the winngs sent through backend");
         }
         FSendUI.transform.GetChild(2).GetComponent<TMP_Text>().text = FreeSpinWinnings.ToString("f2");
         FSendUI.interactable = true;
@@ -641,7 +641,7 @@ public class SlotBehaviour : MonoBehaviour
             FreeSpinAnim_Text.transform.DOScale(1, 0);
             freeSpinCount += count;
             if(FreeSpinData.freeSpinResponse.count[index] != freeSpinCount){
-                Debug.LogError("Free spin count calc is wrong when eqauted to backend data, freeSpinCount: " + freeSpinCount.ToString() + " and backend: " +FreeSpinData.freeSpinResponse.count[index]);
+                // Debug.LogError("Free spin count calc is wrong when eqauted to backend data, freeSpinCount: " + freeSpinCount.ToString() + " and backend: " +FreeSpinData.freeSpinResponse.count[index]);
             }
             FSCount_Text.text = freeSpinCount.ToString();
             yield return new WaitForSeconds(1f);
@@ -851,7 +851,7 @@ public class SlotBehaviour : MonoBehaviour
                         WinningsTextAnimation(winnings, false);
                     }
                     else{
-                        Debug.LogError("Error while parsing string to double");
+                        // Debug.LogError("Error while parsing string to double");
                     }
                 }
             })
@@ -877,13 +877,6 @@ public class SlotBehaviour : MonoBehaviour
                     yield return StartMultiplierWheelGame(basePayout, -1, true, i);
                 }
             }
-            // else if(FreeSpinData.freeSpinResponse.booster[i].type == "SIMPLE"){
-                // checkPopups =false;
-                // StartCoroutine(PlayWinningsAnimation(multiplierWinnings));
-                // yield return new WaitUntil(()=>checkPopups);
-                // FreeSpinWinningsTextAnimation(multiplierWinnings);
-                // yield return TotalWinningsAnimation(multiplierWinnings, true, false);
-            // }
         }
         else{
             if(SocketManager.resultData.booster.type == "EXHAUSTIVE" && MultiplierIndex!=-1){
@@ -897,19 +890,12 @@ public class SlotBehaviour : MonoBehaviour
                     yield break;
                 }
             }
-            // else if(SocketManager.resultData.booster.type == "SIMPLE"){
-                // checkPopups =false;
-                // StartCoroutine(PlayWinningsAnimation(multiplierWinnings));
-                // yield return new WaitUntil(()=>checkPopups);
-                // BalanceAddition(multiplierWinnings);
-                // yield return TotalWinningsAnimation(multiplierWinnings, true, false);
-            // }
         }
         
         if(!FS){
             BgController.SwitchBG(BackgroundController.BackgroundType.Base); //ENDING SIMPLE MULTIPLAYER GAME
             if(multiplierWinnings!=SocketManager.playerdata.currentWining){
-                Debug.LogError("Error while checking if winnings match multiplier Winnings: "+ multiplierWinnings + "SocketManager.playerdata.currentWining: "+ SocketManager.playerdata.currentWining);
+                // Debug.LogError("Error while checking if winnings match multiplier Winnings: "+ multiplierWinnings + "SocketManager.playerdata.currentWining: "+ SocketManager.playerdata.currentWining);
             }
             checkPopups =false;
             StartCoroutine(PlayWinningsAnimation(multiplierWinnings));
