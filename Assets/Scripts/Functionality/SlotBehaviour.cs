@@ -225,6 +225,7 @@ public class SlotBehaviour : MonoBehaviour
 
         currentTotalBet = SocketManager.initialData.Bets[BetCounter];
         uiManager.PopulateSymbolsPayout(SocketManager.initUIData.paylines);
+        uiManager.SetLargePayoutUI();
     }
 
     #region InitialFunctions
@@ -467,7 +468,7 @@ public class SlotBehaviour : MonoBehaviour
         IsSpinning = false;
     }
     #endregion
-    private IEnumerator PlayWinningsAnimation(double amount){
+    internal IEnumerator PlayWinningsAnimation(double amount){
         Transform ImageTransform = null;
         if(amount >= currentTotalBet * 5 && amount < currentTotalBet * 10){
             ImageTransform = WinPopup_GO.transform.GetChild(1);
@@ -566,10 +567,7 @@ public class SlotBehaviour : MonoBehaviour
         }
 
         CanvasGroup FSendUI = FreeSpinPopupUI.GetChild(1).GetComponent<CanvasGroup>();
-        if(FreeSpinWinnings != SocketManager.playerdata.currentWining){
-            // Debug.LogError("Error while checking if the winnings showed is equal to the winngs sent through backend");
-        }
-        double truncatedValue = Math.Floor(FreeSpinWinnings * 100) / 100;
+        double truncatedValue = Math.Floor(SocketManager.playerdata.currentWining * 100) / 100;
         string formattedValue = truncatedValue.ToString("F2");
         FSendUI.transform.GetChild(2).GetComponent<TMP_Text>().text = formattedValue;
         FSendUI.interactable = true;
@@ -633,7 +631,7 @@ public class SlotBehaviour : MonoBehaviour
             Vector3 temp = FreeSpinAnim_Text.transform.localPosition; // Save the local position
             bool scalingStarted = false;
             audioController.PlayWLAudio("pop");
-            yield return FreeSpinAnim_Text.transform.DOLocalMove(FreeSpinTextLoc.transform.localPosition, 0.2f)
+            yield return FreeSpinAnim_Text.transform.DOLocalMove(FreeSpinTextLoc.transform.localPosition, 0.5f)
             .OnUpdate(()=>{
                 if(FreeSpinAnim_Text.transform.position.x>390 && !scalingStarted){
                     scalingStarted = true;
@@ -853,7 +851,7 @@ public class SlotBehaviour : MonoBehaviour
                     scalingStarted = true;
                     CloseSlotWinningsUI(true);
                     if(double.TryParse(TotalWin_text.text, out double currUIwin)){
-                        winnings+=(int)currUIwin;
+                        winnings+=currUIwin;
                         WinningsTextAnimation(winnings, false);
                     }
                     else{
@@ -983,9 +981,8 @@ public class SlotBehaviour : MonoBehaviour
 
     private void WinningsTextAnimation(double amount, bool ToggleButtonsInTheEnd = true)
     {
-        double truncatedValue = Math.Floor(amount * 100) / 100;
         if(double.TryParse(TotalWin_text.text, out double WinAmt)){
-            DOTween.To(() => WinAmt, (val) => WinAmt = val, truncatedValue, 0.8f)
+            DOTween.To(() => WinAmt, (val) => WinAmt = val, amount, 0.8f)
             .OnUpdate(() =>{
                 if(TotalWin_text) TotalWin_text.text = WinAmt.ToString("f2");
             })
@@ -1007,13 +1004,13 @@ public class SlotBehaviour : MonoBehaviour
 
     private void FreeSpinWinningsTextAnimation(double amount){
         double.TryParse(TWCount_Text.text, out double TWCount);
-        double truncatedValue = Math.Floor(amount + TWCount * 100) / 100;
+        double truncatedValue = Math.Floor((amount + TWCount) * 100) / 100;
         
         DOTween.To(() => TWCount, (val) => TWCount = val, truncatedValue, 0.8f)
         .OnUpdate(() =>{
             if(TWCount_Text) TWCount_Text.text = TWCount.ToString("f2");
         });
-        FreeSpinWinnings = (int)(amount + TWCount);
+        FreeSpinWinnings = amount + TWCount;
     }
 
     private void  BalanceDeduction()

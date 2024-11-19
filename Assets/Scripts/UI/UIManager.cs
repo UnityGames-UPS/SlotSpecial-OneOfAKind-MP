@@ -362,12 +362,16 @@ public class UIManager : MonoBehaviour
     {
         StartCoroutine(DownloadImage(AbtImgUrl));
         PopulateSymbolsPayout(symbolsText);
-        Minor_Text.text = socketManager.initialData.Joker[0].ToString();
-        Major_Text.text = socketManager.initialData.Joker[1].ToString();
-        Grand_Text.text = socketManager.initialData.Joker[2].ToString();
-        JokerMinor_Text.text = socketManager.initialData.Joker[0].ToString();
-        JokerMajor_Text.text = socketManager.initialData.Joker[1].ToString();
-        JokerGrand_Text.text = socketManager.initialData.Joker[2].ToString();
+        SetLargePayoutUI();
+    }
+
+    internal void SetLargePayoutUI(){
+        Minor_Text.text = (socketManager.initialData.Joker[0] * slotManager.currentTotalBet).ToString();
+        Major_Text.text = (socketManager.initialData.Joker[1] * slotManager.currentTotalBet).ToString();
+        Grand_Text.text = (socketManager.initialData.Joker[2] * slotManager.currentTotalBet).ToString();
+        JokerMinor_Text.text = (socketManager.initialData.Joker[0] * slotManager.currentTotalBet).ToString();
+        JokerMajor_Text.text = (socketManager.initialData.Joker[1] * slotManager.currentTotalBet).ToString();
+        JokerGrand_Text.text = (socketManager.initialData.Joker[2] * slotManager.currentTotalBet).ToString();
     }
 
     internal void PopulateSymbolsPayout(Paylines paylines)
