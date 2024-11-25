@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
 public class BackgroundController : MonoBehaviour
 {
@@ -327,11 +328,14 @@ public class BackgroundController : MonoBehaviour
 
     internal void RotateWheel(){
         Transform Wheel_Transform = backgrounds[currentBG].CircleCG.transform;
-        float z = Wheel_Transform.position.z;
+        float z = Wheel_Transform.eulerAngles.z;
         z-=360;
-        wheelRoutine = Wheel_Transform.DORotate(new Vector3(0, 0, z), 1.2f, RotateMode.FastBeyond360)
-        .SetEase(Ease.Linear)
-        .SetLoops(-1, LoopType.Incremental);
+        Wheel_Transform.DORotate(new Vector3(0, 0, z), 1f, RotateMode.FastBeyond360).OnComplete(()=> {
+            wheelRoutine = Wheel_Transform.DORotate(new Vector3(0, 0, Wheel_Transform.eulerAngles.z-360), .5f, RotateMode.FastBeyond360)
+            .SetEase(Ease.Linear)
+            .SetLoops(-1, LoopType.Incremental);
+        })
+        .SetEase(Ease.InBack, 2.5f);
         audioController.PlaySpinButtonAudio();
     }
 
@@ -346,7 +350,7 @@ public class BackgroundController : MonoBehaviour
 
         // Rotate the wheel to the nearest 30-degree value over a short duration
         backgrounds[currentBG].CircleCG.transform
-        .DORotate(new Vector3(0, 0, targetZRotation), .8f)
+        .DORotate(new Vector3(0, 0, targetZRotation), .4f)
         .SetEase(Ease.OutBack, 2f); // Adjust ease for a smooth stop animation
     }
 

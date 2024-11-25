@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class BonusController : MonoBehaviour
 {
@@ -494,11 +495,12 @@ public class BonusController : MonoBehaviour
 
     private void OpenJokerGameEndingUI(){
         if(SocketManager.resultData.jokerResponse.payout[0]!=0){
-            int total = 0;
-            foreach(int i in SocketManager.resultData.jokerResponse.payout){
+            double total = 0;
+            foreach(double i in SocketManager.resultData.jokerResponse.payout){
                 total += i;
             }
-            Joker_End_UI.transform.GetChild(2).GetComponent<TMP_Text>().text = total.ToString();
+            double truncatedValue = Math.Floor(total * 100) / 100;
+            Joker_End_UI.transform.GetChild(2).GetComponent<TMP_Text>().text = truncatedValue.ToString("F2");
             if(SocketManager.playerdata.currentWining==SocketManager.initialData.Joker[0]){
                 Joker_End_UI.transform.GetChild(1).GetComponent<TMP_Text>().text = "YOU HAVE WON THE MINOR PRIZE";
             }
@@ -526,52 +528,7 @@ public class BonusController : MonoBehaviour
         Joker_End_UI.blocksRaycasts=false;
         yield return Joker_End_UI.DOFade(0, 0.3f).WaitForCompletion();
         Joker_Start_UI.transform.parent.gameObject.SetActive(false);
-
-
-        uIManager.OpenPopup(BigWinImage.parent.gameObject);
-
-        Transform ImageTransform = null;
-        if(SocketManager.playerdata.currentWining==SocketManager.initialData.Joker[0]){
-            ImageTransform = BigWinImage;
-        }
-        else if(SocketManager.playerdata.currentWining>SocketManager.initialData.Joker[1] && SocketManager.playerdata.currentWining<SocketManager.initialData.Joker[2]){
-            ImageTransform = HugeWinImage;
-        }
-        else if(SocketManager.playerdata.currentWining>SocketManager.initialData.Joker[2]){
-            ImageTransform = MegaWinImage;
-        }
-
-        Tween tween = null;
-        JokerEndAnimation.doLoopAnimation=true;
-        JokerEndAnimation.StartAnimation();
-        audioController.PlayWLAudio("coin");
-
-        TMP_Text text = ImageTransform.GetChild(0).GetComponent<TMP_Text>();
-        double WinAmt = 0;
-        DOTween.To(() => WinAmt, (val) => WinAmt = val, SocketManager.playerdata.currentWining, 1.2f)
-        .OnUpdate(() =>{
-            if(text) text.text = ((int)WinAmt).ToString();
-        });
-        
-
-        ImageTransform.DOScale(1.2f, 0.5f)
-        .SetEase(Ease.OutQuad)
-        .OnComplete(() =>
-        {
-            tween = ImageTransform.DOScale(0.8f, 0.5f)
-                .SetEase(Ease.InQuad)
-                .SetLoops(-1, LoopType.Yoyo);
-        });
-        slotBehaviour.BalanceAddition(SocketManager.playerdata.currentWining);
-        StartCoroutine(slotBehaviour.TotalWinningsAnimation(SocketManager.playerdata.currentWining, true, false)); 
-        yield return new WaitForSeconds(2f);
-        tween.Kill();
-        ImageTransform.DOScale(1, 0.5f);
-        yield return new WaitForSeconds(2f);
-        JokerEndAnimation.StopAnimation();
-        ImageTransform.DOScale(0,0.5f);
-        yield return new WaitForSeconds(1f);
-        uIManager.ClosePopup(BigWinImage.parent.gameObject);
+        StartCoroutine(slotBehaviour.PlayWinningsAnimation(SocketManager.playerdata.currentWining));
     }
 
     private void ResetDiamondArrow(){
