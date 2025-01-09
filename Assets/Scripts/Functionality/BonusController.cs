@@ -51,28 +51,28 @@ public class BonusController : MonoBehaviour
     
     private void Start()
     {
-        if(JokerStart_Cont_Bttn) JokerStart_Cont_Bttn.onClick.RemoveAllListeners();
-        if(JokerStart_Cont_Bttn) JokerStart_Cont_Bttn.onClick.AddListener(()=>{
-            StartCoroutine(StartBlueJokerWheelGame(SocketManager.resultData.jokerResponse));
-        });
+        // if(JokerStart_Cont_Bttn) JokerStart_Cont_Bttn.onClick.RemoveAllListeners();
+        // if(JokerStart_Cont_Bttn) JokerStart_Cont_Bttn.onClick.AddListener(()=>{
+        //     StartCoroutine(StartBlueJokerWheelGame(SocketManager.resultData.jokerResponse));
+        // });
 
-        if(MinorSecured_Cont_Bttn) MinorSecured_Cont_Bttn.onClick.RemoveAllListeners();
-        if(MinorSecured_Cont_Bttn) MinorSecured_Cont_Bttn.onClick.AddListener(()=> {
-            StartCoroutine(StartGreenJokerWheelGame(SocketManager.resultData.jokerResponse));
-        });
+        // if(MinorSecured_Cont_Bttn) MinorSecured_Cont_Bttn.onClick.RemoveAllListeners();
+        // if(MinorSecured_Cont_Bttn) MinorSecured_Cont_Bttn.onClick.AddListener(()=> {
+        //     StartCoroutine(StartGreenJokerWheelGame(SocketManager.resultData.jokerResponse));
+        // });
 
-        if(MajorSecured_Cont_Bttn) MajorSecured_Cont_Bttn.onClick.RemoveAllListeners();
-        if(MajorSecured_Cont_Bttn) MajorSecured_Cont_Bttn.onClick.AddListener(()=>{
-            StartCoroutine(StartRedJokerWheelGame(SocketManager.resultData.jokerResponse));
-        });
+        // if(MajorSecured_Cont_Bttn) MajorSecured_Cont_Bttn.onClick.RemoveAllListeners();
+        // if(MajorSecured_Cont_Bttn) MajorSecured_Cont_Bttn.onClick.AddListener(()=>{
+        //     StartCoroutine(StartRedJokerWheelGame(SocketManager.resultData.jokerResponse));
+        // });
 
-        if(Winnings_Cont_Bttn) Winnings_Cont_Bttn.onClick.RemoveAllListeners();
-        if(Winnings_Cont_Bttn) Winnings_Cont_Bttn.onClick.AddListener(()=>{
-            StartCoroutine(EndJoker());
-        });
+        // if(Winnings_Cont_Bttn) Winnings_Cont_Bttn.onClick.RemoveAllListeners();
+        // if(Winnings_Cont_Bttn) Winnings_Cont_Bttn.onClick.AddListener(()=>{
+        //     StartCoroutine(EndJoker());
+        // });
     }
 
-    private IEnumerator StartBlueJokerWheelGame(JokerResponse jokerResponse){
+    internal IEnumerator StartBlueJokerWheelGame(JokerResponse jokerResponse){
         audioController.SwitchBGSound(true);
         Joker_Start_UI.interactable=false;
         Joker_Start_UI.blocksRaycasts=false;
@@ -128,6 +128,7 @@ public class BonusController : MonoBehaviour
             Minor_UI.interactable = true;
             Minor_UI.blocksRaycasts = true;
             Minor_UI.DOFade(1, 0.5f);
+            DOVirtual.DelayedCall(2f, ()=> StartGreenJokerWheelGame(SocketManager.resultData.jokerResponse));
         }
         else if(jokerResponse.blueRound>0&&jokerResponse.blueRound<3){
             for(int i=0;i<jokerResponse.blueRound;i++){
@@ -269,6 +270,7 @@ public class BonusController : MonoBehaviour
             Major_UI.interactable=true;
             Major_UI.blocksRaycasts=true;
             Major_UI.DOFade(1, 0.5f);
+            DOVirtual.DelayedCall(2f, ()=> StartCoroutine(StartRedJokerWheelGame(SocketManager.resultData.jokerResponse)));
         }
         else if(jokerResponse.greenRound>0&&jokerResponse.greenRound<3){
             for(int i=0;i<jokerResponse.greenRound;i++){
@@ -513,13 +515,19 @@ public class BonusController : MonoBehaviour
             Joker_End_UI.interactable=true;
             Joker_End_UI.blocksRaycasts=true;
             Joker_End_UI.DOFade(1, 0.5f);
+            DOVirtual.DelayedCall(2f, ()=> StartCoroutine(EndJoker()));
         }
         else{
             audioController.SwitchBGSound(false);
+            if(slotBehaviour.WasAutoSpinOn){
+                DOVirtual.DelayedCall(1.2f,slotBehaviour.wasAutoOn);
+            }
+            else{
+                slotBehaviour.ToggleButtonGrp(true);
+            }
         }
         JokerUIToggle(false);
         BgController.SwitchBG(BackgroundController.BackgroundType.Base);
-        slotBehaviour.ToggleButtonGrp(true);
     }
 
     private IEnumerator EndJoker(){
@@ -528,7 +536,14 @@ public class BonusController : MonoBehaviour
         Joker_End_UI.blocksRaycasts=false;
         yield return Joker_End_UI.DOFade(0, 0.3f).WaitForCompletion();
         Joker_Start_UI.transform.parent.gameObject.SetActive(false);
-        StartCoroutine(slotBehaviour.PlayWinningsAnimation(SocketManager.playerdata.currentWining));
+        slotBehaviour.WinAnimCoroutine=StartCoroutine(slotBehaviour.PlayWinningsAnimation(SocketManager.playerdata.currentWining));
+        yield return slotBehaviour.WinAnimCoroutine;
+        if(slotBehaviour.WasAutoSpinOn){
+            DOVirtual.DelayedCall(1.2f,slotBehaviour.wasAutoOn);
+        }
+        else{
+            slotBehaviour.ToggleButtonGrp(true);
+        }
     }
 
     private void ResetDiamondArrow(){
