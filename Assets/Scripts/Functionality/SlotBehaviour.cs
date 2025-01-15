@@ -290,8 +290,8 @@ public class SlotBehaviour : MonoBehaviour
         if (TotalBet_text) TotalBet_text.text = SocketManager.initialData.Bets[BetCounter].ToString();
 
         currentTotalBet = SocketManager.initialData.Bets[BetCounter];
-        uiManager.PopulateSymbolsPayout(SocketManager.initUIData.paylines);
-        uiManager.SetLargePayoutUI();
+        // uiManager.PopulateSymbolsPayout(SocketManager.initUIData.paylines);
+        // uiManager.SetLargePayoutUI();
     }
 
     #region InitialFunctions
