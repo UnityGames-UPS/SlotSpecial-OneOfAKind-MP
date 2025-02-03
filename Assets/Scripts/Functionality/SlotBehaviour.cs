@@ -264,7 +264,7 @@ public class SlotBehaviour : MonoBehaviour
         if (currentBalance < currentTotalBet)
         {
             uiManager.LowBalPopup();
-            SlotStart_Button.interactable = true;
+            ToggleButtonGrp(true);
         }
     }
 
