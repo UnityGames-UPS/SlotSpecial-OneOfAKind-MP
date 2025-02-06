@@ -15,7 +15,7 @@ public class BonusController : MonoBehaviour
     [SerializeField] private Sprite[] RedJokerAnimations;
     [SerializeField] private Sprite Emprty_Sprite;
     [Header("Image Animation")]
-    [SerializeField] private ImageAnimation JokerEndAnimation;  
+    [SerializeField] private ImageAnimation JokerEndAnimation;
     [Header("Canvas Group")]
     [SerializeField] private CanvasGroup TopPayoutUI;
     [SerializeField] private CanvasGroup Joker_Start_UI;
@@ -42,13 +42,13 @@ public class BonusController : MonoBehaviour
     [SerializeField] private Button Winnings_Cont_Bttn;
     [Header("Controller")]
     [SerializeField] private SocketIOManager SocketManager;
-    [SerializeField] private BackgroundController BgController; 
+    [SerializeField] private BackgroundController BgController;
     [SerializeField] private SlotBehaviour slotBehaviour;
     [SerializeField] private UIManager uIManager;
     [SerializeField] private AudioController audioController;
     internal bool wheelStopped = false;
-    
-    
+
+
     private void Start()
     {
         // if(JokerStart_Cont_Bttn) JokerStart_Cont_Bttn.onClick.RemoveAllListeners();
@@ -72,141 +72,153 @@ public class BonusController : MonoBehaviour
         // });
     }
 
-    internal IEnumerator StartBlueJokerWheelGame(JokerResponse jokerResponse){
+    internal IEnumerator StartBlueJokerWheelGame(JokerResponse jokerResponse)
+    {
         audioController.SwitchBGSound(true);
-        Joker_Start_UI.interactable=false;
-        Joker_Start_UI.blocksRaycasts=false;
+        Joker_Start_UI.interactable = false;
+        Joker_Start_UI.blocksRaycasts = false;
         Joker_Start_UI.DOFade(0, 0.5f);
         JokerUIToggle(true);
         BgController.SwitchBG(BackgroundController.BackgroundType.BlueFR, null, "JOKER1");
         DiamondArrowImage.DOFade(1, 0.2f);
-        
+
         yield return new WaitForSeconds(2f);
-        
-        if(jokerResponse.blueRound == 3){
-            for(int i=0;i<jokerResponse.blueRound;i++){
-                if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+
+        if (jokerResponse.blueRound == 3)
+        {
+            for (int i = 0; i < jokerResponse.blueRound; i++)
+            {
+                if (DiamondArrowImage.color != new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f))
+                {
                     yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                     yield return new WaitForSeconds(1f);
                 }
                 BgController.RotateWheel(); //ROTATE WHEEL
-                
+
                 yield return new WaitForSeconds(3f);
 
-                DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-                DiamondArrowImage.GetComponent<Stopper>().stopAT="Blue";
+                DiamondArrowImage.GetComponent<BoxCollider2D>().enabled = true;
+                DiamondArrowImage.GetComponent<Stopper>().stopAT = "Blue";
                 Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
-                wheelStopped =false;
-                DiamondArrowImage.GetComponent<Stopper>().stop=true;
+                wheelStopped = false;
+                DiamondArrowImage.GetComponent<Stopper>().stop = true;
 
-                yield return new WaitUntil(()=> wheelStopped);
+                yield return new WaitUntil(() => wheelStopped);
                 yield return new WaitForSeconds(2f);
 
                 ImageAnimation ResultImageAnimation = DiamondArrowImage.GetComponent<Stopper>().ImageTransform.GetComponent<ImageAnimation>();
                 ResetDiamondArrow();
-                ResultImageAnimation.AnimationSpeed=6f;
+                ResultImageAnimation.AnimationSpeed = 6f;
 
                 ResultImageAnimation.textureArray.Clear();
                 ResultImageAnimation.textureArray.TrimExcess();
-                foreach(Sprite s in BlueJokerAnimations){
+                foreach (Sprite s in BlueJokerAnimations)
+                {
                     ResultImageAnimation.textureArray.Add(s);
                 }
 
                 ResultImageAnimation.StartAnimation();
                 audioController.PlayWLAudio("pop");
-                yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
+                yield return new WaitUntil(() => ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
                 ResultImageAnimation.StopAnimation();
-                JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
-                ResultImageAnimation.rendererDelegate.sprite=Emprty_Sprite;
-                ResultImageAnimation.name ="Empty";
+                JokerCountText.text = i + 1 + " OF 3 JOKERS COLLECTED";
+                ResultImageAnimation.rendererDelegate.sprite = Emprty_Sprite;
+                ResultImageAnimation.name = "Empty";
                 yield return new WaitForSeconds(1f);
             }
-            
+
             yield return Glow_Minor_Image.DOFade(1, 0.3f).WaitForCompletion();
             yield return new WaitForSeconds(1f);
             Minor_UI.interactable = true;
             Minor_UI.blocksRaycasts = true;
             Minor_UI.DOFade(1, 0.5f);
-            DOVirtual.DelayedCall(2f, ()=> StartGreenJokerWheelGame(SocketManager.resultData.jokerResponse));
+            DOVirtual.DelayedCall(2f, () => StartGreenJokerWheelGame(SocketManager.resultData.jokerResponse));
         }
-        else if(jokerResponse.blueRound>0&&jokerResponse.blueRound<3){
-            for(int i=0;i<jokerResponse.blueRound;i++){
-                if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+        else if (jokerResponse.blueRound > 0 && jokerResponse.blueRound < 3)
+        {
+            for (int i = 0; i < jokerResponse.blueRound; i++)
+            {
+                if (DiamondArrowImage.color != new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f))
+                {
                     yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                     yield return new WaitForSeconds(1f);
                 }
                 BgController.RotateWheel(); //ROTATE WHEEL
-                
+
                 yield return new WaitForSeconds(3f);
 
-                DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-                DiamondArrowImage.GetComponent<Stopper>().stopAT="Blue";
+                DiamondArrowImage.GetComponent<BoxCollider2D>().enabled = true;
+                DiamondArrowImage.GetComponent<Stopper>().stopAT = "Blue";
                 Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
-                wheelStopped =false;
-                DiamondArrowImage.GetComponent<Stopper>().stop=true;
+                wheelStopped = false;
+                DiamondArrowImage.GetComponent<Stopper>().stop = true;
 
-                yield return new WaitUntil(()=> wheelStopped);
+                yield return new WaitUntil(() => wheelStopped);
                 yield return new WaitForSeconds(2f);
 
                 ImageAnimation ResultImageAnimation = DiamondArrowImage.GetComponent<Stopper>().ImageTransform.GetComponent<ImageAnimation>();
                 ResetDiamondArrow();
-                ResultImageAnimation.AnimationSpeed=6f;
+                ResultImageAnimation.AnimationSpeed = 6f;
 
                 ResultImageAnimation.textureArray.Clear();
                 ResultImageAnimation.textureArray.TrimExcess();
-                foreach(Sprite s in BlueJokerAnimations){
+                foreach (Sprite s in BlueJokerAnimations)
+                {
                     ResultImageAnimation.textureArray.Add(s);
                 }
 
                 ResultImageAnimation.StartAnimation();
                 audioController.PlayWLAudio("pop");
-                yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
+                yield return new WaitUntil(() => ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
                 ResultImageAnimation.StopAnimation();
-                JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
-                ResultImageAnimation.rendererDelegate.sprite=Emprty_Sprite;
-                ResultImageAnimation.name ="Empty";
+                JokerCountText.text = i + 1 + " OF 3 JOKERS COLLECTED";
+                ResultImageAnimation.rendererDelegate.sprite = Emprty_Sprite;
+                ResultImageAnimation.name = "Empty";
                 yield return new WaitForSeconds(1f);
             }
-            if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+            if (DiamondArrowImage.color != new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f))
+            {
                 yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                 yield return new WaitForSeconds(1f);
             }
             BgController.RotateWheel(); //ROTATE WHEEL
-                
+
             yield return new WaitForSeconds(3f);
 
-            DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-            DiamondArrowImage.GetComponent<Stopper>().stopAT="Empty";
+            DiamondArrowImage.GetComponent<BoxCollider2D>().enabled = true;
+            DiamondArrowImage.GetComponent<Stopper>().stopAT = "Empty";
             Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
-            wheelStopped =false;
-            DiamondArrowImage.GetComponent<Stopper>().stop=true;
+            wheelStopped = false;
+            DiamondArrowImage.GetComponent<Stopper>().stop = true;
 
-            yield return new WaitUntil(()=> wheelStopped);
+            yield return new WaitUntil(() => wheelStopped);
             yield return new WaitForSeconds(2f);
             ResetDiamondArrow();
 
             OpenJokerGameEndingUI();
         }
-        else if(jokerResponse.blueRound == 0){
-            if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+        else if (jokerResponse.blueRound == 0)
+        {
+            if (DiamondArrowImage.color != new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f))
+            {
                 yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                 yield return new WaitForSeconds(1f);
             }
             BgController.RotateWheel(); //ROTATE WHEEL
-                
+
             yield return new WaitForSeconds(3f);
 
-            DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-            DiamondArrowImage.GetComponent<Stopper>().stopAT="Empty";
+            DiamondArrowImage.GetComponent<BoxCollider2D>().enabled = true;
+            DiamondArrowImage.GetComponent<Stopper>().stopAT = "Empty";
             Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
-            wheelStopped =false;
-            DiamondArrowImage.GetComponent<Stopper>().stop=true;
+            wheelStopped = false;
+            DiamondArrowImage.GetComponent<Stopper>().stop = true;
 
-            yield return new WaitUntil(()=> wheelStopped);
+            yield return new WaitUntil(() => wheelStopped);
             yield return new WaitForSeconds(2f);
             ResetDiamondArrow();
 
@@ -214,141 +226,153 @@ public class BonusController : MonoBehaviour
         }
     }
 
-    private IEnumerator StartGreenJokerWheelGame(JokerResponse jokerResponse){
+    private IEnumerator StartGreenJokerWheelGame(JokerResponse jokerResponse)
+    {
         ResultImage.sprite = GreenJokerSymbol;
-        Minor_UI.interactable=false;
-        Minor_UI.blocksRaycasts=false;
+        Minor_UI.interactable = false;
+        Minor_UI.blocksRaycasts = false;
         Minor_UI.DOFade(0, 0.5f);
         JokerCountText.text = "0 OF 3 JOKERS COLLECTED";
         BgController.SwitchBG(BackgroundController.BackgroundType.GreenFR, null, "JOKER2");
         DiamondArrowImage.DOFade(1, 0.2f);
 
         yield return new WaitForSeconds(2f);
-        
-        if(jokerResponse.greenRound == 3){
-            for(int i=0;i<jokerResponse.greenRound;i++){
-                if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+
+        if (jokerResponse.greenRound == 3)
+        {
+            for (int i = 0; i < jokerResponse.greenRound; i++)
+            {
+                if (DiamondArrowImage.color != new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f))
+                {
                     yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                     yield return new WaitForSeconds(1f);
                 }
                 BgController.RotateWheel(); //ROTATE WHEEL
-                
+
                 yield return new WaitForSeconds(3f);
 
-                DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-                DiamondArrowImage.GetComponent<Stopper>().stopAT="Green";
+                DiamondArrowImage.GetComponent<BoxCollider2D>().enabled = true;
+                DiamondArrowImage.GetComponent<Stopper>().stopAT = "Green";
                 Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
-                wheelStopped =false;
-                DiamondArrowImage.GetComponent<Stopper>().stop=true;
+                wheelStopped = false;
+                DiamondArrowImage.GetComponent<Stopper>().stop = true;
 
-                yield return new WaitUntil(()=> wheelStopped);
+                yield return new WaitUntil(() => wheelStopped);
                 yield return new WaitForSeconds(2f);
 
                 ImageAnimation ResultImageAnimation = DiamondArrowImage.GetComponent<Stopper>().ImageTransform.GetComponent<ImageAnimation>();
                 ResetDiamondArrow();
-                ResultImageAnimation.AnimationSpeed=6f;
+                ResultImageAnimation.AnimationSpeed = 6f;
 
                 ResultImageAnimation.textureArray.Clear();
                 ResultImageAnimation.textureArray.TrimExcess();
-                foreach(Sprite s in GreenJokerAnimations){
+                foreach (Sprite s in GreenJokerAnimations)
+                {
                     ResultImageAnimation.textureArray.Add(s);
                 }
 
                 ResultImageAnimation.StartAnimation();
                 audioController.PlayWLAudio("pop");
-                yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
+                yield return new WaitUntil(() => ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
                 ResultImageAnimation.StopAnimation();
-                JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
-                ResultImageAnimation.rendererDelegate.sprite=Emprty_Sprite;
-                ResultImageAnimation.name ="Empty";
+                JokerCountText.text = i + 1 + " OF 3 JOKERS COLLECTED";
+                ResultImageAnimation.rendererDelegate.sprite = Emprty_Sprite;
+                ResultImageAnimation.name = "Empty";
                 yield return new WaitForSeconds(1f);
             }
-            
+
             yield return Glow_Major_Image.DOFade(1, 0.3f).WaitForCompletion();
             yield return new WaitForSeconds(1f);
-            Major_UI.interactable=true;
-            Major_UI.blocksRaycasts=true;
+            Major_UI.interactable = true;
+            Major_UI.blocksRaycasts = true;
             Major_UI.DOFade(1, 0.5f);
-            DOVirtual.DelayedCall(2f, ()=> StartCoroutine(StartRedJokerWheelGame(SocketManager.resultData.jokerResponse)));
+            DOVirtual.DelayedCall(2f, () => StartCoroutine(StartRedJokerWheelGame(SocketManager.resultData.jokerResponse)));
         }
-        else if(jokerResponse.greenRound>0&&jokerResponse.greenRound<3){
-            for(int i=0;i<jokerResponse.greenRound;i++){
-                if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+        else if (jokerResponse.greenRound > 0 && jokerResponse.greenRound < 3)
+        {
+            for (int i = 0; i < jokerResponse.greenRound; i++)
+            {
+                if (DiamondArrowImage.color != new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f))
+                {
                     yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                     yield return new WaitForSeconds(1f);
                 }
                 BgController.RotateWheel(); //ROTATE WHEEL
-                
+
                 yield return new WaitForSeconds(3f);
 
-                DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-                DiamondArrowImage.GetComponent<Stopper>().stopAT="Green";
+                DiamondArrowImage.GetComponent<BoxCollider2D>().enabled = true;
+                DiamondArrowImage.GetComponent<Stopper>().stopAT = "Green";
                 Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
-                wheelStopped =false;
-                DiamondArrowImage.GetComponent<Stopper>().stop=true;
+                wheelStopped = false;
+                DiamondArrowImage.GetComponent<Stopper>().stop = true;
 
-                yield return new WaitUntil(()=> wheelStopped);
+                yield return new WaitUntil(() => wheelStopped);
                 yield return new WaitForSeconds(2f);
 
                 ImageAnimation ResultImageAnimation = DiamondArrowImage.GetComponent<Stopper>().ImageTransform.GetComponent<ImageAnimation>();
                 ResetDiamondArrow();
-                ResultImageAnimation.AnimationSpeed=6f;
+                ResultImageAnimation.AnimationSpeed = 6f;
 
                 ResultImageAnimation.textureArray.Clear();
                 ResultImageAnimation.textureArray.TrimExcess();
-                foreach(Sprite s in GreenJokerAnimations){
+                foreach (Sprite s in GreenJokerAnimations)
+                {
                     ResultImageAnimation.textureArray.Add(s);
                 }
 
                 ResultImageAnimation.StartAnimation();
                 audioController.PlayWLAudio("pop");
-                yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
+                yield return new WaitUntil(() => ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
                 ResultImageAnimation.StopAnimation();
-                JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
-                ResultImageAnimation.rendererDelegate.sprite=Emprty_Sprite;
-                ResultImageAnimation.name ="Empty";
+                JokerCountText.text = i + 1 + " OF 3 JOKERS COLLECTED";
+                ResultImageAnimation.rendererDelegate.sprite = Emprty_Sprite;
+                ResultImageAnimation.name = "Empty";
                 yield return new WaitForSeconds(1f);
             }
-            if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+            if (DiamondArrowImage.color != new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f))
+            {
                 yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                 yield return new WaitForSeconds(1f);
             }
             BgController.RotateWheel(); //ROTATE WHEEL
-                
+
             yield return new WaitForSeconds(3f);
 
-            DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-            DiamondArrowImage.GetComponent<Stopper>().stopAT="Empty";
+            DiamondArrowImage.GetComponent<BoxCollider2D>().enabled = true;
+            DiamondArrowImage.GetComponent<Stopper>().stopAT = "Empty";
             Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
-            wheelStopped =false;
-            DiamondArrowImage.GetComponent<Stopper>().stop=true;
+            wheelStopped = false;
+            DiamondArrowImage.GetComponent<Stopper>().stop = true;
 
-            yield return new WaitUntil(()=> wheelStopped);
+            yield return new WaitUntil(() => wheelStopped);
             yield return new WaitForSeconds(2f);
             ResetDiamondArrow();
 
             OpenJokerGameEndingUI();
         }
-        else if(jokerResponse.greenRound == 0){
-            if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+        else if (jokerResponse.greenRound == 0)
+        {
+            if (DiamondArrowImage.color != new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f))
+            {
                 yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                 yield return new WaitForSeconds(1f);
             }
             BgController.RotateWheel(); //ROTATE WHEEL
-                
+
             yield return new WaitForSeconds(3f);
 
-            DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-            DiamondArrowImage.GetComponent<Stopper>().stopAT="Empty";
+            DiamondArrowImage.GetComponent<BoxCollider2D>().enabled = true;
+            DiamondArrowImage.GetComponent<Stopper>().stopAT = "Empty";
             Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
-            wheelStopped =false;
-            DiamondArrowImage.GetComponent<Stopper>().stop=true;
+            wheelStopped = false;
+            DiamondArrowImage.GetComponent<Stopper>().stop = true;
 
-            yield return new WaitUntil(()=> wheelStopped);
+            yield return new WaitUntil(() => wheelStopped);
             yield return new WaitForSeconds(2f);
             ResetDiamondArrow();
 
@@ -356,54 +380,59 @@ public class BonusController : MonoBehaviour
         }
     }
 
-    private IEnumerator StartRedJokerWheelGame(JokerResponse jokerResponse){
+    private IEnumerator StartRedJokerWheelGame(JokerResponse jokerResponse)
+    {
         ResultImage.sprite = RedJokerSymbol;
-        Major_UI.interactable=false;
-        Major_UI.blocksRaycasts=false;
+        Major_UI.interactable = false;
+        Major_UI.blocksRaycasts = false;
         Major_UI.DOFade(0, 0.5f);
         JokerCountText.text = "0 OF 3 JOKERS COLLECTED";
         BgController.SwitchBG(BackgroundController.BackgroundType.OrangeFR, null, "JOKER3");
         DiamondArrowImage.DOFade(1, 0.2f);
 
         yield return new WaitForSeconds(2f);
-        
-        if(jokerResponse.redRound == 3){
-            for(int i=0;i<jokerResponse.redRound;i++){
-                if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+
+        if (jokerResponse.redRound == 3)
+        {
+            for (int i = 0; i < jokerResponse.redRound; i++)
+            {
+                if (DiamondArrowImage.color != new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f))
+                {
                     yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                     yield return new WaitForSeconds(1f);
                 }
                 BgController.RotateWheel(); //ROTATE WHEEL
-                
+
                 yield return new WaitForSeconds(3f);
 
-                DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-                DiamondArrowImage.GetComponent<Stopper>().stopAT="Red";
+                DiamondArrowImage.GetComponent<BoxCollider2D>().enabled = true;
+                DiamondArrowImage.GetComponent<Stopper>().stopAT = "Red";
                 Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
-                wheelStopped =false;
-                DiamondArrowImage.GetComponent<Stopper>().stop=true;
+                wheelStopped = false;
+                DiamondArrowImage.GetComponent<Stopper>().stop = true;
 
-                yield return new WaitUntil(()=> wheelStopped);
+                yield return new WaitUntil(() => wheelStopped);
                 yield return new WaitForSeconds(2f);
 
                 ImageAnimation ResultImageAnimation = DiamondArrowImage.GetComponent<Stopper>().ImageTransform.GetComponent<ImageAnimation>();
                 ResetDiamondArrow();
-                ResultImageAnimation.AnimationSpeed=6f;
+                ResultImageAnimation.AnimationSpeed = 6f;
 
                 ResultImageAnimation.textureArray.Clear();
                 ResultImageAnimation.textureArray.TrimExcess();
-                foreach(Sprite s in RedJokerAnimations){
+                foreach (Sprite s in RedJokerAnimations)
+                {
                     ResultImageAnimation.textureArray.Add(s);
                 }
 
                 ResultImageAnimation.StartAnimation();
                 audioController.PlayWLAudio("pop");
-                yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
+                yield return new WaitUntil(() => ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
                 ResultImageAnimation.StopAnimation();
-                JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
-                ResultImageAnimation.rendererDelegate.sprite=Emprty_Sprite;
-                ResultImageAnimation.name ="Empty";
+                JokerCountText.text = i + 1 + " OF 3 JOKERS COLLECTED";
+                ResultImageAnimation.rendererDelegate.sprite = Emprty_Sprite;
+                ResultImageAnimation.name = "Empty";
                 yield return new WaitForSeconds(1f);
             }
             yield return Glow_Grand_Image.DOFade(1, 0.3f).WaitForCompletion();
@@ -411,83 +440,90 @@ public class BonusController : MonoBehaviour
 
             OpenJokerGameEndingUI();
         }
-        else if(jokerResponse.redRound>0&&jokerResponse.redRound<3){
-            for(int i=0;i<jokerResponse.redRound;i++){
-                if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+        else if (jokerResponse.redRound > 0 && jokerResponse.redRound < 3)
+        {
+            for (int i = 0; i < jokerResponse.redRound; i++)
+            {
+                if (DiamondArrowImage.color != new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f))
+                {
                     yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                     yield return new WaitForSeconds(1f);
                 }
                 BgController.RotateWheel(); //ROTATE WHEEL
-                
+
                 yield return new WaitForSeconds(3f);
 
-                DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-                DiamondArrowImage.GetComponent<Stopper>().stopAT="Red";
+                DiamondArrowImage.GetComponent<BoxCollider2D>().enabled = true;
+                DiamondArrowImage.GetComponent<Stopper>().stopAT = "Red";
                 Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
-                wheelStopped =false;
-                DiamondArrowImage.GetComponent<Stopper>().stop=true;
+                wheelStopped = false;
+                DiamondArrowImage.GetComponent<Stopper>().stop = true;
 
-                yield return new WaitUntil(()=> wheelStopped);
+                yield return new WaitUntil(() => wheelStopped);
                 yield return new WaitForSeconds(2f);
 
                 ImageAnimation ResultImageAnimation = DiamondArrowImage.GetComponent<Stopper>().ImageTransform.GetComponent<ImageAnimation>();
                 ResetDiamondArrow();
-                ResultImageAnimation.AnimationSpeed=6f;
+                ResultImageAnimation.AnimationSpeed = 6f;
 
                 ResultImageAnimation.textureArray.Clear();
                 ResultImageAnimation.textureArray.TrimExcess();
-                foreach(Sprite s in RedJokerAnimations){
+                foreach (Sprite s in RedJokerAnimations)
+                {
                     ResultImageAnimation.textureArray.Add(s);
                 }
 
                 ResultImageAnimation.StartAnimation();
                 audioController.PlayWLAudio("pop");
-                yield return new WaitUntil(()=> ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
+                yield return new WaitUntil(() => ResultImageAnimation.textureArray[^1] == ResultImageAnimation.rendererDelegate.sprite);
                 ResultImageAnimation.StopAnimation();
-                JokerCountText.text = i+1 + " OF 3 JOKERS COLLECTED";
-                ResultImageAnimation.rendererDelegate.sprite=Emprty_Sprite;
-                ResultImageAnimation.name ="Empty";
+                JokerCountText.text = i + 1 + " OF 3 JOKERS COLLECTED";
+                ResultImageAnimation.rendererDelegate.sprite = Emprty_Sprite;
+                ResultImageAnimation.name = "Empty";
                 yield return new WaitForSeconds(1f);
             }
-            if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+            if (DiamondArrowImage.color != new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f))
+            {
                 yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                 yield return new WaitForSeconds(1f);
             }
             BgController.RotateWheel(); //ROTATE WHEEL
-                
+
             yield return new WaitForSeconds(3f);
 
-            DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-            DiamondArrowImage.GetComponent<Stopper>().stopAT="Empty";
+            DiamondArrowImage.GetComponent<BoxCollider2D>().enabled = true;
+            DiamondArrowImage.GetComponent<Stopper>().stopAT = "Empty";
             Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
-            wheelStopped =false;
-            DiamondArrowImage.GetComponent<Stopper>().stop=true;
+            wheelStopped = false;
+            DiamondArrowImage.GetComponent<Stopper>().stop = true;
 
-            yield return new WaitUntil(()=> wheelStopped);
+            yield return new WaitUntil(() => wheelStopped);
             yield return new WaitForSeconds(2f);
             ResetDiamondArrow();
 
             OpenJokerGameEndingUI();
         }
-        else if(jokerResponse.redRound == 0){
-            if(DiamondArrowImage.color!=new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f)){
+        else if (jokerResponse.redRound == 0)
+        {
+            if (DiamondArrowImage.color != new Color(DiamondArrowImage.color.r, DiamondArrowImage.color.g, DiamondArrowImage.color.b, 255f))
+            {
                 yield return DiamondArrowImage.DOFade(1, 0.2f).WaitForCompletion();
                 yield return new WaitForSeconds(1f);
             }
             BgController.RotateWheel(); //ROTATE WHEEL
-                
+
             yield return new WaitForSeconds(3f);
 
-            DiamondArrowImage.GetComponent<BoxCollider2D>().enabled=true;
-            DiamondArrowImage.GetComponent<Stopper>().stopAT="Empty";
+            DiamondArrowImage.GetComponent<BoxCollider2D>().enabled = true;
+            DiamondArrowImage.GetComponent<Stopper>().stopAT = "Empty";
             Debug.Log("Stopping at: " + DiamondArrowImage.GetComponent<Stopper>().stopAT);
 
-            wheelStopped =false;
-            DiamondArrowImage.GetComponent<Stopper>().stop=true;
+            wheelStopped = false;
+            DiamondArrowImage.GetComponent<Stopper>().stop = true;
 
-            yield return new WaitUntil(()=> wheelStopped);
+            yield return new WaitUntil(() => wheelStopped);
             yield return new WaitForSeconds(2f);
             ResetDiamondArrow();
 
@@ -495,34 +531,43 @@ public class BonusController : MonoBehaviour
         }
     }
 
-    private void OpenJokerGameEndingUI(){
-        if(SocketManager.resultData.jokerResponse.payout[0]!=0){
+    private void OpenJokerGameEndingUI()
+    {
+        if (SocketManager.resultData.jokerResponse.payout[0] != 0)
+        {
             double total = 0;
-            foreach(double i in SocketManager.resultData.jokerResponse.payout){
+            foreach (double i in SocketManager.resultData.jokerResponse.payout)
+            {
                 total += i;
             }
             double truncatedValue = Math.Floor(total * 100) / 100;
-            Joker_End_UI.transform.GetChild(2).GetComponent<TMP_Text>().text = truncatedValue.ToString("F2");
-            if(SocketManager.playerdata.currentWining==SocketManager.initialData.Joker[0]){
+            Joker_End_UI.transform.GetChild(2).GetComponent<TMP_Text>().text = truncatedValue.ToString("F3");
+            if (SocketManager.playerdata.currentWining == SocketManager.initialData.Joker[0])
+            {
                 Joker_End_UI.transform.GetChild(1).GetComponent<TMP_Text>().text = "YOU HAVE WON THE MINOR PRIZE";
             }
-            else if(SocketManager.playerdata.currentWining>SocketManager.initialData.Joker[1] && SocketManager.playerdata.currentWining<SocketManager.initialData.Joker[2]){
+            else if (SocketManager.playerdata.currentWining > SocketManager.initialData.Joker[1] && SocketManager.playerdata.currentWining < SocketManager.initialData.Joker[2])
+            {
                 Joker_End_UI.transform.GetChild(1).GetComponent<TMP_Text>().text = "YOU HAVE WON THE MAJOR PRIZE";
             }
-            else if(SocketManager.playerdata.currentWining>SocketManager.initialData.Joker[2]){
+            else if (SocketManager.playerdata.currentWining > SocketManager.initialData.Joker[2])
+            {
                 Joker_End_UI.transform.GetChild(1).GetComponent<TMP_Text>().text = "YOU HAVE WON THE GRAND PRIZE";
             }
-            Joker_End_UI.interactable=true;
-            Joker_End_UI.blocksRaycasts=true;
+            Joker_End_UI.interactable = true;
+            Joker_End_UI.blocksRaycasts = true;
             Joker_End_UI.DOFade(1, 0.5f);
-            DOVirtual.DelayedCall(2f, ()=> StartCoroutine(EndJoker()));
+            DOVirtual.DelayedCall(2f, () => StartCoroutine(EndJoker()));
         }
-        else{
+        else
+        {
             audioController.SwitchBGSound(false);
-            if(slotBehaviour.WasAutoSpinOn){
-                DOVirtual.DelayedCall(1.2f,slotBehaviour.wasAutoOn);
+            if (slotBehaviour.WasAutoSpinOn)
+            {
+                DOVirtual.DelayedCall(1.2f, slotBehaviour.wasAutoOn);
             }
-            else{
+            else
+            {
                 slotBehaviour.ToggleButtonGrp(true);
             }
         }
@@ -530,23 +575,27 @@ public class BonusController : MonoBehaviour
         BgController.SwitchBG(BackgroundController.BackgroundType.Base);
     }
 
-    private IEnumerator EndJoker(){
+    private IEnumerator EndJoker()
+    {
         audioController.SwitchBGSound(false);
-        Joker_End_UI.interactable=false;
-        Joker_End_UI.blocksRaycasts=false;
+        Joker_End_UI.interactable = false;
+        Joker_End_UI.blocksRaycasts = false;
         yield return Joker_End_UI.DOFade(0, 0.3f).WaitForCompletion();
         Joker_Start_UI.transform.parent.gameObject.SetActive(false);
-        slotBehaviour.WinAnimCoroutine=StartCoroutine(slotBehaviour.PlayWinningsAnimation(SocketManager.playerdata.currentWining));
+        slotBehaviour.WinAnimCoroutine = StartCoroutine(slotBehaviour.PlayWinningsAnimation(SocketManager.playerdata.currentWining));
         yield return slotBehaviour.WinAnimCoroutine;
-        if(slotBehaviour.WasAutoSpinOn){
-            DOVirtual.DelayedCall(1.2f,slotBehaviour.wasAutoOn);
+        if (slotBehaviour.WasAutoSpinOn)
+        {
+            DOVirtual.DelayedCall(1.2f, slotBehaviour.wasAutoOn);
         }
-        else{
+        else
+        {
             slotBehaviour.ToggleButtonGrp(true);
         }
     }
 
-    private void ResetDiamondArrow(){
+    private void ResetDiamondArrow()
+    {
         Stopper stopper = DiamondArrowImage.GetComponent<Stopper>();
         DiamondArrowImage.GetComponent<BoxCollider2D>().enabled = false; //RESET THE STOPPER
         DiamondArrowImage.DOFade(0, 0.2f);
@@ -557,15 +606,17 @@ public class BonusController : MonoBehaviour
 
     private void JokerUIToggle(bool toggle)
     {
-        if(toggle){
+        if (toggle)
+        {
             TopPayoutUI.DOFade(0, 0.5f);
-            Glow_Minor_Image.DOFade(0,0);
-            Glow_Major_Image.DOFade(0,0);
-            Glow_Grand_Image.DOFade(0,0);
+            Glow_Minor_Image.DOFade(0, 0);
+            Glow_Major_Image.DOFade(0, 0);
+            Glow_Grand_Image.DOFade(0, 0);
             JokerCountText.text = "0 OF 3 JOKERS COLLECTED";
             JokerUI.DOFade(1, 0.5f);
         }
-        else{
+        else
+        {
             TopPayoutUI.DOFade(1, 0.5f);
             JokerUI.DOFade(0, 0.5f);
         }
