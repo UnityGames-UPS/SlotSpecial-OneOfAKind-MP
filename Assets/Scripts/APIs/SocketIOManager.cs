@@ -219,7 +219,7 @@ public class SocketIOManager : MonoBehaviour
             {
                 this.manager.Socket.Emit(eventName);
             }
-        }   
+        }
         else
         {
             Debug.LogWarning("Socket is not connected.");
@@ -238,7 +238,7 @@ public class SocketIOManager : MonoBehaviour
 
         string id = myData.id;
 
-        switch(id)
+        switch (id)
         {
             case "InitData":
                 {
@@ -451,8 +451,8 @@ public class Levelup
 [Serializable]
 public class Booster
 {
-    public string type {get; set;}
-    public List<int> multipliers {get; set;}
+    public string type { get; set; }
+    public List<int> multipliers { get; set; }
 }
 
 [Serializable]
@@ -481,7 +481,7 @@ public class Root
 {
     public string id { get; set; }
     public Message message { get; set; }
-    public string username {get; set;}
+    public string username { get; set; }
 }
 
 [Serializable]
@@ -539,7 +539,7 @@ public class PlayerData
 {
     public double Balance { get; set; }
     public double currentWining { get; set; }
-    public double totalbet {get; set;}
+    public double totalbet { get; set; }
     public double haveWon { get; set; }
 }
 
