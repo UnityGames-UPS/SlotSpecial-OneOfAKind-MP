@@ -32,6 +32,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Button PaytableLeft_Button;
     [SerializeField] private Button PaytableRight_Button;
     [SerializeField] private List<GameObject> GameRulesPages = new();
+    [SerializeField] private TMP_Text BlueFS_Text;
+    [SerializeField] private TMP_Text PurpleFS_Text;
 
     [Header("Game Quit Objects")]
     [SerializeField] private Button Quit_Button;
@@ -96,7 +98,8 @@ public class UIManager : MonoBehaviour
         });
 
         if (Music_Button) Music_Button.onClick.RemoveAllListeners();
-        if (Music_Button) Music_Button.onClick.AddListener(delegate {
+        if (Music_Button) Music_Button.onClick.AddListener(delegate
+        {
 
             if (isMusic)
             {
@@ -136,7 +139,7 @@ public class UIManager : MonoBehaviour
             }
         });
 
-        
+
 
         if (Settings_Button) Settings_Button.onClick.RemoveAllListeners();
         if (Settings_Button) Settings_Button.onClick.AddListener(OpenSettingsPanel);
@@ -145,10 +148,10 @@ public class UIManager : MonoBehaviour
         if (SettingsQuit_Button) SettingsQuit_Button.onClick.AddListener(delegate { ClosePopup(Settings_Object); });
 
         if (PaytableLeft_Button) PaytableLeft_Button.onClick.RemoveAllListeners();
-        if (PaytableLeft_Button) PaytableLeft_Button.onClick.AddListener(()=> ChangePage(false));
+        if (PaytableLeft_Button) PaytableLeft_Button.onClick.AddListener(() => ChangePage(false));
 
         if (PaytableRight_Button) PaytableRight_Button.onClick.RemoveAllListeners();
-        if (PaytableRight_Button) PaytableRight_Button.onClick.AddListener(()=> ChangePage(true));
+        if (PaytableRight_Button) PaytableRight_Button.onClick.AddListener(() => ChangePage(true));
     }
 
     internal void CanCloseMenu()
@@ -165,35 +168,21 @@ public class UIManager : MonoBehaviour
 
         if (IncDec)
         {
-            if(PageIndex < GameRulesPages.Count - 1)
+            PageIndex++;
+            if (PageIndex == GameRulesPages.Count)
             {
-                PageIndex++;
-            }
-            if(PageIndex == GameRulesPages.Count - 1)
-            {
-                if (PaytableRight_Button) PaytableRight_Button.interactable = false;
-            }
-            if(PageIndex > 0)
-            {
-                if(PaytableLeft_Button) PaytableLeft_Button.interactable = true;
+                PageIndex = 0;
             }
         }
         else
         {
-            if(PageIndex > 0)
+            PageIndex--;
+            if (PageIndex < 0)
             {
-                PageIndex--;
-            }
-            if(PageIndex == 0)
-            {
-                if (PaytableLeft_Button) PaytableLeft_Button.interactable = false;
-            }
-            if(PageIndex < GameRulesPages.Count - 1)
-            {
-                if (PaytableRight_Button) PaytableRight_Button.interactable = true;
+                PageIndex = GameRulesPages.Count - 1;
             }
         }
-        foreach(GameObject g in GameRulesPages)
+        foreach (GameObject g in GameRulesPages)
         {
             g.SetActive(false);
         }
@@ -202,14 +191,15 @@ public class UIManager : MonoBehaviour
 
     private void OpenCloseMenu(bool toggle)
     {
-        if(audioController) audioController.PlayButtonAudio();
+        if (audioController) audioController.PlayButtonAudio();
         if (toggle)
         {
             isMenu = true;
 
-            SpriteState state = new SpriteState{
-                highlightedSprite=CloseMenuHover_Image,
-                pressedSprite=CloseMenuPressed_Image
+            SpriteState state = new SpriteState
+            {
+                highlightedSprite = CloseMenuHover_Image,
+                pressedSprite = CloseMenuPressed_Image
             };
             Menu_Button.image.sprite = CloseMenu_image;
             Menu_Button.spriteState = state;
@@ -231,9 +221,10 @@ public class UIManager : MonoBehaviour
         {
             isMenu = false;
 
-            SpriteState state = new SpriteState{
-                highlightedSprite=MenuHover_Image,
-                pressedSprite=MenuPressed_Image
+            SpriteState state = new SpriteState
+            {
+                highlightedSprite = MenuHover_Image,
+                pressedSprite = MenuPressed_Image
             };
             Menu_Button.image.sprite = Menu_Image;
             Menu_Button.spriteState = state;
@@ -324,14 +315,14 @@ public class UIManager : MonoBehaviour
 
         PageIndex = 0;
 
-        foreach(GameObject g in GameRulesPages)
+        foreach (GameObject g in GameRulesPages)
         {
             g.SetActive(false);
         }
 
         GameRulesPages[0].SetActive(true);
-        if(PaytableLeft_Button) PaytableLeft_Button.interactable = false;
-        if(PaytableRight_Button) PaytableRight_Button.interactable = true;
+        if (PaytableLeft_Button) PaytableLeft_Button.interactable = true;
+        if (PaytableRight_Button) PaytableRight_Button.interactable = true;
 
         if (PaytableMenuObject) PaytableMenuObject.SetActive(true);
 
@@ -355,7 +346,7 @@ public class UIManager : MonoBehaviour
 
     internal void ADfunction()
     {
-        OpenPopup(ADPopup_Object); 
+        OpenPopup(ADPopup_Object);
     }
 
     internal void InitialiseUIData(string SupportUrl, string AbtImgUrl, string TermsUrl, string PrivacyUrl, Paylines symbolsText)
@@ -365,13 +356,14 @@ public class UIManager : MonoBehaviour
         SetLargePayoutUI();
     }
 
-    internal void SetLargePayoutUI(){
-        Minor_Text.text = (socketManager.initialData.Joker[0] * slotManager.currentTotalBet).ToString();
-        Major_Text.text = (socketManager.initialData.Joker[1] * slotManager.currentTotalBet).ToString();
-        Grand_Text.text = (socketManager.initialData.Joker[2] * slotManager.currentTotalBet).ToString();
-        JokerMinor_Text.text = (socketManager.initialData.Joker[0] * slotManager.currentTotalBet).ToString();
-        JokerMajor_Text.text = (socketManager.initialData.Joker[1] * slotManager.currentTotalBet).ToString();
-        JokerGrand_Text.text = (socketManager.initialData.Joker[2] * slotManager.currentTotalBet).ToString();
+    internal void SetLargePayoutUI()
+    {
+        Minor_Text.text = socketManager.initialData.Joker[0].ToString() + "x";
+        Major_Text.text = socketManager.initialData.Joker[1].ToString() + "x";
+        Grand_Text.text = socketManager.initialData.Joker[2].ToString() + "x";
+        JokerMinor_Text.text = socketManager.initialData.Joker[0].ToString() + "x";
+        JokerMajor_Text.text = socketManager.initialData.Joker[1].ToString() + "x";
+        JokerGrand_Text.text = socketManager.initialData.Joker[2].ToString() + "x";
     }
 
     internal void PopulateSymbolsPayout(Paylines paylines)
@@ -379,11 +371,24 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < SymbolsText.Count; i++)
         {
             string text = null;
-            if(paylines.symbols[i+1].payout!=0){
+            if (paylines.symbols[i + 1].payout != 0)
+            {
                 // Debug.Log("symbol name " + paylines.symbols[i+1].Name + " amt : " + paylines.symbols[i+1].payout.ToString());
-                text = (paylines.symbols[i+1].payout * slotManager.currentTotalBet).ToString();
+                text = paylines.symbols[i + 1].payout.ToString() + "x";
             }
             SymbolsText[i].text = text;
+        }
+
+        foreach (Symbol symbol in paylines.symbols)
+        {
+            if (symbol.Name == "ScatterBlue")
+            {
+                BlueFS_Text.text = symbol.description.ToString();
+            }
+            else if (symbol.Name == "ScatterPurple")
+            {
+                PurpleFS_Text.text = symbol.description.ToString();
+            }
         }
     }
 
@@ -396,7 +401,7 @@ public class UIManager : MonoBehaviour
 
     internal void OpenPopup(GameObject Popup)
     {
-        if (audioController && Popup!=MainPopup_Object.transform.GetChild(1).gameObject) audioController.PlayButtonAudio();
+        if (audioController && Popup != MainPopup_Object.transform.GetChild(1).gameObject) audioController.PlayButtonAudio();
 
         if (Popup) Popup.SetActive(true);
         if (MainPopup_Object) MainPopup_Object.SetActive(true);
@@ -404,9 +409,9 @@ public class UIManager : MonoBehaviour
 
     internal void ClosePopup(GameObject Popup)
     {
-        if (audioController && Popup!=MainPopup_Object.transform.GetChild(1).gameObject) audioController.PlayButtonAudio();
+        if (audioController && Popup != MainPopup_Object.transform.GetChild(1).gameObject) audioController.PlayButtonAudio();
         if (Popup) Popup.SetActive(false);
-        if (!DisconnectPopup_Object.activeSelf) 
+        if (!DisconnectPopup_Object.activeSelf)
         {
             if (MainPopup_Object) MainPopup_Object.SetActive(false);
         }
