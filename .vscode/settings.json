@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "SlotMP-OneOfAKind.sln"
+    "dotnet.defaultSolution": "SlotSpecial-OneOfAKind-MP.sln"
 }
