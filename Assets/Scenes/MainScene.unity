@@ -3710,7 +3710,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 171191367}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3719,12 +3719,12 @@ RectTransform:
   - {fileID: 2037884368}
   - {fileID: 203482978}
   - {fileID: 897520654}
-  m_Father: {fileID: 1952695971}
+  m_Father: {fileID: 1485219722}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2340, y: 1080}
+  m_SizeDelta: {x: 25759.28, y: 9959.58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &171191370
 CanvasRenderer:
@@ -3753,7 +3753,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -3791,7 +3791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.78039217}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -3799,7 +3799,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4529,7 +4529,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -5864,8 +5864,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -822, y: 390}
-  m_SizeDelta: {x: 433.89, y: 165.12}
+  m_AnchoredPosition: {x: -408, y: -331}
+  m_SizeDelta: {x: 267.41, y: 116.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &285361686
 MonoBehaviour:
@@ -10149,7 +10149,7 @@ MonoBehaviour:
   RaycastBlocker: {fileID: 1123055039}
   slotManager: {fileID: 2046803210}
   uiManager: {fileID: 377874625}
-  testToken: 80ce98bbbde345ce9077dd212407211a
+  testToken: 7ec07e029b464e6fb8a1650c6c7beb3f
   JSManager: {fileID: 1743732483}
 --- !u!1 &500314170
 GameObject:
@@ -16462,7 +16462,7 @@ MonoBehaviour:
   rendererDelegate: {fileID: 813289815}
   useSharedMaterial: 1
   doLoopAnimation: 1
-  StartOnAwake: 1
+  StartOnAwake: 0
   AnimationSpeed: 25
   delayBetweenLoop: 0
 --- !u!114 &813289815
@@ -16479,7 +16479,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -18173,7 +18173,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -30759,6 +30759,7 @@ RectTransform:
   - {fileID: 298014160}
   - {fileID: 573569158}
   - {fileID: 411732505}
+  - {fileID: 171191368}
   - {fileID: 1931172947}
   - {fileID: 501562387}
   - {fileID: 1952695971}
@@ -39434,7 +39435,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 665190694}
-  - {fileID: 171191368}
   - {fileID: 1202583361}
   - {fileID: 1904511578}
   - {fileID: 69541375}
@@ -40536,7 +40536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

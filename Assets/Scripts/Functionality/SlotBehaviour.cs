@@ -83,7 +83,6 @@ public class SlotBehaviour : MonoBehaviour
   private bool CheckSpinAudio = false;
   private int BetCounter = 0;
   private double currentBalance = 0;
-  internal double currentTotalBet = 0;
   private double multiplierWinnings;
   private int freeSpinCount;
   private bool EmptyResult = false;
@@ -91,6 +90,7 @@ public class SlotBehaviour : MonoBehaviour
   private bool StopSpinToggle;
   private float SpinDelay = 0.2f;
   private bool IsTurboOn;
+  internal double currentTotalBet = 0;
   internal bool WasAutoSpinOn;
   //internal variables
   internal bool wheelStopped = false;
@@ -143,26 +143,19 @@ public class SlotBehaviour : MonoBehaviour
     if (WinAnimCoroutine != null)
     {
       StopCoroutine(WinAnimCoroutine);
-      uiManager.ClosePopup(WinPopup_GO);
       WinAnimCoroutine = null;
-    }
-    else
-    {
-      uiManager.ClosePopup(WinPopup_GO);
     }
     CleanUpTweens();
     checkPopups = true;
-    if (CoinWinnings_ImageAnimation.currentAnimationState == ImageAnimation.ImageState.PLAYING)
-    {
-      CoinWinnings_ImageAnimation.StopAnimation();
-    }
-    for (int i = 0; i < 3; i++)
+    CoinWinnings_ImageAnimation.StopAnimation();
+    for (int i = 1; i < 4; i++)
     {
       if (WinPopup_GO.transform.GetChild(i).localScale.x > 0)
       {
         WinPopup_GO.transform.GetChild(i).localScale = Vector3.zero;
       }
     }
+    WinPopup_GO.SetActive(false);
   }
   internal void wasAutoOn()
   {
@@ -616,7 +609,7 @@ public class SlotBehaviour : MonoBehaviour
       yield break;
     }
 
-    uiManager.OpenPopup(WinPopup_GO);
+    WinPopup_GO.SetActive(true);
     Tween tween = null;
     CoinWinnings_ImageAnimation.doLoopAnimation = true;
     CoinWinnings_ImageAnimation.StartAnimation();
@@ -651,10 +644,10 @@ public class SlotBehaviour : MonoBehaviour
     CoinWinnings_ImageAnimation.StopAnimation();
     Tween imageScaleTween3 = ImageTransform.DOScale(0, 0.2f);
     winningsTweens.Add(imageScaleTween3);
-    yield return new WaitForSeconds(1f);
+    yield return new WaitForSeconds(0.2f);
     checkPopups = true;
-    uiManager.ClosePopup(WinPopup_GO);
     CleanUpTweens();
+    WinPopup_GO.SetActive(false);
   }
   void CleanUpTweens()
   {
@@ -689,6 +682,7 @@ public class SlotBehaviour : MonoBehaviour
       }
       BalanceAddition(payout);
       StartCoroutine(TotalWinningsAnimation(payout, true, !WasAutoSpinOn));
+      StartCoroutine(PlayWinningsAnimation(payout));
       delay = 1.5f;
     }
 

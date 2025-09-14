@@ -278,12 +278,13 @@ public class UIManager : MonoBehaviour
 
   internal void SetLargePayoutUI()
   {
-    Minor_Text.text = socketManager.initFeatures.joker.payout[0].ToString() + "x";
-    Major_Text.text = socketManager.initFeatures.joker.payout[1].ToString() + "x";
-    Grand_Text.text = socketManager.initFeatures.joker.payout[2].ToString() + "x";
-    JokerMinor_Text.text = socketManager.initFeatures.joker.payout[0].ToString() + "x";
-    JokerMajor_Text.text = socketManager.initFeatures.joker.payout[1].ToString() + "x";
-    JokerGrand_Text.text = socketManager.initFeatures.joker.payout[2].ToString() + "x";
+    double totalBet = slotManager.currentTotalBet;
+    Minor_Text.text = (socketManager.initFeatures.joker.payout[0] * totalBet).ToString();
+    Major_Text.text = (socketManager.initFeatures.joker.payout[1] * totalBet).ToString();
+    Grand_Text.text = (socketManager.initFeatures.joker.payout[2] * totalBet).ToString();
+    JokerMinor_Text.text = (socketManager.initFeatures.joker.payout[0] * totalBet).ToString();
+    JokerMajor_Text.text = (socketManager.initFeatures.joker.payout[1] * totalBet).ToString();
+    JokerGrand_Text.text = (socketManager.initFeatures.joker.payout[2] * totalBet).ToString();
   }
 
   internal void PopulateSymbolsPayout(Paylines paylines)
@@ -294,7 +295,7 @@ public class UIManager : MonoBehaviour
       if (paylines.symbols[i + 1].payout != 0)
       {
         // Debug.Log("symbol name " + paylines.symbols[i+1].Name + " amt : " + paylines.symbols[i+1].payout.ToString());
-        text = paylines.symbols[i + 1].payout.ToString() + "x";
+        text = (paylines.symbols[i + 1].payout * slotManager.currentTotalBet).ToString();
       }
       SymbolsText[i].text = text;
     }
