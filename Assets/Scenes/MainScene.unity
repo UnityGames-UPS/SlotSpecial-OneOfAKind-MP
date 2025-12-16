@@ -10149,7 +10149,7 @@ MonoBehaviour:
   RaycastBlocker: {fileID: 1123055039}
   slotManager: {fileID: 2046803210}
   uiManager: {fileID: 377874625}
-  testToken: 7ec07e029b464e6fb8a1650c6c7beb3f
+  testToken: aa874ffe5a1a4743a3e42e133c041960
   JSManager: {fileID: 1743732483}
 --- !u!1 &500314170
 GameObject:
@@ -13012,7 +13012,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 0.78039217}
-  m_RaycastTarget: 0
+  m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -24751,8 +24751,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 417070569}
-  - {fileID: 117379314}
   - {fileID: 1274228503}
+  - {fileID: 117379314}
   - {fileID: 415647115}
   - {fileID: 1223135348}
   m_Father: {fileID: 1952695971}
