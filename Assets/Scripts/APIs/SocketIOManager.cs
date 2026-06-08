@@ -25,7 +25,7 @@ public class SocketIOManager : MonoBehaviour
   private Socket gameSocket;
   private SocketManager manager;
   protected string SocketURI = null;
-  protected string TestSocketURI = "http://localhost:5000/";
+  protected string TestSocketURI = "https://devrealtime.dingdinghouse.com/";
   // protected string TestSocketURI = "https://game-crm-rtp-backend.onrender.com/";
   internal bool isLoaded = false;
   internal bool SetInit = false;

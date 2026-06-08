@@ -1264,7 +1264,7 @@ public class SlotBehaviour : MonoBehaviour
       .OnUpdate(() =>
       {
         Balance_text.text = balance.ToString("f3");
-      });
+      }).WaitForCompletion();
     }
   }
 
@@ -1284,6 +1284,8 @@ public class SlotBehaviour : MonoBehaviour
   {
     double bet = 0;
     double balance = 0;
+    balanceTween?.Kill();
+    Balance_text.text = currentBalance.ToString("f3");
     try
     {
       bet = double.Parse(TotalBet_text.text);
