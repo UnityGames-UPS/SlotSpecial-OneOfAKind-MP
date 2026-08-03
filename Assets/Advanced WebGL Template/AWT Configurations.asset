@@ -71,16 +71,16 @@ MonoBehaviour:
   _playPongButtonFontSize: 13px
   _watchVideoButtonYoutubeLink: https://www.youtube.com/watch?v=FIpZ1h7LEos
   _disableMobileWarning: 1
-  _targetPath: /Users/dev-mehul/Documents/Game Builds/B2B/One Of A Kind/Build
-  _s11: "\n    &&& title2019start &&&<title>%UNITY_WEB_NAME%</title>&&& title2019end
-    &&&\n    &&& title2020start &&&<title>OneOfAKind</title>&&& title2020end &&&\n   
+  _targetPath: D:/UnityProjects/B2BBuilds/SlotSpecial-OneOfAKind/Build
+  _s11: "\r\n    &&& title2019start &&&<title>%UNITY_WEB_NAME%</title>&&& title2019end
+    &&&\r\n    &&& title2020start &&&<title>OneOfAKind</title>&&& title2020end &&&\r\n   
     &&& UnityLoader1 &&& <script src=\"%UNITY_WEBGL_LOADER_URL%\"></script> &&& UnityLoader2
-    &&&\n    "
-  _s21: "\n            applicationInstance = UnityLoader.instantiate(\"gameContainer\",
-    \"%UNITY_WEBGL_BUILD_URL%\", {onProgress: UnityProgress});\n            "
-  _s31: "\n    var buildUrl = \"Build\";\n    var loaderUrl = buildUrl + \"/Build.loader.js\";\n   
-    var config = {\n        dataUrl: buildUrl + \"/Build.data.unityweb\",\n       
-    frameworkUrl: buildUrl + \"/Build.framework.js.unityweb\",\n        codeUrl:
-    buildUrl + \"/Build.wasm.unityweb\",\n        streamingAssetsUrl: \"StreamingAssets\",\n       
-    companyName: \"DefaultCompany\",\n        productName: \"OneOfAKind\",\n       
-    productVersion: \"1.0\",\n    };\n    "
+    &&&\r\n    "
+  _s21: "\r\n            applicationInstance = UnityLoader.instantiate(\"gameContainer\",
+    \"%UNITY_WEBGL_BUILD_URL%\", {onProgress: UnityProgress});\r\n            "
+  _s31: "\r\n    var buildUrl = \"Build\";\r\n    var loaderUrl = buildUrl + \"/Build.loader.js\";\r\n   
+    var config = {\r\n        dataUrl: buildUrl + \"/Build.data.unityweb\",\r\n       
+    frameworkUrl: buildUrl + \"/Build.framework.js.unityweb\",\r\n        codeUrl:
+    buildUrl + \"/Build.wasm.unityweb\",\r\n        streamingAssetsUrl: \"StreamingAssets\",\r\n       
+    companyName: \"DefaultCompany\",\r\n        productName: \"OneOfAKind\",\r\n       
+    productVersion: \"1.0\",\r\n    };\r\n    "
