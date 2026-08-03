@@ -80,7 +80,6 @@ public class SlotBehaviour : MonoBehaviour
   private bool IsAutoSpin = false;
   private bool IsFreeSpin = false;
   private bool IsSpinning = false;
-  private bool CheckSpinAudio = false;
   private int BetCounter = 0;
   private double currentBalance = 0;
   private double multiplierWinnings;
@@ -330,7 +329,7 @@ public class SlotBehaviour : MonoBehaviour
 
   private void OnApplicationFocus(bool focus)
   {
-    audioController.CheckFocusFunction(focus, CheckSpinAudio);
+    audioController.SetMuteAll(!focus);
   }
 
   //function to populate animation sprites accordingly
@@ -1316,6 +1315,14 @@ public class SlotBehaviour : MonoBehaviour
   internal void CallCloseSocket()
   {
     StartCoroutine(SocketManager.CloseSocket());
+  }
+
+  internal void UpdateBalanceDisplay(double newBalance)
+  {
+    balanceTween?.Kill();
+    currentBalance = newBalance;
+    if (Balance_text) Balance_text.text = newBalance.ToString("f3");
+    CompareBalance();
   }
 
   internal void ToggleButtonGrp(bool toggle)

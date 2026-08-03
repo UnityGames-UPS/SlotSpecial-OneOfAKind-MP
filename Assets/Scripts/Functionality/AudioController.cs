@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class AudioController : MonoBehaviour
@@ -9,33 +10,36 @@ public class AudioController : MonoBehaviour
     [SerializeField] private AudioClip[] clips;
     [SerializeField] private AudioSource bg_audioBonus;
 
+    private List<AudioSource> allSources;
+    private readonly Dictionary<AudioSource, bool> preFocusMuteState = new Dictionary<AudioSource, bool>();
+    private bool isForceMuted = false;
+
     private void Start()
     {
         if (bg_adudio) bg_adudio.Play();
         audioPlayer_button.clip = clips[clips.Length-1];
         audioSpin_button.clip = clips[clips.Length-2];
+        allSources = new List<AudioSource> { bg_adudio, bg_audioBonus, audioPlayer_wl, audioPlayer_button, audioSpin_button };
     }
 
-    internal void CheckFocusFunction(bool focus, bool IsSpinning)
+    // Focus-driven — called from BOTH UIManager.OnFocusChanged (WebGL/JS path) and SlotBehaviour.OnApplicationFocus (native path).
+    internal void SetMuteAll(bool forceMute)
     {
-        if (!focus)
+        if (forceMute == isForceMuted) return;
+        isForceMuted = forceMute;
+
+        foreach (var source in allSources)
         {
-            bg_adudio.Pause();
-            audioPlayer_wl.Pause();
-            audioPlayer_button.Pause();
-        }
-        else
-        {
-            if (!bg_adudio.mute) bg_adudio.UnPause();
-            if (IsSpinning)
+            if (source == null) continue;
+            if (forceMute)
             {
-                if (!audioPlayer_wl.mute) audioPlayer_wl.UnPause();
+                preFocusMuteState[source] = source.mute;
+                source.mute = true;
             }
             else
             {
-                StopWLAaudio();
+                source.mute = preFocusMuteState.TryGetValue(source, out bool prevMuted) ? prevMuted : source.mute;
             }
-            if (!audioPlayer_button.mute) audioPlayer_button.UnPause();
         }
     }
 
