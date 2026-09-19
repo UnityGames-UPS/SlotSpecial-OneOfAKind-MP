@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>OneOfAKind</title>
+  <title>DoubleWheel</title>
   <style>
     body,
     html {
@@ -24,15 +24,11 @@
       width: 100%;
     }
 
-      #loading-screen {
+    #loading-screen {
       position: absolute;
       width: 100%;
       height: 100%;
-  }
-
-
-
-
+    }
   </style>
 </head>
 
@@ -40,7 +36,7 @@
 
   <canvas id="unity-canvas" tabindex="-1"></canvas>
   <script>
-    const canvas=document.querySelector("#unity-canvas");
+    const canvas = document.querySelector("#unity-canvas");
 
     function resizeCanvas() {
       // visualViewport is the accurate visible area on iOS; fall back to innerWidth/Height.
@@ -70,34 +66,33 @@
     document.addEventListener('gesturechange', function (e) { e.preventDefault(); });
 
     var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/Build.loader.js";
-      var config = {
-        dataUrl: buildUrl + "/Build.data.unityweb",
-        frameworkUrl: buildUrl + "/Build.framework.js.unityweb",
-        codeUrl: buildUrl + "/Build.wasm.unityweb",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "OneOfAKind",
-        productVersion: "1.0",
-      };
+    var loaderUrl = buildUrl + "/Build.loader.js";
+    var config = {
+      dataUrl: buildUrl + "/Build.data.unityweb",
+      frameworkUrl: buildUrl + "/Build.framework.js.unityweb",
+      codeUrl: buildUrl + "/Build.wasm.unityweb",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "DefaultCompany",
+      productName: "DoubleWheel",
+      productVersion: "1.0",
+    };
 
-        
-        var script = document.createElement("script");
-        script.src = loaderUrl;
-        script.onload = () => {
-          createUnityInstance(canvas, config, (progress) => {
-          }).then((unityInstance) => {
-          }).catch((message) => {
-            alert(message);
-          });
-        };
-        
-        document.body.appendChild(script);
-        window.addEventListener('load', resizeCanvas);
+    var script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+      createUnityInstance(canvas, config, (progress) => {
+      }).then((unityInstance) => {
+      }).catch((message) => {
+        alert(message);
+      });
+    };
+
+    document.body.appendChild(script);
+    window.addEventListener('load', resizeCanvas);
   </script>
-    <script>
-      window.focus();
-    </script>
+  <script>
+    window.focus();
+  </script>
 
 </body>
 
